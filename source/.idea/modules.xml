@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/source.iml" filepath="$PROJECT_DIR$/source.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shoppingbot-lambda.iml" filepath="$PROJECT_DIR$/shoppingbot-lambda.iml" />
     </modules>
   </component>
 </project>
