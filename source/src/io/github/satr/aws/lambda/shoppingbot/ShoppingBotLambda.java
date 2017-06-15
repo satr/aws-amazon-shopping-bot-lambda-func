@@ -17,8 +17,11 @@ public class ShoppingBotLambda implements RequestHandler<Map<String, Object>, Le
         LexRequest lexRequest = LexRequestFactory.readFromMap(input);
         try {
             String content = "Product is not requested.";
-            if(lexRequest.isProductSet())
+            if(lexRequest.isProductRequested())
                 content = String.format("You requested: %s, amount: %s", lexRequest.getRequestedProduct(), lexRequest.getAmount());
+            else if(lexRequest.hasError())
+                content = lexRequest.getError();
+
             Message message = new Message(Message.ContentType.PlainText, content);
             DialogAction dialogAction = new DialogAction(DialogAction.Type.Close,
                     DialogAction.FulfillmentState.Fulfilled,

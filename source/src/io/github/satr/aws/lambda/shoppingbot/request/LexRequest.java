@@ -9,6 +9,7 @@ public class LexRequest {
     private boolean isProductSet;
     private String invocationSource;
     private String outputDialogMode;
+    private String error;
 
     public void setProduct(String requestedProduct) {
         this.requestedProduct = requestedProduct;
@@ -62,7 +63,19 @@ public class LexRequest {
         this.intentName = intentName;
     }
 
-    public boolean isProductSet() {
+    public boolean isProductRequested() {
         return this.isProductSet;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public boolean hasError() {
+        return getError() != null;
     }
 }

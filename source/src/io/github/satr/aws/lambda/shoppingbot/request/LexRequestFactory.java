@@ -2,6 +2,7 @@ package io.github.satr.aws.lambda.shoppingbot.request;
 
 import io.github.satr.aws.lambda.shoppingbot.entity.BakeryDepartment;
 import io.github.satr.aws.lambda.shoppingbot.entity.MilkDepartment;
+import io.github.satr.aws.lambda.shoppingbot.entity.VegetableDepartment;
 
 import java.util.Map;
 
@@ -51,6 +52,13 @@ public class LexRequestFactory {
                     request.setAmount((String) slots.get(MilkDepartment.Slot.Amount));
                     request.isSet(true);
                     break;
+                case VegetableDepartment.IntentName:
+                    request.setProduct((String) slots.get(VegetableDepartment.Slot.Product));
+                    request.setAmount((String) slots.get(VegetableDepartment.Slot.Amount));
+                    request.isSet(true);
+                    break;
+                default:
+                    request.setError("Requested product is not recognized.");
             }
         }
     }
