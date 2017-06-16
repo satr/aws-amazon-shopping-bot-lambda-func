@@ -11,6 +11,7 @@ public class DialogAction {
 
     public class FulfillmentState {
         public static final String Fulfilled = "Fulfilled";
+        public static final String Failed = "Failed";
     }
 
     public DialogAction(String type, String fulfillmentState, Message message) {

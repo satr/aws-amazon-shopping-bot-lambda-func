@@ -40,26 +40,31 @@ public class LexRequestFactory {
 
     private static void readRequestedProduct(Map<String, Object> currentIntent, LexRequest request) {
         Map<String, Object> slots = (Map<String, Object>) currentIntent.get(Property.Slots);
-        if (slots != null) {
-            switch (request.getIntentName()) {
-                case BakeryDepartment.IntentName:
-                    request.setProduct((String) slots.get(BakeryDepartment.Slot.Product));
-                    request.setAmount((String) slots.get(BakeryDepartment.Slot.Amount));
-                    request.isSet(true);
-                    break;
-                case MilkDepartment.IntentName:
-                    request.setProduct((String) slots.get(MilkDepartment.Slot.Product));
-                    request.setAmount((String) slots.get(MilkDepartment.Slot.Amount));
-                    request.isSet(true);
-                    break;
-                case VegetableDepartment.IntentName:
-                    request.setProduct((String) slots.get(VegetableDepartment.Slot.Product));
-                    request.setAmount((String) slots.get(VegetableDepartment.Slot.Amount));
-                    request.isSet(true);
-                    break;
-                default:
-                    request.setError("Requested product is not recognized.");
-            }
+        if (slots == null)
+            return;
+        switch (request.getIntentName()) {
+            case BakeryDepartment.IntentName:
+                readSlots(request, slots, BakeryDepartment.Slot.Product, BakeryDepartment.Slot.Amount);
+                break;
+            case MilkDepartment.IntentName:
+                readSlots(request, slots, MilkDepartment.Slot.Product, MilkDepartment.Slot.Amount);
+                break;
+            case VegetableDepartment.IntentName:
+                readSlots(request, slots, VegetableDepartment.Slot.Product, VegetableDepartment.Slot.Amount);
+                break;
+            default:
+                request.setError("Requested department is not recognized.");
         }
+    }
+
+    private static void readSlots(LexRequest request, Map<String, Object> slots, String productSlotName, String amountSlotName) {
+        String productSlot = (String)slots.get(productSlotName);
+        if (productSlot == null)
+            return;
+        request.setProduct(productSlot);
+        String requestedAmount = (String) slots.get(amountSlotName);
+        if (requestedAmount == null)
+            return;
+        request.setRequestedAmount(requestedAmount);
     }
 }

@@ -1,21 +1,12 @@
-package io.github.satr.aws.lambda.shoppingbot;
-
-import io.github.satr.aws.lambda.shoppingbot.response.LexResponse;
-
 import java.util.LinkedHashMap;
 
-public class Main {
+public class ObjectMother {
 
+    public final static String shoppingBotName = "ShoppingBot";
 
-    public static void main(String[] args) {
-        LinkedHashMap<String, Object> requestMap = createRequestMap("BakeryDepartment", "BakeryProduct", "bread", "Amount", "2");
-        LexResponse a = new ShoppingBotLambda().handleRequest(requestMap, null);
-        System.out.println(a.getDialogAction().getMessage().getContent());
-    }
-
-    private static LinkedHashMap<String, Object> createRequestMap(String department, String productSlotName, String product, String amountSlotName, String amount) {
+    public static LinkedHashMap<String, Object> createRequestMap(String department, String productSlotName, String product, String amountSlotName, String amount) {
         LinkedHashMap<String, Object> botMap = new LinkedHashMap<>();
-        botMap.put("name", "ShoppingBot");
+        botMap.put("name", shoppingBotName);
         LinkedHashMap<String, Object> requestMap = new LinkedHashMap<>();
         requestMap.put("bot", botMap);
         LinkedHashMap<String, Object> currentIntentMap = new LinkedHashMap<>();
@@ -27,4 +18,5 @@ public class Main {
         currentIntentMap.put("slots", slotsMap);
         requestMap.put("currentIntent", currentIntentMap);
         return requestMap;
-    }}
+    }
+}

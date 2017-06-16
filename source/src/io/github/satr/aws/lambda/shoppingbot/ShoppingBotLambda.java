@@ -14,24 +14,29 @@ public class ShoppingBotLambda implements RequestHandler<Map<String, Object>, Le
 
     @Override
     public LexResponse handleRequest(Map<String, Object> input, Context context) {
-        LexRequest lexRequest = LexRequestFactory.readFromMap(input);
         try {
-            String content = "Product is not requested.";
-            if(lexRequest.isProductRequested())
-                content = String.format("You requested: %s, amount: %s", lexRequest.getRequestedProduct(), lexRequest.getAmount());
-            else if(lexRequest.hasError())
-                content = lexRequest.getError();
+            LexRequest lexRequest = LexRequestFactory.readFromMap(input);
+            if(lexRequest.hasError())
+                return createFailureLexResponse(lexRequest.getError());
+            if(!lexRequest.requestedAmountIsSet() || !lexRequest.requestedProductIsSet())
+                return createFailureLexResponse("Product or amount are not requested.");
+
+            String content = String.format("You requested: %s, amount: %s", lexRequest.getRequestedProduct(), lexRequest.getRequestedAmount());
 
             Message message = new Message(Message.ContentType.PlainText, content);
             DialogAction dialogAction = new DialogAction(DialogAction.Type.Close,
-                    DialogAction.FulfillmentState.Fulfilled,
-                    message);
-            LexResponse response = new LexResponse(dialogAction);
-            return response;
+                                                            DialogAction.FulfillmentState.Fulfilled,
+                                                            message);
+            return new LexResponse(dialogAction);
         } catch (Exception e) {
             e.printStackTrace();
-            return new LexResponse(new DialogAction(DialogAction.Type.Close,null,new Message(null,null)));
+            return createFailureLexResponse("Error: " + e.getMessage());
         }
+    }
+
+    private LexResponse createFailureLexResponse(String message) {
+        return new LexResponse(new DialogAction(DialogAction.Type.Close, DialogAction.FulfillmentState.Failed,
+                                                new Message(Message.ContentType.PlainText, message)));
     }
 }
 
