@@ -1,5 +1,5 @@
 import io.github.satr.aws.lambda.shoppingbot.ShoppingBotLambda;
-import io.github.satr.aws.lambda.shoppingbot.entity.BakeryDepartment;
+import io.github.satr.aws.lambda.shoppingbot.entity.BakeryDepartmentIntent;
 import io.github.satr.aws.lambda.shoppingbot.response.DialogAction;
 import io.github.satr.aws.lambda.shoppingbot.response.LexResponse;
 
@@ -9,6 +9,8 @@ import static org.junit.Assert.*;
 
 public class ShoppingBotLambdaTest {
 
+    private final String unknownIntentName = "UnknownIntent";
+    private final String unknownSlotName = "UnknownSlot";
     private ShoppingBotLambda shoppingBotLambda;
 
     @org.junit.Before
@@ -24,18 +26,23 @@ public class ShoppingBotLambdaTest {
     public void orderFulfilledBackeryRequest() throws Exception {
         String amount = "123456";
         String product = "bread";
-        LinkedHashMap<String, Object> requestMap = ObjectMother.createRequestMap(BakeryDepartment.IntentName, BakeryDepartment.Slot.Product, product, BakeryDepartment.Slot.Amount, amount);
+        String unit = "pieces";
+        LinkedHashMap<String, Object> requestMap = ObjectMother.createRequestMap(BakeryDepartmentIntent.Name,
+                                                                                 BakeryDepartmentIntent.Slot.Product, product,
+                                                                                 BakeryDepartmentIntent.Slot.Amount, amount,
+                                                                                 BakeryDepartmentIntent.Slot.Unit, unit);
         LexResponse lexResponse = shoppingBotLambda.handleRequest(requestMap, null);
 
         assertEquals(DialogAction.FulfillmentState.Fulfilled, lexResponse.getDialogAction().getFulfillmentState());
         String responseContent = lexResponse.getDialogAction().getMessage().getContent();
         assertTrue(responseContent.contains(amount));
         assertTrue(responseContent.contains(product));
+        assertTrue(responseContent.contains(unit));
     }
 
     @org.junit.Test
     public void orderFailuredUnknownIntentRequest() throws Exception {
-        LinkedHashMap<String, Object> requestMap = ObjectMother.createRequestMap("UnknownIntent", BakeryDepartment.Slot.Product, "bread", BakeryDepartment.Slot.Amount, "123456");
+        LinkedHashMap<String, Object> requestMap = ObjectMother.createRequestMap(unknownIntentName, BakeryDepartmentIntent.Slot.Product, "bread", BakeryDepartmentIntent.Slot.Amount, "123456", BakeryDepartmentIntent.Slot.Unit, "pieces");
         LexResponse lexResponse = shoppingBotLambda.handleRequest(requestMap, null);
 
         assertEquals(DialogAction.FulfillmentState.Failed, lexResponse.getDialogAction().getFulfillmentState());
@@ -45,7 +52,7 @@ public class ShoppingBotLambdaTest {
 
     @org.junit.Test
     public void orderFailuredUnknownSlotRequest() throws Exception {
-        LinkedHashMap<String, Object> requestMap = ObjectMother.createRequestMap(BakeryDepartment.IntentName, "UnknownSlot", "bread", BakeryDepartment.Slot.Amount, "123456");
+        LinkedHashMap<String, Object> requestMap = ObjectMother.createRequestMap(BakeryDepartmentIntent.Name, unknownSlotName, "bread", BakeryDepartmentIntent.Slot.Amount, "123456", BakeryDepartmentIntent.Slot.Unit, "pieces");
         LexResponse lexResponse = shoppingBotLambda.handleRequest(requestMap, null);
 
         assertEquals(DialogAction.FulfillmentState.Failed, lexResponse.getDialogAction().getFulfillmentState());

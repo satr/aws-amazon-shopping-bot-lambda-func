@@ -1,8 +1,8 @@
 package io.github.satr.aws.lambda.shoppingbot.request;
 
-import io.github.satr.aws.lambda.shoppingbot.entity.BakeryDepartment;
-import io.github.satr.aws.lambda.shoppingbot.entity.MilkDepartment;
-import io.github.satr.aws.lambda.shoppingbot.entity.VegetableDepartment;
+import io.github.satr.aws.lambda.shoppingbot.entity.BakeryDepartmentIntent;
+import io.github.satr.aws.lambda.shoppingbot.entity.MilkDepartmentIntent;
+import io.github.satr.aws.lambda.shoppingbot.entity.VegetableDepartmentIntent;
 
 import java.util.Map;
 
@@ -43,28 +43,28 @@ public class LexRequestFactory {
         if (slots == null)
             return;
         switch (request.getIntentName()) {
-            case BakeryDepartment.IntentName:
-                readSlots(request, slots, BakeryDepartment.Slot.Product, BakeryDepartment.Slot.Amount);
+            case BakeryDepartmentIntent.Name:
+                readSlots(request, slots, BakeryDepartmentIntent.Slot.Product, BakeryDepartmentIntent.Slot.Amount, BakeryDepartmentIntent.Slot.Unit);
                 break;
-            case MilkDepartment.IntentName:
-                readSlots(request, slots, MilkDepartment.Slot.Product, MilkDepartment.Slot.Amount);
+            case MilkDepartmentIntent.Name:
+                readSlots(request, slots, MilkDepartmentIntent.Slot.Product, MilkDepartmentIntent.Slot.Amount, MilkDepartmentIntent.Slot.Unit);
                 break;
-            case VegetableDepartment.IntentName:
-                readSlots(request, slots, VegetableDepartment.Slot.Product, VegetableDepartment.Slot.Amount);
+            case VegetableDepartmentIntent.Name:
+                readSlots(request, slots, VegetableDepartmentIntent.Slot.Product, VegetableDepartmentIntent.Slot.Amount, VegetableDepartmentIntent.Slot.Unit);
                 break;
             default:
                 request.setError("Requested department is not recognized.");
         }
     }
 
-    private static void readSlots(LexRequest request, Map<String, Object> slots, String productSlotName, String amountSlotName) {
-        String productSlot = (String)slots.get(productSlotName);
-        if (productSlot == null)
-            return;
-        request.setProduct(productSlot);
-        String requestedAmount = (String) slots.get(amountSlotName);
-        if (requestedAmount == null)
-            return;
-        request.setRequestedAmount(requestedAmount);
+    private static void readSlots(LexRequest request, Map<String, Object> slots, String productSlotName, String amountSlotName, String unitSlotName) {
+        request.setProduct(getSlotValueFor(slots, productSlotName, null));
+        request.setRequestedAmount(getSlotValueFor(slots, amountSlotName, null));
+        request.setRequestedUnit(getSlotValueFor(slots, unitSlotName, null));
+    }
+
+    private static String getSlotValueFor(Map<String, Object> slots, String productSlotName, String defaultValue) {
+        String slotValue = (String)slots.get(productSlotName);
+        return slotValue != null ? slotValue : defaultValue;
     }
 }

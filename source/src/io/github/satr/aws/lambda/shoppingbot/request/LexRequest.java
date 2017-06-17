@@ -6,6 +6,7 @@ public class LexRequest {
     private String intentName;
     private String requestedProduct;
     private String requestedAmount;
+    private String requestedUnit;
     private String invocationSource;
     private String outputDialogMode;
     private String error;
@@ -26,6 +27,8 @@ public class LexRequest {
         return requestedAmount;
     }
 
+    public String getRequestedUnit() { return requestedUnit; }
+
     public void setInvocationSource(String invocationSource) {
         this.invocationSource = invocationSource;
     }
@@ -37,10 +40,8 @@ public class LexRequest {
     public boolean requestedProductIsSet() {
         return requestedProduct != null && requestedProduct.length() > 0;
     }
-
-    public boolean requestedAmountIsSet() {
-        return requestedAmount != null && requestedAmount.length() > 0;
-    }
+    public boolean requestedAmountIsSet() { return requestedAmount != null && requestedAmount.length() > 0; }
+    public boolean requestedUnitsIsSet() { return requestedUnit != null && requestedUnit.length() > 0; }
 
     public String getBotName() {
         return botName;
@@ -76,5 +77,9 @@ public class LexRequest {
 
     public boolean hasError() {
         return getError() != null;
+    }
+
+    public void setRequestedUnit(String requestedUnit) {
+        this.requestedUnit = requestedUnit;
     }
 }

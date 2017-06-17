@@ -21,9 +21,7 @@ public class ShoppingBotLambda implements RequestHandler<Map<String, Object>, Le
             if(!lexRequest.requestedAmountIsSet() || !lexRequest.requestedProductIsSet())
                 return createFailureLexResponse("Product or amount are not requested.");
 
-            String content = String.format("You requested: %s, amount: %s", lexRequest.getRequestedProduct(), lexRequest.getRequestedAmount());
-
-            Message message = new Message(Message.ContentType.PlainText, content);
+            Message message = new Message(Message.ContentType.PlainText, buildContent(lexRequest));
             DialogAction dialogAction = new DialogAction(DialogAction.Type.Close,
                                                             DialogAction.FulfillmentState.Fulfilled,
                                                             message);
@@ -32,6 +30,13 @@ public class ShoppingBotLambda implements RequestHandler<Map<String, Object>, Le
             e.printStackTrace();
             return createFailureLexResponse("Error: " + e.getMessage());
         }
+    }
+
+    private String buildContent(LexRequest lexRequest) {
+        String requestedUnit = lexRequest.getRequestedUnit();
+        return requestedUnit != null && requestedUnit.length() > 0
+                ? String.format("You requested: %s %s of %s.", lexRequest.getRequestedAmount(), requestedUnit, lexRequest.getRequestedProduct())
+                : String.format("You requested: %s %s.", lexRequest.getRequestedAmount(), lexRequest.getRequestedProduct());
     }
 
     private LexResponse createFailureLexResponse(String message) {
