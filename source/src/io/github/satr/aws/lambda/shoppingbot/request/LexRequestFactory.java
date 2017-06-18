@@ -1,8 +1,8 @@
 package io.github.satr.aws.lambda.shoppingbot.request;
 
-import io.github.satr.aws.lambda.shoppingbot.entity.BakeryDepartmentIntent;
-import io.github.satr.aws.lambda.shoppingbot.entity.MilkDepartmentIntent;
-import io.github.satr.aws.lambda.shoppingbot.entity.VegetableDepartmentIntent;
+import io.github.satr.aws.lambda.shoppingbot.intent.BakeryDepartmentIntent;
+import io.github.satr.aws.lambda.shoppingbot.intent.MilkDepartmentIntent;
+import io.github.satr.aws.lambda.shoppingbot.intent.VegetableDepartmentIntent;
 
 import java.util.Map;
 
@@ -42,19 +42,14 @@ public class LexRequestFactory {
         Map<String, Object> slots = (Map<String, Object>) currentIntent.get(Property.Slots);
         if (slots == null)
             return;
-        switch (request.getIntentName()) {
-            case BakeryDepartmentIntent.Name:
-                readSlots(request, slots, BakeryDepartmentIntent.Slot.Product, BakeryDepartmentIntent.Slot.Amount, BakeryDepartmentIntent.Slot.Unit);
-                break;
-            case MilkDepartmentIntent.Name:
-                readSlots(request, slots, MilkDepartmentIntent.Slot.Product, MilkDepartmentIntent.Slot.Amount, MilkDepartmentIntent.Slot.Unit);
-                break;
-            case VegetableDepartmentIntent.Name:
-                readSlots(request, slots, VegetableDepartmentIntent.Slot.Product, VegetableDepartmentIntent.Slot.Amount, VegetableDepartmentIntent.Slot.Unit);
-                break;
-            default:
-                request.setError("Requested department is not recognized.");
-        }
+        if (request.getIntentName().equals(BakeryDepartmentIntent.Name))
+            readSlots(request, slots, BakeryDepartmentIntent.Slot.Product, BakeryDepartmentIntent.Slot.Amount, BakeryDepartmentIntent.Slot.Unit);
+        else if (request.getIntentName().equals(MilkDepartmentIntent.Name))
+            readSlots(request, slots, MilkDepartmentIntent.Slot.Product, MilkDepartmentIntent.Slot.Amount, MilkDepartmentIntent.Slot.Unit);
+        else if (request.getIntentName().equals(VegetableDepartmentIntent.Name))
+            readSlots(request, slots, VegetableDepartmentIntent.Slot.Product, VegetableDepartmentIntent.Slot.Amount, VegetableDepartmentIntent.Slot.Unit);
+        else
+            request.setError("Requested department is not recognized.");
     }
 
     private static void readSlots(LexRequest request, Map<String, Object> slots, String productSlotName, String amountSlotName, String unitSlotName) {

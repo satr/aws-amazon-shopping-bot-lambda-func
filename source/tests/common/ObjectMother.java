@@ -1,3 +1,13 @@
+package common;
+
+//import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
+//import com.amazonaws.services.dynamodbv2.local.embedded.DynamoDBEmbedded;
+//import com.amazonaws.services.dynamodbv2.local.shared.access.AmazonDynamoDBLocal;
+
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
+import com.amazonaws.services.dynamodbv2.local.embedded.DynamoDBEmbedded;
+import com.amazonaws.services.dynamodbv2.local.shared.access.AmazonDynamoDBLocal;
+
 import java.util.LinkedHashMap;
 
 public class ObjectMother {
@@ -21,5 +31,20 @@ public class ObjectMother {
         currentIntentMap.put("slots", slotsMap);
         requestMap.put("currentIntent", currentIntentMap);
         return requestMap;
+    }
+
+    public static AmazonDynamoDB createInMemoryDb() {
+        AmazonDynamoDB dynamodb = null;
+        try {
+//            System.setProperty("sqlite4java.library.path", "native-libs");
+            // Create an in-memory and in-process instance of DynamoDB Local that skips HTTP
+            AmazonDynamoDBLocal amazonDynamoDBLocal = DynamoDBEmbedded.create();
+            dynamodb = amazonDynamoDBLocal.amazonDynamoDB();
+            return dynamodb;
+        } catch (Exception e){
+            if(dynamodb != null)
+                dynamodb.shutdown();// Shutdown the thread pools in DynamoDB Local / Embedded
+        }
+        return dynamodb;
     }
 }

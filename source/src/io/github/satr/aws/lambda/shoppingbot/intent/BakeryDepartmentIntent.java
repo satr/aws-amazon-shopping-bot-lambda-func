@@ -1,4 +1,4 @@
-package io.github.satr.aws.lambda.shoppingbot.entity;
+package io.github.satr.aws.lambda.shoppingbot.intent;
 
 public class BakeryDepartmentIntent {
     public static final String Name = "BakeryDepartment";

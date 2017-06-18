@@ -1,5 +1,8 @@
+package business;
+
+import common.ObjectMother;
 import io.github.satr.aws.lambda.shoppingbot.ShoppingBotLambda;
-import io.github.satr.aws.lambda.shoppingbot.entity.BakeryDepartmentIntent;
+import io.github.satr.aws.lambda.shoppingbot.intent.BakeryDepartmentIntent;
 import io.github.satr.aws.lambda.shoppingbot.response.DialogAction;
 import io.github.satr.aws.lambda.shoppingbot.response.LexResponse;
 

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="DynamoDBLocal">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/external/dynamodb_local/DynamoDBLocal.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
