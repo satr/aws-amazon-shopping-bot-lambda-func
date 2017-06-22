@@ -39,19 +39,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User getById(String userId) throws InvalidDataException {
-        String attrValueUserId = ":v_user_id";
-        String keyConditionExpression = String.format("%s=%s", Attr.UserId, attrValueUserId);
-        Map<String, AttributeValue> expressionValueMap = new HashMap<>();
-        expressionValueMap.put(attrValueUserId, new AttributeValue(userId));
-        DynamoDBQueryExpression<User> queryExpression = new DynamoDBQueryExpression<User>()
-                                                            .withKeyConditionExpression(keyConditionExpression)
-                                                            .withExpressionAttributeValues(expressionValueMap);
-
-        PaginatedQueryList<User> queryResult = dbMapper.query(User.class, queryExpression);
-        if(queryResult.size() > 1)
-            throw new InvalidDataException("Multiple users exist with same UserId.");
-
-        return queryResult.size() > 0 ? queryResult.get(0) : null;
+        return dbMapper.load(User.class, userId);
     }
 
     @Override
@@ -67,5 +55,11 @@ public class UserRepositoryImpl implements UserRepository {
                                                 .withFilterExpression(filterExpression)
                                                 .withExpressionAttributeValues(expressionValueMap);
         return dbMapper.scan(User.class, scanExpression);
+    }
+
+
+    @Override
+    public void save(User user) {
+        dbMapper.save(user);
     }
 }

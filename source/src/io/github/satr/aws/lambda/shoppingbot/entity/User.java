@@ -4,12 +4,18 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
+import java.util.UUID;
+
 @DynamoDBTable(tableName = "User")
 public class User {
     private String userId;
     private String firstName;
     private String lastName;
     private String address;
+
+    public User() {
+        setUserId(UUID.randomUUID().toString());
+    }
 
     @DynamoDBHashKey(attributeName="user_id")
     public String getUserId() {

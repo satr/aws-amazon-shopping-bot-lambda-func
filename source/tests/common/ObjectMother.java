@@ -36,8 +36,7 @@ public class ObjectMother {
     public static AmazonDynamoDB createInMemoryDb() {
         AmazonDynamoDB dynamodb = null;
         try {
-//            System.setProperty("sqlite4java.library.path", "native-libs");
-            // Create an in-memory and in-process instance of DynamoDB Local that skips HTTP
+            // Create an in-memory and in-process instance of DynamoDB Local
             AmazonDynamoDBLocal amazonDynamoDBLocal = DynamoDBEmbedded.create();
             dynamodb = amazonDynamoDBLocal.amazonDynamoDB();
             return dynamodb;
