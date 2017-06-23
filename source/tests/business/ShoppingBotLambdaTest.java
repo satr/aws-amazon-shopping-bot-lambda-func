@@ -5,8 +5,11 @@ import io.github.satr.aws.lambda.shoppingbot.ShoppingBotLambda;
 import io.github.satr.aws.lambda.shoppingbot.intent.BakeryDepartmentIntent;
 import io.github.satr.aws.lambda.shoppingbot.response.DialogAction;
 import io.github.satr.aws.lambda.shoppingbot.response.LexResponse;
+import org.junit.Test;
+import testdata.FileNames;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -23,6 +26,13 @@ public class ShoppingBotLambdaTest {
 
     @org.junit.After
     public void tearDown() throws Exception {
+    }
+
+    @Test
+    public void s() throws Exception {
+        Map<String, Object> requestMap = ObjectMother.createMapFromJson(FileNames.LexRequestBakeryDepartmentJson);
+        LexResponse lexResponse = shoppingBotLambda.handleRequest(requestMap, null);
+        assertNotNull(lexResponse);
     }
 
     @org.junit.Test

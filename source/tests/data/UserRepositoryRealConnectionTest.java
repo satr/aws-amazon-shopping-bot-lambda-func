@@ -65,21 +65,4 @@ public class UserRepositoryRealConnectionTest {
         assertNotNull(dbUser);
         assertEquals(user.toString(), dbUser.toString());
     }
-
-//    @Test
-//    public void getUserById() throws Exception {
-//        User testUser = testUsers.get(0);
-//        User dbUser = userRepository.getById(testUser.getUserId());
-//        assertNotNull(dbUser);
-//        assertEquals(testUser.toString(), dbUser.toString());
-//    }
-//
-//    @Test
-//    public void getUserByName() throws Exception {
-//        List<User> dbUsers = userRepository.getByName(testingFirstName1, testingLastName1);
-//        assertNotNull(dbUsers);
-//        assertTrue(dbUsers.size() > 1);
-//        assertEquals(testingFirstName1, dbUsers.get(0).getFirstName());
-//        assertEquals(testingLastName1, dbUsers.get(0).getLastName());
-//    }
 }

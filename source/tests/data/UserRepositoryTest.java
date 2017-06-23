@@ -6,9 +6,11 @@ import common.ObjectMother;
 import io.github.satr.aws.lambda.shoppingbot.data.UserRepositoryImpl;
 import io.github.satr.aws.lambda.shoppingbot.entity.User;
 import org.junit.*;
+import testdata.FileNames;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 

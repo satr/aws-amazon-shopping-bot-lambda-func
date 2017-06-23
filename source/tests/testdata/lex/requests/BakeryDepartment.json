@@ -1,0 +1,16 @@
+{
+  "bot": {
+    "alias": "null",
+    "name": "ShoppingBot",
+    "version": "$LATEST"
+  },
+  "currentIntent": {
+    "confirmationStatus": "None",
+    "name": "BakeryDepartment",
+    "slots": {
+      "Amount": "1",
+      "BakeryProduct": "bread",
+      "BakeryDepartmentUnit": "loaf"
+    }
+  }
+}
