@@ -1,0 +1,15 @@
+{
+  "bot": {
+    "alias": "null",
+    "name": "ShoppingBot",
+    "version": "$LATEST"
+  },
+  "currentIntent": {
+    "confirmationStatus": "None",
+    "name": "Greetings",
+    "slots": {
+      "FirstName": "John",
+      "LastName": "Doe"
+    }
+  }
+}

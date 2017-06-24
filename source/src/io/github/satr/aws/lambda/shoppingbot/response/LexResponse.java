@@ -21,6 +21,6 @@ public class LexResponse {
     }
 
     public Object getSessionAttribute(String attributeName) {
-        return sessionAttributes.containsKey(attributeName) ? sessionAttributes.get(attributeName) : null;
+        return sessionAttributes != null && sessionAttributes.containsKey(attributeName) ? sessionAttributes.get(attributeName) : null;
     }
 }

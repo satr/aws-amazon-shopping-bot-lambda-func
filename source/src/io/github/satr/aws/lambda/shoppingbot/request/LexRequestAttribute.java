@@ -1,6 +1,6 @@
 package io.github.satr.aws.lambda.shoppingbot.request;
 
-public final class LexRequestAttr {
+public final class LexRequestAttribute {
     public static final String Bot = "bot";
     public static final String BotName = "name";
     public static final String SessionAttributes = "sessionAttributes";

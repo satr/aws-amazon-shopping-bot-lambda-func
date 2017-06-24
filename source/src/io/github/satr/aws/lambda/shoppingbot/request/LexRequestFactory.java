@@ -38,33 +38,33 @@ public class LexRequestFactory {
     }
 
     private static void loadSessionAttributes(Map<String, Object> input, LexRequest request) {
-        Map<String, Object> sessionAttrs = (Map<String, Object>) input.get(LexRequestAttr.SessionAttributes);
+        Map<String, Object> sessionAttrs = (Map<String, Object>) input.get(LexRequestAttribute.SessionAttributes);
         if (sessionAttrs != null)
             request.setSessionAttributes(sessionAttrs);
     }
 
     private static void loadIntentParameters(Map<String, Object> currentIntent, LexRequest request) {
-        request.setConfirmationStatus((String) currentIntent.get(LexRequestAttr.ConfirmationStatus));
-        request.setIntentName((String) currentIntent.get(LexRequestAttr.CurrentIntentName));
-        request.setInvocationSource((String) currentIntent.get(LexRequestAttr.InvocationSource));
-        request.setOutputDialogMode((String) currentIntent.get(LexRequestAttr.OutputDialogMode));
+        request.setConfirmationStatus((String) currentIntent.get(LexRequestAttribute.ConfirmationStatus));
+        request.setIntentName((String) currentIntent.get(LexRequestAttribute.CurrentIntentName));
+        request.setInvocationSource((String) currentIntent.get(LexRequestAttribute.InvocationSource));
+        request.setOutputDialogMode((String) currentIntent.get(LexRequestAttribute.OutputDialogMode));
 
         loadIntentSlots(currentIntent, request);
     }
 
     private static Map<String, Object> loadCurrentIntent(Map<String, Object> input) {
-        return (Map<String, Object>) input.get(LexRequestAttr.CurrentIntent);
+        return (Map<String, Object>) input.get(LexRequestAttribute.CurrentIntent);
     }
 
     private static void loadBotName(Map<String, Object> input, LexRequest request) {
-        Map<String, Object> bot = (Map<String, Object>) input.get(LexRequestAttr.Bot);
+        Map<String, Object> bot = (Map<String, Object>) input.get(LexRequestAttribute.Bot);
         if (bot != null)
-            request.setBotName((String) bot.get(LexRequestAttr.BotName));
+            request.setBotName((String) bot.get(LexRequestAttribute.BotName));
     }
 
     private static void loadIntentSlots(Map<String, Object> currentIntent, LexRequest request) {
         IntentLoaderStrategy strategy = getIntentLoadingStrategyBy(request.getIntentName());
-        Map<String, Object> slots = (Map<String, Object>) currentIntent.get(LexRequestAttr.Slots);
+        Map<String, Object> slots = (Map<String, Object>) currentIntent.get(LexRequestAttribute.Slots);
         strategy.load(request, slots);
     }
 

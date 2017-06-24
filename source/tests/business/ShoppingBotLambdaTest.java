@@ -3,10 +3,9 @@ package business;
 import common.ObjectMother;
 import data.NullRepositoryFactory;
 import io.github.satr.aws.lambda.shoppingbot.ShoppingBotLambda;
-import io.github.satr.aws.lambda.shoppingbot.ShoppingBotProcessor;
+import io.github.satr.aws.lambda.shoppingbot.processing.ShoppingBotProcessor;
 import io.github.satr.aws.lambda.shoppingbot.intent.BakeryDepartmentIntent;
 import io.github.satr.aws.lambda.shoppingbot.intent.GreetingsIntent;
-import io.github.satr.aws.lambda.shoppingbot.request.LexRequestAttr;
 import io.github.satr.aws.lambda.shoppingbot.response.DialogAction;
 import io.github.satr.aws.lambda.shoppingbot.response.LexResponse;
 import org.junit.Test;
@@ -46,6 +45,7 @@ public class ShoppingBotLambdaTest {
         String product = "bread";
         String unit = "pieces";
         LinkedHashMap<String, Object> requestMap = ObjectMother.createRequestForBakeryDepartment(product, amount, unit);
+
         LexResponse lexResponse = shoppingBotLambda.handleRequest(requestMap, null);
 
         assertEquals(DialogAction.FulfillmentState.Fulfilled, lexResponse.getDialogAction().getFulfillmentState());
@@ -59,6 +59,7 @@ public class ShoppingBotLambdaTest {
     @org.junit.Test
     public void orderFailuredUnknownIntentRequest() throws Exception {
         LinkedHashMap<String, Object> requestMap = ObjectMother.createRequestMap(unknownIntentName, BakeryDepartmentIntent.Slot.Product, "bread", BakeryDepartmentIntent.Slot.Amount, "123456", BakeryDepartmentIntent.Slot.Unit, "pieces");
+
         LexResponse lexResponse = shoppingBotLambda.handleRequest(requestMap, null);
 
         assertEquals(DialogAction.FulfillmentState.Failed, lexResponse.getDialogAction().getFulfillmentState());
@@ -69,6 +70,7 @@ public class ShoppingBotLambdaTest {
     @org.junit.Test
     public void orderFailuredUnknownSlotRequest() throws Exception {
         LinkedHashMap<String, Object> requestMap = ObjectMother.createRequestMap(BakeryDepartmentIntent.Name, unknownSlotName, "bread", BakeryDepartmentIntent.Slot.Amount, "123456", BakeryDepartmentIntent.Slot.Unit, "pieces");
+
         LexResponse lexResponse = shoppingBotLambda.handleRequest(requestMap, null);
 
         assertEquals(DialogAction.FulfillmentState.Failed, lexResponse.getDialogAction().getFulfillmentState());
@@ -77,15 +79,43 @@ public class ShoppingBotLambdaTest {
     }
 
     @Test
-    public void sessionAttributes() throws Exception {
+    public void transferSessionAttributesFromRequestToRespond() throws Exception {
         Map<String, Object> requestMap = ObjectMother.createMapFromJson(FileNames.LexRequestBakeryDepartmentJson);
-        String firstName = ObjectMother.setSessionAttributeFromRundomString(requestMap, GreetingsIntent.Slot.FirstName);
-        String lastName = ObjectMother.setSessionAttributeFromRundomString(requestMap, GreetingsIntent.Slot.LastName);
+        String firstName = ObjectMother.setSessionAttributeWithRundomString(requestMap, GreetingsIntent.Slot.FirstName);
+        String lastName = ObjectMother.setSessionAttributeWithRundomString(requestMap, GreetingsIntent.Slot.LastName);
+        String sessionId = ObjectMother.setSessionAttributeWithRundomString(requestMap, GreetingsIntent.Slot.SessionId);
 
         LexResponse lexResponse = shoppingBotLambda.handleRequest(requestMap, null);
 
         assertEquals(firstName, lexResponse.getSessionAttribute(GreetingsIntent.Slot.FirstName));
         assertEquals(lastName, lexResponse.getSessionAttribute(GreetingsIntent.Slot.LastName));
+        assertEquals(sessionId, lexResponse.getSessionAttribute(GreetingsIntent.Slot.SessionId));
         assertNull(lexResponse.getSessionAttribute(unknownSessionAttribute));
     }
+
+    @Test
+    public void getNameFromGreetingsIntent() throws Exception {
+        String firstName = ObjectMother.createRandomString();
+        String lastName = ObjectMother.createRandomString();
+        Map<String, Object> requestMap = ObjectMother.createGreetingsIntentMapWithNamesInSlots(firstName, lastName);
+
+        LexResponse lexResponse = shoppingBotLambda.handleRequest(requestMap, null);
+
+        String responseContent = lexResponse.getDialogAction().getMessage().getContent();
+        assertTrue(responseContent.contains(firstName));
+        assertTrue(responseContent.contains(lastName));
+    }
+
+    @Test
+    public void storeNameSlotsToSessionAttributes() throws Exception {
+        String firstName = ObjectMother.createRandomString();
+        String lastName = ObjectMother.createRandomString();
+        Map<String, Object> requestMap = ObjectMother.createGreetingsIntentMapWithNamesInSlots(firstName, lastName);
+
+        LexResponse lexResponse = shoppingBotLambda.handleRequest(requestMap, null);
+
+        assertEquals(firstName, lexResponse.getSessionAttribute(GreetingsIntent.Slot.FirstName));
+        assertEquals(lastName, lexResponse.getSessionAttribute(GreetingsIntent.Slot.LastName));
+    }
 }
+

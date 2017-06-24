@@ -10,7 +10,9 @@ import com.amazonaws.services.dynamodbv2.local.shared.access.AmazonDynamoDBLocal
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.satr.aws.lambda.shoppingbot.intent.BakeryDepartmentIntent;
-import io.github.satr.aws.lambda.shoppingbot.request.LexRequestAttr;
+import io.github.satr.aws.lambda.shoppingbot.intent.GreetingsIntent;
+import io.github.satr.aws.lambda.shoppingbot.request.LexRequestAttribute;
+import testdata.FileNames;
 
 import java.io.File;
 import java.io.IOException;
@@ -80,16 +82,20 @@ public class ObjectMother {
         return dynamodb;
     }
 
-    public static String setSessionAttributeFromRundomString(Map<String, Object> requestMap, String sessionAttributeName) {
-        Map<String, Object> sessionAttrsMap = createSessionAttribute(requestMap, sessionAttributeName, createRandomString());
+    public static String setSessionAttributeWithRundomString(Map<String, Object> requestMap, String sessionAttributeName) {
+        return setSessionAttributeWithString(requestMap, sessionAttributeName, createRandomString());
+    }
+
+    private static String setSessionAttributeWithString(Map<String, Object> requestMap, String sessionAttributeName, String value) {
+        Map<String, Object> sessionAttrsMap = createSessionAttribute(requestMap, sessionAttributeName, value);
         return (String) sessionAttrsMap.get(sessionAttributeName);
     }
 
     private static Map<String, Object> createSessionAttribute(Map<String, Object> requestMap, String sessionAttributeName, Object value) {
-        Map<String, Object> sessionAttrsMap = (Map<String, Object>) requestMap.get(LexRequestAttr.SessionAttributes);
+        Map<String, Object> sessionAttrsMap = (Map<String, Object>) requestMap.get(LexRequestAttribute.SessionAttributes);
         if(sessionAttrsMap == null) {
             sessionAttrsMap = new LinkedHashMap<>();
-            requestMap.put(LexRequestAttr.SessionAttributes, new LinkedHashMap<String, Object>());
+            requestMap.put(LexRequestAttribute.SessionAttributes, sessionAttrsMap);
         }
         sessionAttrsMap.put(sessionAttributeName, value);
         return sessionAttrsMap;
@@ -98,4 +104,13 @@ public class ObjectMother {
     public static String createRandomString() {
         return UUID.randomUUID().toString();
     }
+
+    public static Map<String, Object> createGreetingsIntentMapWithNamesInSlots(String firstName, String lastName) {
+        Map<String, Object> mapFromJson = createMapFromJson(FileNames.LexRequestGreetingsWithNamesJson);
+        Map<String, Object> slots = (Map<String, Object>) ((Map<String, Object>) mapFromJson.get(LexRequestAttribute.CurrentIntent)).get(LexRequestAttribute.Slots);
+        slots.put(GreetingsIntent.Slot.FirstName, firstName);
+        slots.put(GreetingsIntent.Slot.LastName, lastName);
+        return mapFromJson;
+    }
+
 }

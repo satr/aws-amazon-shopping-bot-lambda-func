@@ -1,5 +1,6 @@
 package io.github.satr.aws.lambda.shoppingbot.request;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class LexRequest {
@@ -14,7 +15,8 @@ public class LexRequest {
     private String error;
     private String firstName;
     private String lastName;
-    private Map<String, Object> sessionAttributes;
+    private String address;
+    private Map<String, Object> sessionAttributes = new LinkedHashMap<>();
 
     public void setProduct(String requestedProduct) {
         this.requestedProduct = requestedProduct;
@@ -47,6 +49,8 @@ public class LexRequest {
     }
     public boolean requestedAmountIsSet() { return requestedAmount != null && requestedAmount.length() > 0; }
     public boolean requestedUnitsIsSet() { return requestedUnit != null && requestedUnit.length() > 0; }
+    public boolean firstNameIsSet() { return firstName != null && firstName.length() > 0; }
+    public boolean lastNameIsSet() { return lastName != null && lastName.length() > 0; }
 
     public String getBotName() {
         return botName;
@@ -105,10 +109,18 @@ public class LexRequest {
     }
 
     public void setSessionAttributes(Map<String, Object> sessionAttributes) {
-        this.sessionAttributes = sessionAttributes;
+        this.sessionAttributes = sessionAttributes != null ? sessionAttributes : new LinkedHashMap<>();
     }
 
     public Map<String, Object> getSessionAttributes() {
         return sessionAttributes;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
