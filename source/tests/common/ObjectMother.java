@@ -9,6 +9,8 @@ import com.amazonaws.services.dynamodbv2.local.embedded.DynamoDBEmbedded;
 import com.amazonaws.services.dynamodbv2.local.shared.access.AmazonDynamoDBLocal;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.satr.aws.lambda.shoppingbot.entity.ShoppingCart;
+import io.github.satr.aws.lambda.shoppingbot.entity.User;
 import io.github.satr.aws.lambda.shoppingbot.intent.BakeryDepartmentIntent;
 import io.github.satr.aws.lambda.shoppingbot.intent.GreetingsIntent;
 import io.github.satr.aws.lambda.shoppingbot.request.LexRequestAttribute;
@@ -16,6 +18,8 @@ import testdata.FileNames;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -113,4 +117,26 @@ public class ObjectMother {
         return mapFromJson;
     }
 
+    public static void removeSessionAttribute(Map<String, Object> requestMap, String attributeName) {
+        Map<String, Object> sessionAttrsMap = (Map<String, Object>) requestMap.get(LexRequestAttribute.SessionAttributes);
+        if(sessionAttrsMap == null || !sessionAttrsMap.containsKey(attributeName))
+            return;
+        sessionAttrsMap.remove(attributeName);
+    }
+
+    public static ShoppingCart createShoppingCart() {
+        User user = new User();
+        return createShoppingCart(user);
+    }
+
+    public static ShoppingCart createShoppingCart(User user) {
+        ShoppingCart cart = new ShoppingCart();
+        cart.setUser(user);
+        cart.setSessionId(createRandomString());
+        return cart;
+    }
+
+    public static ZonedDateTime createZonedDateTimeForYear(int year) {
+        return ZonedDateTime.of(year,1, 1,1,1,1,1, ZoneId.of("UTC"));
+    }
 }

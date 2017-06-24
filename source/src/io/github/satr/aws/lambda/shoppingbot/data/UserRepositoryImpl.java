@@ -11,9 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class UserRepositoryImpl implements UserRepository {
+public class UserRepositoryImpl extends RepositoryImpl implements UserRepository {
     public final static String TableName = "User";
-    private final DynamoDBMapper dbMapper;
 
     public final class Attr {
         public final static String UserId = "user_id";
@@ -22,11 +21,8 @@ public class UserRepositoryImpl implements UserRepository {
         public final static String Address = "address";
     }
 
-    private AmazonDynamoDB dynamodb;
-
     public UserRepositoryImpl(AmazonDynamoDB dynamodb, DynamoDBMapper dbMapper) {
-        this.dynamodb = dynamodb;
-        this.dbMapper = dbMapper;
+        super(dynamodb, dbMapper);
     }
 
     @Override

@@ -11,9 +11,12 @@ public class RequestDepartmentProductProcessingStrategy implements IntentProcess
         if(!lexRequest.requestedAmountIsSet() || !lexRequest.requestedProductIsSet())
             return LexResponseHelper.createFailedLexResponse("Product or amount are not specified.", lexRequest);
 
-        return LexResponseHelper.createLexResponse(lexRequest, buildContent(lexRequest),
-                                                                      DialogAction.Type.Close,
-                                                                      DialogAction.FulfillmentState.Fulfilled);
+
+
+        LexResponse lexResponse = LexResponseHelper.createLexResponse(lexRequest, buildContent(lexRequest),
+                                                                        DialogAction.Type.Close,
+                                                                        DialogAction.FulfillmentState.Fulfilled);
+        return lexResponse;
     }
 
     private String buildContent(LexRequest lexRequest) {

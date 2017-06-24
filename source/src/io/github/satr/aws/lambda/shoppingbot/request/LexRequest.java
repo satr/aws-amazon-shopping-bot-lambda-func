@@ -123,4 +123,12 @@ public class LexRequest {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public Object getSessionAttribute(String attributeName) {
+        return sessionAttributes.containsKey(attributeName) ? sessionAttributes.get(attributeName) : null;
+    }
+
+    public void setSessionAttribute(String attributeName, Object value) {
+        sessionAttributes.put(attributeName, value);
+    }
 }

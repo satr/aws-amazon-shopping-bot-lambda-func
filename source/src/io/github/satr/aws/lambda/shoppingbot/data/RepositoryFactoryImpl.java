@@ -9,6 +9,7 @@ public class RepositoryFactoryImpl implements RepositoryFactory {
     private final AmazonDynamoDB dynamoDbClient;
     private final DynamoDBMapper dbMapper;
     private UserRepository userRepository;
+    private ShoppingCartRepository shoppingCartRepository;
 
     public RepositoryFactoryImpl() {
         dynamoDbClient = AmazonDynamoDBClientBuilder.standard()
@@ -16,8 +17,14 @@ public class RepositoryFactoryImpl implements RepositoryFactory {
         dbMapper = new DynamoDBMapper(dynamoDbClient);
     }
 
+    @Override
     public UserRepository getUserRepository() {
         return userRepository != null ? userRepository : (userRepository = new UserRepositoryImpl(dynamoDbClient, dbMapper));
+    }
+
+    @Override
+    public ShoppingCartRepository getShoppingCartRepository() {
+        return shoppingCartRepository != null ? shoppingCartRepository : (shoppingCartRepository = new ShoppingCartRepositoryImpl(dynamoDbClient, dbMapper));
     }
 
     @Override

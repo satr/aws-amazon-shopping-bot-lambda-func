@@ -3,6 +3,7 @@ package data;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.model.*;
+import io.github.satr.aws.lambda.shoppingbot.data.ShoppingCartRepositoryImpl;
 import io.github.satr.aws.lambda.shoppingbot.data.UserRepositoryImpl;
 import io.github.satr.aws.lambda.shoppingbot.entity.User;
 
@@ -13,6 +14,10 @@ import java.util.UUID;
 public class TestRepositoryHelper {
     public static void deleteTableUser(AmazonDynamoDB dynamoDbClient) {
         dynamoDbClient.deleteTable(UserRepositoryImpl.TableName);
+    }
+
+    public static void deleteTableShoppingCart(AmazonDynamoDB dynamoDbClient) {
+        dynamoDbClient.deleteTable(ShoppingCartRepositoryImpl.TableName);
     }
 
     public static User addUser(DynamoDBMapper dbMapper, String firstName, String lastName, String address) {
@@ -26,14 +31,22 @@ public class TestRepositoryHelper {
     }
 
     public static void createTableUser(AmazonDynamoDB dynamodb) {
+        createTable(dynamodb, UserRepositoryImpl.TableName, UserRepositoryImpl.Attr.UserId);
+    }
+
+    public static void createTableShoppingCart(AmazonDynamoDB dynamodb) {
+        createTable(dynamodb, ShoppingCartRepositoryImpl.TableName, ShoppingCartRepositoryImpl.Attr.CartId);
+    }
+
+    private static void createTable(AmazonDynamoDB dynamodb, String tableName, String tableKeyFieldName) {
         List<AttributeDefinition> attributeDefinitions= new ArrayList<AttributeDefinition>();
-        attributeDefinitions.add(new AttributeDefinition().withAttributeName(UserRepositoryImpl.Attr.UserId).withAttributeType("S"));
+        attributeDefinitions.add(new AttributeDefinition().withAttributeName(tableKeyFieldName).withAttributeType("S"));
 
         List<KeySchemaElement> keySchema = new ArrayList<KeySchemaElement>();
-        keySchema.add(new KeySchemaElement().withAttributeName(UserRepositoryImpl.Attr.UserId).withKeyType(KeyType.HASH));
+        keySchema.add(new KeySchemaElement().withAttributeName(tableKeyFieldName).withKeyType(KeyType.HASH));
 
         CreateTableRequest request = new CreateTableRequest()
-                .withTableName(UserRepositoryImpl.TableName)
+                .withTableName(tableName)
                 .withKeySchema(keySchema)
                 .withAttributeDefinitions(attributeDefinitions)
                 .withProvisionedThroughput(new ProvisionedThroughput()
@@ -41,7 +54,7 @@ public class TestRepositoryHelper {
                         .withWriteCapacityUnits(1L));
 
         dynamodb.createTable(request);
-
-        TableDescription table = dynamodb.describeTable(UserRepositoryImpl.TableName).getTable();
+//TODO: just to look at result, if needed
+//        TableDescription table = dynamodb.describeTable(tableName).getTable();
     }
 }

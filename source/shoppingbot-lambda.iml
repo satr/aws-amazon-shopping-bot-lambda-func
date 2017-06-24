@@ -32,5 +32,6 @@
     </orderEntry>
     <orderEntry type="library" name="com.amazonaws:aws-java-sdk-dynamodb:1.11.113" level="project" />
     <orderEntry type="library" scope="TEST" name="DynamoDBLocal" level="project" />
+    <orderEntry type="library" scope="TEST" name="com.google.dexmaker:dexmaker-mockito:1.2" level="project" />
   </component>
 </module>

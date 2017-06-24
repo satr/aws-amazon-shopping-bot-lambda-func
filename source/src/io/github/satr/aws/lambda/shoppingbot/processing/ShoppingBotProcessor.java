@@ -8,10 +8,12 @@ import io.github.satr.aws.lambda.shoppingbot.processing.strategies.RequestDepart
 import io.github.satr.aws.lambda.shoppingbot.processing.strategies.IntentProcessingStrategy;
 import io.github.satr.aws.lambda.shoppingbot.processing.strategies.UnsupportedIntentProcessingStrategy;
 import io.github.satr.aws.lambda.shoppingbot.request.LexRequest;
+import io.github.satr.aws.lambda.shoppingbot.request.LexRequestAttribute;
 import io.github.satr.aws.lambda.shoppingbot.response.LexResponse;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class ShoppingBotProcessor {
     private RepositoryFactory repositoryFactory;
@@ -28,6 +30,8 @@ public class ShoppingBotProcessor {
     }
 
     public LexResponse Process(LexRequest lexRequest) {
+        if(lexRequest.getSessionAttribute(LexRequestAttribute.SessionAttribute.SessionId) == null)
+            lexRequest.setSessionAttribute(LexRequestAttribute.SessionAttribute.SessionId, UUID.randomUUID().toString());
         return getProcessingStrategy(lexRequest.getIntentName()).Process(lexRequest);
     }
 

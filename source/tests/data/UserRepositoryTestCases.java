@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class UserRepositoryTest {
+public class UserRepositoryTestCases {
     private static AmazonDynamoDB dynamoDbClient;
     private static DynamoDBMapper dbMapper;
     private final String testingFirstName1 = "firstName1";
