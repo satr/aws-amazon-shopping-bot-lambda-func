@@ -6,11 +6,9 @@ import common.ObjectMother;
 import io.github.satr.aws.lambda.shoppingbot.data.UserRepositoryImpl;
 import io.github.satr.aws.lambda.shoppingbot.entity.User;
 import org.junit.*;
-import testdata.FileNames;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -36,7 +34,7 @@ public class UserRepositoryTest {
 
     @Before
     public void setUp() throws Exception {
-        userRepository = new UserRepositoryImpl(dynamoDbClient);
+        userRepository = new UserRepositoryImpl(dynamoDbClient, dbMapper);
         TestRepositoryHelper.createTableUser(dynamoDbClient);
         testUsers.add(TestRepositoryHelper.addUser(dbMapper, testingFirstName1, testingLastName1, "address1"));
         testUsers.add(TestRepositoryHelper.addUser(dbMapper, testingFirstName1, testingLastName1, "address2"));

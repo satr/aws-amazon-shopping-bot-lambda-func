@@ -2,46 +2,40 @@ package io.github.satr.aws.lambda.shoppingbot;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
+import io.github.satr.aws.lambda.shoppingbot.data.RepositoryFactory;
+import io.github.satr.aws.lambda.shoppingbot.data.RepositoryFactoryImpl;
 import io.github.satr.aws.lambda.shoppingbot.request.LexRequest;
 import io.github.satr.aws.lambda.shoppingbot.request.LexRequestFactory;
 import io.github.satr.aws.lambda.shoppingbot.response.DialogAction;
 import io.github.satr.aws.lambda.shoppingbot.response.LexResponse;
 import io.github.satr.aws.lambda.shoppingbot.response.Message;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ShoppingBotLambda implements RequestHandler<Map<String, Object>, LexResponse> {
 
+    private ShoppingBotProcessor shoppingBotProcessor;
+
+    public ShoppingBotLambda() {
+        this(new ShoppingBotProcessor(new RepositoryFactoryImpl()));
+    }
+
+    public ShoppingBotLambda(ShoppingBotProcessor shoppingBotProcessor) {
+        this.shoppingBotProcessor = shoppingBotProcessor;
+    }
+
     @Override
     public LexResponse handleRequest(Map<String, Object> input, Context context) {
+        LexRequest lexRequest = null;
         try {
-            LexRequest lexRequest = LexRequestFactory.readFromMap(input);
-            if(lexRequest.hasError())
-                return createFailureLexResponse(lexRequest.getError());
-            if(!lexRequest.requestedAmountIsSet() || !lexRequest.requestedProductIsSet())
-                return createFailureLexResponse("Product or amount are not requested.");
-
-            Message message = new Message(Message.ContentType.PlainText, buildContent(lexRequest));
-            DialogAction dialogAction = new DialogAction(DialogAction.Type.Close,
-                                                            DialogAction.FulfillmentState.Fulfilled,
-                                                            message);
-            return new LexResponse(dialogAction);
+            lexRequest = LexRequestFactory.createFromMap(input);
+            return shoppingBotProcessor.Process(lexRequest);
         } catch (Exception e) {
             e.printStackTrace();
-            return createFailureLexResponse("Error: " + e.getMessage());
+            Map<String, Object> sessionAttributes = lexRequest != null ? lexRequest.getSessionAttributes() : new LinkedHashMap<>();
+            return ShoppingBotProcessor.createFailureLexResponse("Error: " + e.getMessage(), sessionAttributes);
         }
-    }
-
-    private String buildContent(LexRequest lexRequest) {
-        String requestedUnit = lexRequest.getRequestedUnit();
-        return requestedUnit != null && requestedUnit.length() > 0
-                ? String.format("You requested: %s %s of %s.", lexRequest.getRequestedAmount(), requestedUnit, lexRequest.getRequestedProduct())
-                : String.format("You requested: %s %s.", lexRequest.getRequestedAmount(), lexRequest.getRequestedProduct());
-    }
-
-    private LexResponse createFailureLexResponse(String message) {
-        return new LexResponse(new DialogAction(DialogAction.Type.Close, DialogAction.FulfillmentState.Failed,
-                                                new Message(Message.ContentType.PlainText, message)));
     }
 }
 

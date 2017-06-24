@@ -9,6 +9,5 @@ public interface UserRepository extends Repository {
     List<User> getList();
     User getById(String userId) throws InvalidDataException;
     List<User> getByName(String firstName, String lastName);
-
     void save(User user);
 }

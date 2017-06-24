@@ -1,5 +1,7 @@
 package io.github.satr.aws.lambda.shoppingbot.request;
 
+import java.util.Map;
+
 public class LexRequest {
     private String botName;
     private String confirmationStatus;
@@ -10,6 +12,9 @@ public class LexRequest {
     private String invocationSource;
     private String outputDialogMode;
     private String error;
+    private String firstName;
+    private String lastName;
+    private Map<String, Object> sessionAttributes;
 
     public void setProduct(String requestedProduct) {
         this.requestedProduct = requestedProduct;
@@ -81,5 +86,29 @@ public class LexRequest {
 
     public void setRequestedUnit(String requestedUnit) {
         this.requestedUnit = requestedUnit;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setSessionAttributes(Map<String, Object> sessionAttributes) {
+        this.sessionAttributes = sessionAttributes;
+    }
+
+    public Map<String, Object> getSessionAttributes() {
+        return sessionAttributes;
     }
 }

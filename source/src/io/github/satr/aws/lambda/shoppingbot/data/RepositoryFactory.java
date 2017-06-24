@@ -1,4 +1,5 @@
 package io.github.satr.aws.lambda.shoppingbot.data;
 
-public class RepositoryFactory {
+public interface RepositoryFactory{
+    void shutdown();
 }

@@ -2,14 +2,11 @@ package io.github.satr.aws.lambda.shoppingbot.data;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
-import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.sun.media.sound.InvalidDataException;
 import io.github.satr.aws.lambda.shoppingbot.entity.User;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,9 +24,9 @@ public class UserRepositoryImpl implements UserRepository {
 
     private AmazonDynamoDB dynamodb;
 
-    public UserRepositoryImpl(AmazonDynamoDB dynamodb) {
+    public UserRepositoryImpl(AmazonDynamoDB dynamodb, DynamoDBMapper dbMapper) {
         this.dynamodb = dynamodb;
-        dbMapper = new DynamoDBMapper(dynamodb);
+        this.dbMapper = dbMapper;
     }
 
     @Override

@@ -9,13 +9,15 @@ import com.amazonaws.services.dynamodbv2.local.embedded.DynamoDBEmbedded;
 import com.amazonaws.services.dynamodbv2.local.shared.access.AmazonDynamoDBLocal;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.media.sound.InvalidDataException;
+import io.github.satr.aws.lambda.shoppingbot.intent.BakeryDepartmentIntent;
+import io.github.satr.aws.lambda.shoppingbot.request.LexRequestAttr;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class ObjectMother {
 
@@ -38,7 +40,7 @@ public class ObjectMother {
             return new HashMap<>();
         }
     }
-    public static LinkedHashMap<String, Object> createRequestMap(String department, String productSlotName, String product,
+    public static LinkedHashMap<String, Object> createRequestMap(String intentName, String productSlotName, String product,
                                                                  String amountSlotName, String amount,
                                                                  String unitSlotName, String unit) {
         LinkedHashMap<String, Object> botMap = new LinkedHashMap<>();
@@ -47,7 +49,7 @@ public class ObjectMother {
         requestMap.put("bot", botMap);
         LinkedHashMap<String, Object> currentIntentMap = new LinkedHashMap<>();
         currentIntentMap.put("confirmationStatus", "None");
-        currentIntentMap.put("name", department);
+        currentIntentMap.put("name", intentName);
         LinkedHashMap<String, Object> slotsMap = new LinkedHashMap<>();
         slotsMap.put(productSlotName, product);
         slotsMap.put(amountSlotName, amount);
@@ -55,6 +57,13 @@ public class ObjectMother {
         currentIntentMap.put("slots", slotsMap);
         requestMap.put("currentIntent", currentIntentMap);
         return requestMap;
+    }
+
+    public static LinkedHashMap<String, Object> createRequestForBakeryDepartment(String product, String amount, String unit) {
+        return ObjectMother.createRequestMap(BakeryDepartmentIntent.Name,
+                BakeryDepartmentIntent.Slot.Product, product,
+                BakeryDepartmentIntent.Slot.Amount, amount,
+                BakeryDepartmentIntent.Slot.Unit, unit);
     }
 
     public static AmazonDynamoDB createInMemoryDb() {
@@ -69,5 +78,24 @@ public class ObjectMother {
                 dynamodb.shutdown();// Shutdown the thread pools in DynamoDB Local / Embedded
         }
         return dynamodb;
+    }
+
+    public static String setSessionAttributeFromRundomString(Map<String, Object> requestMap, String sessionAttributeName) {
+        Map<String, Object> sessionAttrsMap = createSessionAttribute(requestMap, sessionAttributeName, createRandomString());
+        return (String) sessionAttrsMap.get(sessionAttributeName);
+    }
+
+    private static Map<String, Object> createSessionAttribute(Map<String, Object> requestMap, String sessionAttributeName, Object value) {
+        Map<String, Object> sessionAttrsMap = (Map<String, Object>) requestMap.get(LexRequestAttr.SessionAttributes);
+        if(sessionAttrsMap == null) {
+            sessionAttrsMap = new LinkedHashMap<>();
+            requestMap.put(LexRequestAttr.SessionAttributes, new LinkedHashMap<String, Object>());
+        }
+        sessionAttrsMap.put(sessionAttributeName, value);
+        return sessionAttrsMap;
+    }
+
+    public static String createRandomString() {
+        return UUID.randomUUID().toString();
     }
 }

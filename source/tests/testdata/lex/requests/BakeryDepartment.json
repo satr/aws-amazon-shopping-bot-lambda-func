@@ -1,4 +1,9 @@
 {
+  "sessionAttributes":{
+    "FirstName": "John",
+    "LastName": "Doe",
+    "SessionId": "FakeSessionId"
+  },
   "bot": {
     "alias": "null",
     "name": "ShoppingBot",

@@ -5,6 +5,8 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import common.ObjectMother;
+import io.github.satr.aws.lambda.shoppingbot.data.RepositoryFactoryImpl;
+import io.github.satr.aws.lambda.shoppingbot.data.UserRepository;
 import io.github.satr.aws.lambda.shoppingbot.data.UserRepositoryImpl;
 import io.github.satr.aws.lambda.shoppingbot.entity.User;
 import org.junit.*;
@@ -16,30 +18,25 @@ import static org.junit.Assert.*;
 
 @Ignore  //Real database access
 public class UserRepositoryRealConnectionTest {
-    private static AmazonDynamoDB dynamoDbClient;
-    private static DynamoDBMapper dbMapper;
+    private static final RepositoryFactoryImpl repositoryFactory = new RepositoryFactoryImpl();
     private final String testingFirstName1 = "firstName1";
     private final String testingLastName1 = "testingLastName1";
     private final String testingAddress1 = "Testing address 1";
-    private UserRepositoryImpl userRepository;
+    private UserRepository userRepository;
     private List<User> testUsers = new ArrayList<>();
 
     @BeforeClass
     public static void fixtureSetUp() throws Exception {
-        dynamoDbClient = AmazonDynamoDBClientBuilder.standard()
-                .withRegion(Regions.US_EAST_1).build();
-        dbMapper = new DynamoDBMapper(dynamoDbClient);
     }
 
     @AfterClass
     public static void fixtureTearDown() throws Exception {
-        if(dynamoDbClient != null)
-            dynamoDbClient.shutdown();
+        repositoryFactory.shutdown();
     }
 
     @Before
     public void setUp() throws Exception {
-        userRepository = new UserRepositoryImpl(dynamoDbClient);
+        userRepository = repositoryFactory.getUserRepository();
     }
 
     @After
