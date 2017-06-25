@@ -2,58 +2,60 @@ package io.github.satr.aws.lambda.shoppingbot;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-import io.github.satr.aws.lambda.shoppingbot.data.RepositoryFactoryImpl;
+import io.github.satr.aws.lambda.shoppingbot.log.CompositeLogger;
+import io.github.satr.aws.lambda.shoppingbot.repositories.RepositoryFactory;
+import io.github.satr.aws.lambda.shoppingbot.repositories.RepositoryFactoryImpl;
 import io.github.satr.aws.lambda.shoppingbot.processing.ShoppingBotProcessor;
 import io.github.satr.aws.lambda.shoppingbot.request.LexRequest;
 import io.github.satr.aws.lambda.shoppingbot.request.LexRequestFactory;
 import io.github.satr.aws.lambda.shoppingbot.response.LexResponse;
 import io.github.satr.aws.lambda.shoppingbot.response.LexResponseHelper;
+import io.github.satr.aws.lambda.shoppingbot.services.ShoppingCartService;
+import io.github.satr.aws.lambda.shoppingbot.services.ShoppingCartServiceImpl;
+import io.github.satr.aws.lambda.shoppingbot.services.UserService;
+import io.github.satr.aws.lambda.shoppingbot.services.UserServiceImpl;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.Map;
 
 public class ShoppingBotLambda implements RequestHandler<Map<String, Object>, LexResponse> {
 
+    private final RepositoryFactory repositoryFactory;
     private ShoppingBotProcessor shoppingBotProcessor;
+    private CompositeLogger logger = new CompositeLogger();
 
     public ShoppingBotLambda() {
-        this(new ShoppingBotProcessor(new RepositoryFactoryImpl()));
+        repositoryFactory = new RepositoryFactoryImpl();
+        init(new UserServiceImpl(repositoryFactory.createUserRepository(), logger),
+                new ShoppingCartServiceImpl(repositoryFactory.createShoppingCartRepository(), this.logger));
     }
 
-    public ShoppingBotLambda(ShoppingBotProcessor shoppingBotProcessor) {
-        this.shoppingBotProcessor = shoppingBotProcessor;
+    public ShoppingBotLambda(RepositoryFactory repositoryFactory, UserService userService, ShoppingCartService shoppingCartService) {
+        this.repositoryFactory = repositoryFactory;
+        init(userService, shoppingCartService);
+    }
+
+    private void init(UserService userService, ShoppingCartService shoppingCartService) {
+        this.shoppingBotProcessor = new ShoppingBotProcessor(userService, shoppingCartService);
     }
 
     @Override
     public LexResponse handleRequest(Map<String, Object> input, Context context) {
+        if(context != null)
+            logger.setLambdaLogger(context.getLogger());
+
         LexRequest lexRequest = null;
         try {
             lexRequest = LexRequestFactory.createFromMap(input);
             return shoppingBotProcessor.Process(lexRequest);
         } catch (Exception e) {
-            logStackTrace(context, e);
+            logger.log(e);
             return LexResponseHelper.createFailedLexResponse("Error: " + e.getMessage(), lexRequest);
         }
     }
 
-    private void logStackTrace(Context context, Exception e) {
-        if(context == null || context.getLogger() == null)
-        {
-            e.printStackTrace();
-            return;
-        }
-        PrintWriter pw = null;
-        try {
-            StringWriter sw = new StringWriter();
-            pw = new PrintWriter(sw);
-            e.printStackTrace(pw);
-            context.getLogger().log(sw.toString());
-        } finally {
-            if(pw != null)
-                pw.close();
-        }
+    @Override
+    public void finalize() {
+        repositoryFactory.shutdown();
     }
 }
 

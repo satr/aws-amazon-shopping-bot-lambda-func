@@ -2,13 +2,15 @@ package business;
 
 import common.ObjectMother;
 import io.github.satr.aws.lambda.shoppingbot.ShoppingBotLambda;
-import io.github.satr.aws.lambda.shoppingbot.data.RepositoryFactory;
-import io.github.satr.aws.lambda.shoppingbot.processing.ShoppingBotProcessor;
+import io.github.satr.aws.lambda.shoppingbot.log.Logger;
+import io.github.satr.aws.lambda.shoppingbot.repositories.RepositoryFactory;
 import io.github.satr.aws.lambda.shoppingbot.intent.BakeryDepartmentIntent;
 import io.github.satr.aws.lambda.shoppingbot.intent.GreetingsIntent;
 import io.github.satr.aws.lambda.shoppingbot.request.LexRequestAttribute;
 import io.github.satr.aws.lambda.shoppingbot.response.DialogAction;
 import io.github.satr.aws.lambda.shoppingbot.response.LexResponse;
+import io.github.satr.aws.lambda.shoppingbot.services.ShoppingCartService;
+import io.github.satr.aws.lambda.shoppingbot.services.UserService;
 import org.junit.Test;
 import org.mockito.Mockito;
 import testdata.FileNames;
@@ -24,14 +26,15 @@ public class ShoppingBotLambdaTestCases {
     private final String unknownSlotName = "UnknownSlot";
     private final String unknownSessionAttribute = "UnknownSessionAttribute";
     private ShoppingBotLambda shoppingBotLambda;
+    private UserService userServiceMock;
+    private ShoppingCartService shoppingCartServiceMock;
+    RepositoryFactory repositoryFactoryMock = Mockito.mock(RepositoryFactory.class);
 
     @org.junit.Before
     public void setUp() throws Exception {
-        shoppingBotLambda = new ShoppingBotLambda(new ShoppingBotProcessor(Mockito.mock(RepositoryFactory.class)));
-    }
-
-    @org.junit.After
-    public void tearDown() throws Exception {
+        userServiceMock = Mockito.mock(UserService.class);
+        shoppingCartServiceMock = Mockito.mock(ShoppingCartService.class);
+        shoppingBotLambda = new ShoppingBotLambda(repositoryFactoryMock, userServiceMock, shoppingCartServiceMock);
     }
 
     @Test

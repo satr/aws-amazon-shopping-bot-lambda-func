@@ -1,5 +1,7 @@
 package io.github.satr.aws.lambda.shoppingbot.response;
 
+import io.github.satr.aws.lambda.shoppingbot.request.LexRequestAttribute;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -9,7 +11,7 @@ public class LexResponse {
     public LexResponse(DialogAction dialogAction, Map<String, Object> sessionAttributes) {
 
         this.dialogAction = dialogAction;
-        this.sessionAttributes = sessionAttributes;
+        this.sessionAttributes = sessionAttributes != null ? sessionAttributes : new LinkedHashMap<>();
     }
 
     public DialogAction getDialogAction() {
@@ -21,6 +23,6 @@ public class LexResponse {
     }
 
     public Object getSessionAttribute(String attributeName) {
-        return sessionAttributes != null && sessionAttributes.containsKey(attributeName) ? sessionAttributes.get(attributeName) : null;
+        return sessionAttributes.containsKey(attributeName) ? sessionAttributes.get(attributeName) : null;
     }
 }

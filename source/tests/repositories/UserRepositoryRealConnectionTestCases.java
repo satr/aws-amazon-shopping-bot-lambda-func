@@ -1,19 +1,13 @@
-package data;
+package repositories;
 
-import com.amazonaws.regions.Regions;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import common.ObjectMother;
-import io.github.satr.aws.lambda.shoppingbot.data.RepositoryFactoryImpl;
-import io.github.satr.aws.lambda.shoppingbot.data.ShoppingCartRepository;
-import io.github.satr.aws.lambda.shoppingbot.data.UserRepository;
-import io.github.satr.aws.lambda.shoppingbot.data.UserRepositoryImpl;
+import io.github.satr.aws.lambda.shoppingbot.repositories.RepositoryFactoryImpl;
+import io.github.satr.aws.lambda.shoppingbot.repositories.ShoppingCartRepository;
+import io.github.satr.aws.lambda.shoppingbot.repositories.UserRepository;
 import io.github.satr.aws.lambda.shoppingbot.entity.ShoppingCart;
 import io.github.satr.aws.lambda.shoppingbot.entity.User;
 import org.junit.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -32,7 +26,7 @@ public class UserRepositoryRealConnectionTestCases {
 
     @Test
     public void getFullList() throws Exception {
-        List<User> list = repositoryFactory.getUserRepository().getList();
+        List<User> list = repositoryFactory.createUserRepository().getAllUsers();
         assertNotNull(list);
     }
 
@@ -42,10 +36,10 @@ public class UserRepositoryRealConnectionTestCases {
         user.setFirstName(testingFirstName1);
         user.setLastName(testingLastName1);
         user.setAddress(testingAddress1);
-        UserRepository userRepository = repositoryFactory.getUserRepository();
+        UserRepository userRepository = repositoryFactory.createUserRepository();
         userRepository.save(user);
 
-        User dbUser = userRepository.getById(user.getUserId());
+        User dbUser = userRepository.getUserById(user.getUserId());
         assertNotNull(dbUser);
         assertEquals(user.toString(), dbUser.toString());
     }
@@ -57,10 +51,10 @@ public class UserRepositoryRealConnectionTestCases {
         user.setLastName(testingLastName1);
         user.setAddress(testingAddress1);
         ShoppingCart shoppingCart = ObjectMother.createShoppingCart(user);
-        ShoppingCartRepository shoppingCartRepository = repositoryFactory.getShoppingCartRepository();
+        ShoppingCartRepository shoppingCartRepository = repositoryFactory.createShoppingCartRepository();
         shoppingCartRepository.save(shoppingCart);
 
-        ShoppingCart dbCart = shoppingCartRepository.getById(shoppingCart.getCartId());
+        ShoppingCart dbCart = shoppingCartRepository.getShoppingCartById(shoppingCart.getCartId());
         assertNotNull(dbCart);
         assertEquals(shoppingCart.toString(), dbCart.toString());
     }

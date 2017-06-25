@@ -1,10 +1,11 @@
-package io.github.satr.aws.lambda.shoppingbot.data;
+package io.github.satr.aws.lambda.shoppingbot.repositories;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.sun.media.sound.InvalidDataException;
 import io.github.satr.aws.lambda.shoppingbot.entity.ShoppingCart;
+import io.github.satr.aws.lambda.shoppingbot.repositories.exceptions.UnexpectedMultipleDataItemsException;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -34,22 +35,22 @@ public class ShoppingCartRepositoryImpl extends RepositoryImpl implements Shoppi
     }
 
     @Override
-    public List<ShoppingCart> getList() {
+    public List<ShoppingCart> getAllShoppingCarts() {
         return dbMapper.scan(ShoppingCart.class, new DynamoDBScanExpression());
     }
 
     @Override
-    public ShoppingCart getById(String cartId) throws InvalidDataException {
+    public ShoppingCart getShoppingCartById(String cartId) throws InvalidDataException {
         return dbMapper.load(ShoppingCart.class, cartId);
     }
 
     @Override
-    public List<ShoppingCart> getByUserId(String userId) {
+    public List<ShoppingCart> getShoppingCartByUserId(String userId) {
         return scan(ShoppingCart.class, Attr.UserId, userId);
     }
 
     @Override
-    public List<ShoppingCart> getBySessionId(String sessionId) {
+    public List<ShoppingCart> getShoppingCartsBySessionId(String sessionId) {
         return scan(ShoppingCart.class, Attr.SessionId, sessionId);
     }
 

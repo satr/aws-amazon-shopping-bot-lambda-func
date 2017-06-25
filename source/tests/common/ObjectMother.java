@@ -1,8 +1,8 @@
 package common;
 
-//import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-//import com.amazonaws.services.dynamodbv2.local.embedded.DynamoDBEmbedded;
-//import com.amazonaws.services.dynamodbv2.local.shared.access.AmazonDynamoDBLocal;
+//import com.amazonaws.strategies.dynamodbv2.AmazonDynamoDB;
+//import com.amazonaws.strategies.dynamodbv2.local.embedded.DynamoDBEmbedded;
+//import com.amazonaws.strategies.dynamodbv2.local.shared.access.AmazonDynamoDBLocal;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.local.embedded.DynamoDBEmbedded;
@@ -129,10 +129,21 @@ public class ObjectMother {
         return createShoppingCart(user);
     }
 
+    public static ShoppingCart createShoppingCart(String sessionId, int year) {
+        ShoppingCart shoppingCart = createShoppingCart(new User(), createRandomString());
+        shoppingCart.setSessionId(sessionId);
+        shoppingCart.setUpdatedOn(createZonedDateTimeForYear(year).toString());
+        return shoppingCart;
+    }
+
     public static ShoppingCart createShoppingCart(User user) {
+        return createShoppingCart(user, createRandomString());
+    }
+
+    private static ShoppingCart createShoppingCart(User user, String sessionId) {
         ShoppingCart cart = new ShoppingCart();
         cart.setUser(user);
-        cart.setSessionId(createRandomString());
+        cart.setSessionId(sessionId);
         return cart;
     }
 

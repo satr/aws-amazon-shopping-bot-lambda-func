@@ -1,9 +1,9 @@
-package data;
+package repositories;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import common.ObjectMother;
-import io.github.satr.aws.lambda.shoppingbot.data.UserRepositoryImpl;
+import io.github.satr.aws.lambda.shoppingbot.repositories.UserRepositoryImpl;
 import io.github.satr.aws.lambda.shoppingbot.entity.User;
 import org.junit.*;
 
@@ -49,21 +49,21 @@ public class UserRepositoryTestCases {
 
     @Test
     public void getFullList() throws Exception {
-        List<User> list = userRepository.getList();
+        List<User> list = userRepository.getAllUsers();
         assertEquals(testUsers.size(), list.size());
     }
 
     @Test
     public void getUserById() throws Exception {
         User testUser = testUsers.get(0);
-        User dbUser = userRepository.getById(testUser.getUserId());
+        User dbUser = userRepository.getUserById(testUser.getUserId());
         assertNotNull(dbUser);
         assertEquals(testUser.toString(), dbUser.toString());
     }
 
     @Test
     public void getUserByName() throws Exception {
-        List<User> dbUsers = userRepository.getByName(testingFirstName1, testingLastName1);
+        List<User> dbUsers = userRepository.getUserByName(testingFirstName1, testingLastName1);
         assertNotNull(dbUsers);
         assertTrue(dbUsers.size() > 1);
         assertEquals(testingFirstName1, dbUsers.get(0).getFirstName());

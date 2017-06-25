@@ -5,10 +5,17 @@ import io.github.satr.aws.lambda.shoppingbot.request.LexRequest;
 import io.github.satr.aws.lambda.shoppingbot.response.DialogAction;
 import io.github.satr.aws.lambda.shoppingbot.response.LexResponse;
 import io.github.satr.aws.lambda.shoppingbot.response.LexResponseHelper;
+import io.github.satr.aws.lambda.shoppingbot.services.UserService;
 
 import java.util.Map;
 
 public class GreetingsProcessingStrategy implements IntentProcessingStrategy {
+    private UserService userService;
+
+    public GreetingsProcessingStrategy(UserService userService) {
+        this.userService = userService;
+    }
+
     @Override
     public LexResponse Process(LexRequest lexRequest) {
         if(!lexRequest.firstNameIsSet() || !lexRequest.lastNameIsSet())

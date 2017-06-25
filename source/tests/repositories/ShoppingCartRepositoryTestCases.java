@@ -1,19 +1,14 @@
-package data;
+package repositories;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import common.ObjectMother;
 import common.TestHelper;
-import io.github.satr.aws.lambda.shoppingbot.data.ShoppingCartRepositoryImpl;
+import io.github.satr.aws.lambda.shoppingbot.repositories.ShoppingCartRepositoryImpl;
 import io.github.satr.aws.lambda.shoppingbot.entity.ShoppingCart;
 import io.github.satr.aws.lambda.shoppingbot.entity.User;
 import org.junit.*;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
-import java.util.Date;
 import java.util.List;
 
 import static junit.framework.TestCase.*;
@@ -54,7 +49,7 @@ public class ShoppingCartRepositoryTestCases {
 
         shoppingCartRepository.save(cart);
 
-        ShoppingCart dbCart = shoppingCartRepository.getById(cart.getCartId());
+        ShoppingCart dbCart = shoppingCartRepository.getShoppingCartById(cart.getCartId());
         assertNotNull(dbCart);
         assertEquals(cart.getUserId(), dbCart.getUserId());
         assertNull(dbCart.getUser());
@@ -66,7 +61,7 @@ public class ShoppingCartRepositoryTestCases {
 
         shoppingCartRepository.save(cart);
 
-        List<ShoppingCart> dbCarts = shoppingCartRepository.getBySessionId(cart.getSessionId());
+        List<ShoppingCart> dbCarts = shoppingCartRepository.getShoppingCartsBySessionId(cart.getSessionId());
         assertNotNull(dbCarts);
         assertEquals(1, dbCarts.size());
         assertEquals(cart.toString(), dbCarts.get(0).toString());
@@ -82,7 +77,7 @@ public class ShoppingCartRepositoryTestCases {
 
         shoppingCartRepository.save(cart);
 
-        ShoppingCart dbCart = shoppingCartRepository.getById(cart.getCartId());
+        ShoppingCart dbCart = shoppingCartRepository.getShoppingCartById(cart.getCartId());
         assertTrue(dbCart.getUpdatedOnAsDate().getYear() > defaultYear);
     }
 
@@ -93,7 +88,7 @@ public class ShoppingCartRepositoryTestCases {
         ShoppingCart cart2 = ObjectMother.createShoppingCart();
         shoppingCartRepository.save(cart2);
 
-        List<ShoppingCart> dbCarts = shoppingCartRepository.getList();
+        List<ShoppingCart> dbCarts = shoppingCartRepository.getAllShoppingCarts();
 
         assertNotNull(dbCarts);
         assertEquals(2, dbCarts.size());
@@ -108,9 +103,9 @@ public class ShoppingCartRepositoryTestCases {
 
         shoppingCartRepository.delete(cart);
 
-        ShoppingCart dbCart = shoppingCartRepository.getById(cart.getCartId());
+        ShoppingCart dbCart = shoppingCartRepository.getShoppingCartById(cart.getCartId());
         assertNull(dbCart);
-        List<ShoppingCart> dbCarts = shoppingCartRepository.getList();
+        List<ShoppingCart> dbCarts = shoppingCartRepository.getAllShoppingCarts();
         assertEquals(0, dbCarts.size());
     }
 
@@ -122,11 +117,12 @@ public class ShoppingCartRepositoryTestCases {
         ShoppingCart cart2 = ObjectMother.createShoppingCart(user);
         shoppingCartRepository.save(cart2);
 
-        List<ShoppingCart> dbCarts = shoppingCartRepository.getByUserId(user.getUserId());
+        List<ShoppingCart> dbCarts = shoppingCartRepository.getShoppingCartByUserId(user.getUserId());
 
         assertNotNull(dbCarts);
         TestHelper.assertContains(dbCarts, cart1);
         TestHelper.assertContains(dbCarts, cart2);
     }
+
 
 }

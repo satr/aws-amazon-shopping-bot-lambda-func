@@ -1,10 +1,10 @@
-package data;
+package repositories;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.model.*;
-import io.github.satr.aws.lambda.shoppingbot.data.ShoppingCartRepositoryImpl;
-import io.github.satr.aws.lambda.shoppingbot.data.UserRepositoryImpl;
+import io.github.satr.aws.lambda.shoppingbot.repositories.ShoppingCartRepositoryImpl;
+import io.github.satr.aws.lambda.shoppingbot.repositories.UserRepositoryImpl;
 import io.github.satr.aws.lambda.shoppingbot.entity.User;
 
 import java.util.ArrayList;
@@ -39,10 +39,10 @@ public class TestRepositoryHelper {
     }
 
     private static void createTable(AmazonDynamoDB dynamodb, String tableName, String tableKeyFieldName) {
-        List<AttributeDefinition> attributeDefinitions= new ArrayList<AttributeDefinition>();
+        List<AttributeDefinition> attributeDefinitions= new ArrayList<>();
         attributeDefinitions.add(new AttributeDefinition().withAttributeName(tableKeyFieldName).withAttributeType("S"));
 
-        List<KeySchemaElement> keySchema = new ArrayList<KeySchemaElement>();
+        List<KeySchemaElement> keySchema = new ArrayList<>();
         keySchema.add(new KeySchemaElement().withAttributeName(tableKeyFieldName).withKeyType(KeyType.HASH));
 
         CreateTableRequest request = new CreateTableRequest()
@@ -54,7 +54,7 @@ public class TestRepositoryHelper {
                         .withWriteCapacityUnits(1L));
 
         dynamodb.createTable(request);
-//TODO: just to look at result, if needed
+//TODO: just to look at the result, if needed
 //        TableDescription table = dynamodb.describeTable(tableName).getTable();
     }
 }

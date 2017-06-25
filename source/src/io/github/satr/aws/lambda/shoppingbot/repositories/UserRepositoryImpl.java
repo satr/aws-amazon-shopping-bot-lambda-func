@@ -1,10 +1,9 @@
-package io.github.satr.aws.lambda.shoppingbot.data;
+package io.github.satr.aws.lambda.shoppingbot.repositories;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
-import com.sun.media.sound.InvalidDataException;
 import io.github.satr.aws.lambda.shoppingbot.entity.User;
 
 import java.util.HashMap;
@@ -26,17 +25,17 @@ public class UserRepositoryImpl extends RepositoryImpl implements UserRepository
     }
 
     @Override
-    public List<User> getList() {
+    public List<User> getAllUsers() {
         return dbMapper.scan(User.class, new DynamoDBScanExpression());
     }
 
     @Override
-    public User getById(String userId) throws InvalidDataException {
+    public User getUserById(String userId) {
         return dbMapper.load(User.class, userId);
     }
 
     @Override
-    public List<User> getByName(String firstName, String lastName) {
+    public List<User> getUserByName(String firstName, String lastName) {
         String attrValueFirstName = ":v_first_name";
         String attrValueLastName = ":v_last_name";
         String filterExpression = String.format("%s=%s and %s=%s", Attr.FirstName, attrValueFirstName,
