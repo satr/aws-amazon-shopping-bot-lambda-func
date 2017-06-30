@@ -10,6 +10,7 @@ import com.amazonaws.services.dynamodbv2.local.shared.access.AmazonDynamoDBLocal
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.satr.aws.lambda.shoppingbot.entity.ShoppingCart;
+import io.github.satr.aws.lambda.shoppingbot.entity.ShoppingCartItem;
 import io.github.satr.aws.lambda.shoppingbot.entity.User;
 import io.github.satr.aws.lambda.shoppingbot.intent.BakeryDepartmentIntent;
 import io.github.satr.aws.lambda.shoppingbot.intent.GreetingsIntent;
@@ -20,14 +21,12 @@ import java.io.File;
 import java.io.IOException;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class ObjectMother {
 
     public final static String shoppingBotName = "ShoppingBot";
+    public final static Random random = new Random();
 
     public static Map<String, Object> createMapFromJson(String jsonFilePath){
         ClassLoader classLoader = ObjectMother.class.getClassLoader();
@@ -65,10 +64,10 @@ public class ObjectMother {
         return requestMap;
     }
 
-    public static LinkedHashMap<String, Object> createRequestForBakeryDepartment(String product, String amount, String unit) {
+    public static LinkedHashMap<String, Object> createRequestForBakeryDepartment(String product, Double amount, String unit) {
         return ObjectMother.createRequestMap(BakeryDepartmentIntent.Name,
                 BakeryDepartmentIntent.Slot.Product, product,
-                BakeryDepartmentIntent.Slot.Amount, amount,
+                BakeryDepartmentIntent.Slot.Amount, amount.toString(),
                 BakeryDepartmentIntent.Slot.Unit, unit);
     }
 
@@ -109,9 +108,14 @@ public class ObjectMother {
         return UUID.randomUUID().toString();
     }
 
+    public static Double createRandomNumber() {
+        return random.nextDouble();
+    }
+
     public static Map<String, Object> createGreetingsIntentMapWithNamesInSlots(String firstName, String lastName) {
         Map<String, Object> mapFromJson = createMapFromJson(FileNames.LexRequestGreetingsWithNamesJson);
-        Map<String, Object> slots = (Map<String, Object>) ((Map<String, Object>) mapFromJson.get(LexRequestAttribute.CurrentIntent)).get(LexRequestAttribute.Slots);
+        Map<String, Object> slots = (Map<String, Object>) ((Map<String, Object>) mapFromJson.get(LexRequestAttribute.CurrentIntent))
+                                                                                            .get(LexRequestAttribute.Slots);
         slots.put(GreetingsIntent.Slot.FirstName, firstName);
         slots.put(GreetingsIntent.Slot.LastName, lastName);
         return mapFromJson;
@@ -129,25 +133,40 @@ public class ObjectMother {
         return createShoppingCart(user);
     }
 
-    public static ShoppingCart createShoppingCart(String sessionId, int year) {
-        ShoppingCart shoppingCart = createShoppingCart(new User(), createRandomString());
-        shoppingCart.setSessionId(sessionId);
+    public static ShoppingCart createShoppingCart(String userId, int year) {
+        User user = new User();
+        user.setUserId(userId);
+        ShoppingCart shoppingCart = createShoppingCart(user);
         shoppingCart.setUpdatedOn(createZonedDateTimeForYear(year).toString());
         return shoppingCart;
     }
 
     public static ShoppingCart createShoppingCart(User user) {
-        return createShoppingCart(user, createRandomString());
-    }
-
-    private static ShoppingCart createShoppingCart(User user, String sessionId) {
         ShoppingCart cart = new ShoppingCart();
         cart.setUser(user);
-        cart.setSessionId(sessionId);
         return cart;
     }
 
     public static ZonedDateTime createZonedDateTimeForYear(int year) {
         return ZonedDateTime.of(year,1, 1,1,1,1,1, ZoneId.of("UTC"));
+    }
+
+    public static ShoppingCartItem createShoppingCartItem(String product, Double amount, String unit) {
+        ShoppingCartItem cartItem = new ShoppingCartItem();
+        cartItem.setProduct(product);
+        cartItem.setAmount(amount);
+        cartItem.setUnit(unit);
+        return cartItem;
+    }
+
+    public static User createUser() {
+        return createUser(createRandomString(), createRandomString());
+    }
+
+    public static User createUser(String firstName, String lastName) {
+        User user = new User();
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        return user;
     }
 }

@@ -35,7 +35,7 @@ public class TestRepositoryHelper {
     }
 
     public static void createTableShoppingCart(AmazonDynamoDB dynamodb) {
-        createTable(dynamodb, ShoppingCartRepositoryImpl.TableName, ShoppingCartRepositoryImpl.Attr.CartId);
+        createTable(dynamodb, ShoppingCartRepositoryImpl.TableName, ShoppingCartRepositoryImpl.Attr.UserId);
     }
 
     private static void createTable(AmazonDynamoDB dynamodb, String tableName, String tableKeyFieldName) {

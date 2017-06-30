@@ -4,6 +4,7 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import common.ObjectMother;
 import common.TestHelper;
+import io.github.satr.aws.lambda.shoppingbot.entity.ShoppingCartItem;
 import io.github.satr.aws.lambda.shoppingbot.repositories.ShoppingCartRepositoryImpl;
 import io.github.satr.aws.lambda.shoppingbot.entity.ShoppingCart;
 import io.github.satr.aws.lambda.shoppingbot.entity.User;
@@ -44,30 +45,6 @@ public class ShoppingCartRepositoryTestCases {
     }
 
     @Test
-    public void createCartAndGetById() throws Exception {
-        ShoppingCart cart = ObjectMother.createShoppingCart();
-
-        shoppingCartRepository.save(cart);
-
-        ShoppingCart dbCart = shoppingCartRepository.getShoppingCartById(cart.getCartId());
-        assertNotNull(dbCart);
-        assertEquals(cart.getUserId(), dbCart.getUserId());
-        assertNull(dbCart.getUser());
-    }
-
-    @Test
-    public void getBySessionId() throws Exception {
-        ShoppingCart cart = ObjectMother.createShoppingCart();
-
-        shoppingCartRepository.save(cart);
-
-        List<ShoppingCart> dbCarts = shoppingCartRepository.getShoppingCartsBySessionId(cart.getSessionId());
-        assertNotNull(dbCarts);
-        assertEquals(1, dbCarts.size());
-        assertEquals(cart.toString(), dbCarts.get(0).toString());
-    }
-
-    @Test
     public void updateOnRefreshedOnSave() throws Exception {
         ShoppingCart cart = ObjectMother.createShoppingCart();
 
@@ -77,7 +54,7 @@ public class ShoppingCartRepositoryTestCases {
 
         shoppingCartRepository.save(cart);
 
-        ShoppingCart dbCart = shoppingCartRepository.getShoppingCartById(cart.getCartId());
+        ShoppingCart dbCart = shoppingCartRepository.getShoppingCartByUserId(cart.getUserId());
         assertTrue(dbCart.getUpdatedOnAsDate().getYear() > defaultYear);
     }
 
@@ -103,7 +80,7 @@ public class ShoppingCartRepositoryTestCases {
 
         shoppingCartRepository.delete(cart);
 
-        ShoppingCart dbCart = shoppingCartRepository.getShoppingCartById(cart.getCartId());
+        ShoppingCart dbCart = shoppingCartRepository.getShoppingCartByUserId(cart.getUserId());
         assertNull(dbCart);
         List<ShoppingCart> dbCarts = shoppingCartRepository.getAllShoppingCarts();
         assertEquals(0, dbCarts.size());
@@ -112,17 +89,36 @@ public class ShoppingCartRepositoryTestCases {
     @Test
     public void getCartByUserId() throws Exception {
         ShoppingCart cart1 = ObjectMother.createShoppingCart();
-        shoppingCartRepository.save(cart1);
         User user = cart1.getUser();
+        shoppingCartRepository.save(cart1);
         ShoppingCart cart2 = ObjectMother.createShoppingCart(user);
         shoppingCartRepository.save(cart2);
 
-        List<ShoppingCart> dbCarts = shoppingCartRepository.getShoppingCartByUserId(user.getUserId());
+        ShoppingCart dbCart = shoppingCartRepository.getShoppingCartByUserId(user.getUserId());
 
-        assertNotNull(dbCarts);
-        TestHelper.assertContains(dbCarts, cart1);
-        TestHelper.assertContains(dbCarts, cart2);
+        assertNotNull(dbCart);
+        assertFalse(cart1.toString().equals(dbCart.toString()));
+        assertTrue(cart2.toString().equals(dbCart.toString()));
     }
 
+    @Test
+    public void addItemToShoppingCart() throws Exception {
+        ShoppingCart cart = ObjectMother.createShoppingCart();
+        String product = "bread";
+        double amount = 2.0;
+        String unit = "loafs";
+        ShoppingCartItem cartItem = ObjectMother.createShoppingCartItem(product, amount, unit);
+        cart.getItems().add(cartItem);
 
+        shoppingCartRepository.save(cart);
+        ShoppingCart dbCart = shoppingCartRepository.getShoppingCartByUserId(cart.getUserId());
+
+        assertNotNull(dbCart.getItems());
+        //TODO
+/*        assertEquals(1, dbCart.getItems().size());
+        ShoppingCartItem dbCartItem = dbCart.getItems().get(0);
+        assertEquals(product, dbCartItem.getProduct());
+        assertEquals(amount, dbCartItem.getAmount());
+        assertEquals(unit, dbCartItem.getUnit());*/
+    }
 }

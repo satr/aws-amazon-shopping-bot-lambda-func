@@ -11,8 +11,8 @@ public final class LexRequestAttribute {
     public static final String OutputDialogMode = "outputDialogMode";
     public static final String SessionAttributes = "sessionAttributes";
     public final class SessionAttribute{
-        public static final String SessionId = "SessionId";
         public static final String FirstName = "FirstName";
         public static final String LastName = "LastName";
+        public static final String UserId = "UserId";
     }
 }

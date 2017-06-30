@@ -7,46 +7,24 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
 @DynamoDBTable(tableName = "ShoppingCart")
 public class ShoppingCart {
-    private String cartId;
     private String userId;
     private User user;
-    private String sessionId;
     private String updatedOn;
     private ZonedDateTime updatedOnAsDate;
+    private List<ShoppingCartItem> items = new ArrayList<>();
 
-    public ShoppingCart() {
-        setCartId(UUID.randomUUID().toString());
-    }
-
-    @DynamoDBHashKey(attributeName="cart_id")
-    public String getCartId() {
-        return cartId;
-    }
-
-    public void setCartId(String cartId) {
-        this.cartId = cartId;
-    }
-
-    @DynamoDBAttribute(attributeName = "user_id")
+    @DynamoDBHashKey(attributeName = "user_id")
     public String getUserId() {
         return userId;
     }
 
     public void setUserId(String userId) {
         this.userId = userId;
-    }
-
-    @DynamoDBAttribute(attributeName = "session_id")
-    public String getSessionId() {
-        return sessionId;
-    }
-
-    public void setSessionId(String sessionId) {
-        this.sessionId = sessionId;
     }
 
     @DynamoDBAttribute(attributeName = "updated_on")
@@ -78,9 +56,8 @@ public class ShoppingCart {
     @Override
     public String toString() {
         return "ShoppingCart{" +
-                "cartId='" + cartId + '\'' +
-                ", userId='" + userId + '\'' +
-                ", sessionId='" + sessionId + '\'' +
+                "userId='" + userId + '\'' +
+                ", updatedOn='" + updatedOn + '\'' +
                 '}';
     }
 
@@ -95,5 +72,32 @@ public class ShoppingCart {
             updatedOnAsDate = getUtc();
         }
         return updatedOnAsDate;
+    }
+
+//    @DynamoDBAttribute(attributeName = "items")
+    @DynamoDBIgnore
+    public List<ShoppingCartItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<ShoppingCartItem> items) {
+        this.items = items;
+    }
+
+    public ShoppingCartItem getItemByProduct(String product) {
+        List<ShoppingCartItem> cartItems = getItems();
+        ShoppingCartItem cartItem = null;
+        for (ShoppingCartItem item : cartItems) {
+            if (!item.getProduct().equals(product))
+                continue;
+            cartItem = item;
+            break;
+        }
+        if(cartItem == null) {
+            cartItem = new ShoppingCartItem();
+            cartItem.setProduct(product);
+            cartItems.add(cartItem);
+        }
+        return cartItem;
     }
 }

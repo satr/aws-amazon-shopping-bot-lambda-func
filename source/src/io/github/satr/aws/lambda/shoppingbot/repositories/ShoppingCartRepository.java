@@ -8,9 +8,7 @@ import java.util.List;
 
 public interface ShoppingCartRepository extends Repository {
     List<ShoppingCart> getAllShoppingCarts();
-    ShoppingCart getShoppingCartById(String cartId) throws InvalidDataException;
-    List<ShoppingCart> getShoppingCartByUserId(String userId);
-    List<ShoppingCart> getShoppingCartsBySessionId(String sessionId);
+    ShoppingCart getShoppingCartByUserId(String userId);
     void save(ShoppingCart cart);
     void delete(ShoppingCart cart);
 }

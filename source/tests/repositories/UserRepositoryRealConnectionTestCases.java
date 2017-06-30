@@ -54,7 +54,7 @@ public class UserRepositoryRealConnectionTestCases {
         ShoppingCartRepository shoppingCartRepository = repositoryFactory.createShoppingCartRepository();
         shoppingCartRepository.save(shoppingCart);
 
-        ShoppingCart dbCart = shoppingCartRepository.getShoppingCartById(shoppingCart.getCartId());
+        ShoppingCart dbCart = shoppingCartRepository.getShoppingCartByUserId(shoppingCart.getUserId());
         assertNotNull(dbCart);
         assertEquals(shoppingCart.toString(), dbCart.toString());
     }

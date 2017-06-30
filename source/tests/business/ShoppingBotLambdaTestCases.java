@@ -46,16 +46,16 @@ public class ShoppingBotLambdaTestCases {
 
     @org.junit.Test
     public void orderFulfilledBackeryRequest() throws Exception {
-        String amount = "123456";
-        String product = "bread";
-        String unit = "pieces";
+        String product = ObjectMother.createRandomString();
+        Double amount = ObjectMother.createRandomNumber();
+        String unit = ObjectMother.createRandomString();
         LinkedHashMap<String, Object> requestMap = ObjectMother.createRequestForBakeryDepartment(product, amount, unit);
 
         LexResponse lexResponse = shoppingBotLambda.handleRequest(requestMap, null);
 
         assertEquals(DialogAction.FulfillmentState.Fulfilled, lexResponse.getDialogAction().getFulfillmentState());
         String responseContent = lexResponse.getDialogAction().getMessage().getContent();
-        assertTrue(responseContent.contains(amount));
+        assertTrue(responseContent.contains(amount.toString()));
         assertTrue(responseContent.contains(product));
         assertTrue(responseContent.contains(unit));
     }
@@ -88,13 +88,13 @@ public class ShoppingBotLambdaTestCases {
         Map<String, Object> requestMap = ObjectMother.createMapFromJson(FileNames.LexRequestBakeryDepartmentJson);
         String firstName = ObjectMother.setSessionAttributeWithRundomString(requestMap, LexRequestAttribute.SessionAttribute.FirstName);
         String lastName = ObjectMother.setSessionAttributeWithRundomString(requestMap, LexRequestAttribute.SessionAttribute.LastName);
-        String sessionId = ObjectMother.setSessionAttributeWithRundomString(requestMap, LexRequestAttribute.SessionAttribute.SessionId);
+        String sessionId = ObjectMother.setSessionAttributeWithRundomString(requestMap, LexRequestAttribute.SessionAttribute.UserId);
 
         LexResponse lexResponse = shoppingBotLambda.handleRequest(requestMap, null);
 
         assertEquals(firstName, lexResponse.getSessionAttribute(LexRequestAttribute.SessionAttribute.FirstName));
         assertEquals(lastName, lexResponse.getSessionAttribute(LexRequestAttribute.SessionAttribute.LastName));
-        assertEquals(sessionId, lexResponse.getSessionAttribute(LexRequestAttribute.SessionAttribute.SessionId));
+        assertEquals(sessionId, lexResponse.getSessionAttribute(LexRequestAttribute.SessionAttribute.UserId));
         assertNull(lexResponse.getSessionAttribute(unknownSessionAttribute));
     }
 
@@ -127,23 +127,13 @@ public class ShoppingBotLambdaTestCases {
     }
 
     @Test
-    public void createSessionIdIfNotExistsInSessionAttributes() throws Exception {
+    public void keepUserIdIfExistsInSessionAttributes() throws Exception {
         Map<String, Object> requestMap = ObjectMother.createMapFromJson(FileNames.LexRequestBakeryDepartmentJson);
-        ObjectMother.removeSessionAttribute(requestMap, LexRequestAttribute.SessionAttribute.SessionId);
+        String sessionId = ObjectMother.setSessionAttributeWithRundomString(requestMap, LexRequestAttribute.SessionAttribute.UserId);
 
         LexResponse lexResponse = shoppingBotLambda.handleRequest(requestMap, null);
 
-        assertNotNull(lexResponse.getSessionAttribute(LexRequestAttribute.SessionAttribute.SessionId));
-    }
-
-    @Test
-    public void keepSessionIdIfExistsInSessionAttributes() throws Exception {
-        Map<String, Object> requestMap = ObjectMother.createMapFromJson(FileNames.LexRequestBakeryDepartmentJson);
-        String sessionId = ObjectMother.setSessionAttributeWithRundomString(requestMap, LexRequestAttribute.SessionAttribute.SessionId);
-
-        LexResponse lexResponse = shoppingBotLambda.handleRequest(requestMap, null);
-
-        assertEquals(sessionId, lexResponse.getSessionAttribute(LexRequestAttribute.SessionAttribute.SessionId));
+        assertEquals(sessionId, lexResponse.getSessionAttribute(LexRequestAttribute.SessionAttribute.UserId));
     }
 
 }

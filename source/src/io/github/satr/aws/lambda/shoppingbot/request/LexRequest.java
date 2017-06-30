@@ -132,6 +132,7 @@ public class LexRequest {
         sessionAttributes.put(attributeName, value);
     }
 
-    public String getSessionId() {
-        return (String) getSessionAttribute(LexRequestAttribute.SessionAttribute.SessionId);
-    }}
+    public String getUserId() {
+        return (String) getSessionAttribute(LexRequestAttribute.SessionAttribute.UserId);
+    }
+}

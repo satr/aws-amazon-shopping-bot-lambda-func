@@ -1,8 +1,11 @@
-package business;
+package intentprocessors;
 
 
 import common.ObjectMother;
 import io.github.satr.aws.lambda.shoppingbot.ShoppingBotLambda;
+import io.github.satr.aws.lambda.shoppingbot.entity.ShoppingCart;
+import io.github.satr.aws.lambda.shoppingbot.entity.ShoppingCartItem;
+import io.github.satr.aws.lambda.shoppingbot.entity.User;
 import io.github.satr.aws.lambda.shoppingbot.repositories.RepositoryFactory;
 import io.github.satr.aws.lambda.shoppingbot.repositories.ShoppingCartRepository;
 import io.github.satr.aws.lambda.shoppingbot.repositories.UserRepository;
@@ -14,13 +17,16 @@ import io.github.satr.aws.lambda.shoppingbot.services.ShoppingCartService;
 import io.github.satr.aws.lambda.shoppingbot.services.UserService;
 import io.github.satr.aws.lambda.shoppingbot.services.UserServiceImpl;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
-public class WorkflowTestCases {
+public class OrderProductIntentProcessorTestCases {
     private ShoppingBotLambda shoppingBotLambda;
     private UserService userServiceMock;
     private ShoppingCartService shoppingCartServiceMock;
@@ -31,28 +37,28 @@ public class WorkflowTestCases {
         userServiceMock = Mockito.mock(UserService.class);
         shoppingCartServiceMock = Mockito.mock(ShoppingCartService.class);
         shoppingBotLambda = new ShoppingBotLambda(repositoryFactoryMock, userServiceMock, shoppingCartServiceMock);
-
-    }
-
-    @org.junit.After
-    public void tearDown() throws Exception {
     }
 
     @Test
     public void workflowOrderBread() throws Exception {
-        String amount = "123456";
-        String product = "bread";
-        String unit = "pieces";
+        String product = ObjectMother.createRandomString();
+        Double amount = ObjectMother.createRandomNumber();
+        String unit = ObjectMother.createRandomString();
         LinkedHashMap<String, Object> requestToBuyBread = ObjectMother.createRequestForBakeryDepartment(product, amount, unit);
-        String firstName = ObjectMother.setSessionAttributeWithRundomString(requestToBuyBread, GreetingsIntent.Slot.FirstName);
-        String lastName = ObjectMother.setSessionAttributeWithRundomString(requestToBuyBread, GreetingsIntent.Slot.LastName);
-        String sessionId = ObjectMother.setSessionAttributeWithRundomString(requestToBuyBread, LexRequestAttribute.SessionAttribute.SessionId);
+        String userId = ObjectMother.setSessionAttributeWithRundomString(requestToBuyBread, LexRequestAttribute.SessionAttribute.UserId);
 
         LexResponse lexResponse = shoppingBotLambda.handleRequest(requestToBuyBread, null);
 
         assertEquals(DialogAction.FulfillmentState.Fulfilled, lexResponse.getDialogAction().getFulfillmentState());
 
-        Mockito.verify(shoppingCartServiceMock, Mockito.atLeastOnce()).getShoppingCartBySessionId(sessionId);
-//        Mockito.verify(userRepositoryMock, Mockito.times(1)).getUserByName(firstName, lastName);
+        Mockito.verify(shoppingCartServiceMock, Mockito.atLeastOnce()).getShoppingCartByUserId(userId);
+        ArgumentCaptor<ShoppingCart> cartArgument = ArgumentCaptor.forClass(ShoppingCart.class);
+        Mockito.verify(shoppingCartServiceMock, Mockito.atLeastOnce()).save(cartArgument.capture());
+        ShoppingCart shoppingCart = cartArgument.getValue();
+        assertEquals(1, shoppingCart.getItems().size());
+        ShoppingCartItem cartItem = shoppingCart.getItems().get(0);
+        assertEquals(product, cartItem.getProduct());
+        assertEquals(amount, cartItem.getAmount());
+        assertEquals(unit, cartItem.getUnit());
     }
 }
