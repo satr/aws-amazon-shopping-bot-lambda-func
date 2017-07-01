@@ -1,9 +1,7 @@
 package io.github.satr.aws.lambda.shoppingbot.entity;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIgnore;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
+import io.github.satr.aws.lambda.shoppingbot.entity.converters.ShoppingCartItemConverter;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -74,8 +72,9 @@ public class ShoppingCart {
         return updatedOnAsDate;
     }
 
-//    @DynamoDBAttribute(attributeName = "items")
-    @DynamoDBIgnore
+//    @DynamoDBIgnore
+    @DynamoDBAttribute(attributeName = "items")
+    @DynamoDBTypeConverted(converter = ShoppingCartItemConverter.class)
     public List<ShoppingCartItem> getItems() {
         return items;
     }

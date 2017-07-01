@@ -35,7 +35,7 @@ public class ShoppingBotLambda implements RequestHandler<Map<String, Object>, Le
     }
 
     private void init(UserService userService, ShoppingCartService shoppingCartService) {
-        this.shoppingBotProcessor = new ShoppingBotProcessor(userService, shoppingCartService);
+        this.shoppingBotProcessor = new ShoppingBotProcessor(userService, shoppingCartService, logger);
     }
 
     @Override
@@ -46,11 +46,23 @@ public class ShoppingBotLambda implements RequestHandler<Map<String, Object>, Le
         LexRequest lexRequest = null;
         try {
             lexRequest = LexRequestFactory.createFromMap(input);
-            return shoppingBotProcessor.Process(lexRequest);
+            LexResponse lexRespond = shoppingBotProcessor.Process(lexRequest);
+            logStatus(lexRespond);
+            return lexRespond;
         } catch (Exception e) {
             logger.log(e);
             return LexResponseHelper.createFailedLexResponse("Error: " + e.getMessage(), lexRequest);
         }
+    }
+
+    private void logStatus(LexResponse lexRespond) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(String.format("FulfillmentState: %s\n", lexRespond.getDialogAction().getFulfillmentState()));
+        builder.append("Session:\n");
+        Map<String, Object> sessionAttributes = lexRespond.getSessionAttributes();
+        for (String key: sessionAttributes.keySet())
+            builder.append(String.format("  %s:\"%s\"\n", key, sessionAttributes.get(key)));
+        logger.log(builder.toString());
     }
 
     @Override

@@ -102,11 +102,11 @@ public class ShoppingCartRepositoryTestCases {
     }
 
     @Test
-    public void addItemToShoppingCart() throws Exception {
+    public void setProductToShoppingCart() throws Exception {
         ShoppingCart cart = ObjectMother.createShoppingCart();
-        String product = "bread";
-        double amount = 2.0;
-        String unit = "loafs";
+        String product = ObjectMother.createRandomString();
+        double amount = ObjectMother.createRandomNumber();
+        String unit = ObjectMother.createRandomString();
         ShoppingCartItem cartItem = ObjectMother.createShoppingCartItem(product, amount, unit);
         cart.getItems().add(cartItem);
 
@@ -114,11 +114,39 @@ public class ShoppingCartRepositoryTestCases {
         ShoppingCart dbCart = shoppingCartRepository.getShoppingCartByUserId(cart.getUserId());
 
         assertNotNull(dbCart.getItems());
-        //TODO
-/*        assertEquals(1, dbCart.getItems().size());
+        assertEquals(1, dbCart.getItems().size());
         ShoppingCartItem dbCartItem = dbCart.getItems().get(0);
         assertEquals(product, dbCartItem.getProduct());
         assertEquals(amount, dbCartItem.getAmount());
-        assertEquals(unit, dbCartItem.getUnit());*/
+        assertEquals(unit, dbCartItem.getUnit());
+    }
+
+    @Test
+    public void addMultipleProductsToShoppingCart() throws Exception {
+        ShoppingCart cart = ObjectMother.createShoppingCart();
+        String product1 = ObjectMother.createRandomString();
+        double amount1 = ObjectMother.createRandomNumber();
+        String unit1 = ObjectMother.createRandomString();
+        String product2 = ObjectMother.createRandomString();
+        double amount2 = ObjectMother.createRandomNumber();
+        String unit2 = ObjectMother.createRandomString();
+        ShoppingCartItem cartItem1 = ObjectMother.createShoppingCartItem(product1, amount1, unit1);
+        ShoppingCartItem cartItem2 = ObjectMother.createShoppingCartItem(product2, amount2, unit2);
+        cart.getItems().add(cartItem1);
+        cart.getItems().add(cartItem2);
+
+        shoppingCartRepository.save(cart);
+        ShoppingCart dbCart = shoppingCartRepository.getShoppingCartByUserId(cart.getUserId());
+
+        assertNotNull(dbCart.getItems());
+        assertEquals(2, dbCart.getItems().size());
+        ShoppingCartItem dbCartItem1 = dbCart.getItems().get(0);
+        assertEquals(product1, dbCartItem1.getProduct());
+        assertEquals(amount1, dbCartItem1.getAmount());
+        assertEquals(unit1, dbCartItem1.getUnit());
+        ShoppingCartItem dbCartItem2 = dbCart.getItems().get(1);
+        assertEquals(product2, dbCartItem2.getProduct());
+        assertEquals(amount2, dbCartItem2.getAmount());
+        assertEquals(unit2, dbCartItem2.getUnit());
     }
 }

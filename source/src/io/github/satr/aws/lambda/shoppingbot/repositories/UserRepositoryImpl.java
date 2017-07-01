@@ -49,7 +49,6 @@ public class UserRepositoryImpl extends RepositoryImpl implements UserRepository
         return dbMapper.scan(User.class, scanExpression);
     }
 
-
     @Override
     public void save(User user) {
         dbMapper.save(user);

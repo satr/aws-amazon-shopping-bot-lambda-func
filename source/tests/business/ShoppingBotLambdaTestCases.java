@@ -2,6 +2,7 @@ package business;
 
 import common.ObjectMother;
 import io.github.satr.aws.lambda.shoppingbot.ShoppingBotLambda;
+import io.github.satr.aws.lambda.shoppingbot.entity.User;
 import io.github.satr.aws.lambda.shoppingbot.log.Logger;
 import io.github.satr.aws.lambda.shoppingbot.repositories.RepositoryFactory;
 import io.github.satr.aws.lambda.shoppingbot.intent.BakeryDepartmentIntent;
@@ -19,6 +20,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
 
 public class ShoppingBotLambdaTestCases {
 
@@ -50,6 +52,9 @@ public class ShoppingBotLambdaTestCases {
         Double amount = ObjectMother.createRandomNumber();
         String unit = ObjectMother.createRandomString();
         LinkedHashMap<String, Object> requestMap = ObjectMother.createRequestForBakeryDepartment(product, amount, unit);
+        User user = ObjectMother.createUser();
+        ObjectMother.setSessionAttribute(requestMap, LexRequestAttribute.SessionAttribute.UserId, user.getUserId());
+        when(userServiceMock.getUserById(user.getUserId())).thenReturn(user);
 
         LexResponse lexResponse = shoppingBotLambda.handleRequest(requestMap, null);
 

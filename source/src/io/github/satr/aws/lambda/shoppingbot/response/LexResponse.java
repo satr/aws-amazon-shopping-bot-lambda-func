@@ -25,4 +25,8 @@ public class LexResponse {
     public Object getSessionAttribute(String attributeName) {
         return sessionAttributes.containsKey(attributeName) ? sessionAttributes.get(attributeName) : null;
     }
+
+    public Map<String, Object> getSessionAttributes() {
+        return sessionAttributes;
+    }
 }

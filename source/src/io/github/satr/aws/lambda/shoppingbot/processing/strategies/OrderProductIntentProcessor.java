@@ -2,28 +2,39 @@ package io.github.satr.aws.lambda.shoppingbot.processing.strategies;
 
 import io.github.satr.aws.lambda.shoppingbot.entity.ShoppingCart;
 import io.github.satr.aws.lambda.shoppingbot.entity.ShoppingCartItem;
+import io.github.satr.aws.lambda.shoppingbot.entity.User;
+import io.github.satr.aws.lambda.shoppingbot.log.Logger;
 import io.github.satr.aws.lambda.shoppingbot.request.LexRequest;
 import io.github.satr.aws.lambda.shoppingbot.request.LexRequestAttribute;
 import io.github.satr.aws.lambda.shoppingbot.response.DialogAction;
 import io.github.satr.aws.lambda.shoppingbot.response.LexResponse;
 import io.github.satr.aws.lambda.shoppingbot.response.LexResponseHelper;
 import io.github.satr.aws.lambda.shoppingbot.services.ShoppingCartService;
+import io.github.satr.aws.lambda.shoppingbot.services.UserService;
 
-import java.util.List;
-
-public class OrderProductIntentProcessor implements IntentProcessor {
+public class OrderProductIntentProcessor extends IntentProcessor {
     private ShoppingCartService shoppingCartService;
+    private UserService userService;
 
-    public OrderProductIntentProcessor(ShoppingCartService shoppingCartService) {
+    public OrderProductIntentProcessor(ShoppingCartService shoppingCartService, UserService userService, Logger logger) {
+        super(logger);
         this.shoppingCartService = shoppingCartService;
+        this.userService = userService;
     }
 
     @Override
     public LexResponse Process(LexRequest lexRequest) {
         if(!lexRequest.requestedAmountIsSet() || !lexRequest.requestedProductIsSet())
-            return LexResponseHelper.createFailedLexResponse("Product or amount are not specified.", lexRequest);
+            return createLexErrorResponse(lexRequest, "Product or amount are not specified.");
 
         String userId = (String) lexRequest.getSessionAttribute(LexRequestAttribute.SessionAttribute.UserId);
+        if(userId == null || userId.length() == 0)
+            return createLexErrorResponse(lexRequest, "User is not recognized - UserId is not specified.");
+
+        User user = userService.getUserById(userId);
+        if(user == null)
+            return createLexErrorResponse(lexRequest, String.format("UserId is not recognized by UserId %s", userId));
+
         ShoppingCart shoppingCart = getOrCreateShoppingCart(userId);
         ShoppingCartItem cartItem = shoppingCart.getItemByProduct(lexRequest.getRequestedProduct());
         updateCartItemWithRequested(lexRequest, cartItem);

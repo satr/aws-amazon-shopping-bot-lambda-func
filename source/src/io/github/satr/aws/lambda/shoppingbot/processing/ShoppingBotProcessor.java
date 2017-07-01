@@ -2,6 +2,10 @@ package io.github.satr.aws.lambda.shoppingbot.processing;
 
 import io.github.satr.aws.lambda.shoppingbot.intent.BakeryDepartmentIntent;
 import io.github.satr.aws.lambda.shoppingbot.intent.GreetingsIntent;
+import io.github.satr.aws.lambda.shoppingbot.intent.MilkDepartmentIntent;
+import io.github.satr.aws.lambda.shoppingbot.intent.VegetableDepartmentIntent;
+import io.github.satr.aws.lambda.shoppingbot.log.CompositeLogger;
+import io.github.satr.aws.lambda.shoppingbot.log.Logger;
 import io.github.satr.aws.lambda.shoppingbot.processing.strategies.GreetingsIntentProcessor;
 import io.github.satr.aws.lambda.shoppingbot.processing.strategies.OrderProductIntentProcessor;
 import io.github.satr.aws.lambda.shoppingbot.processing.strategies.IntentProcessor;
@@ -15,12 +19,16 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ShoppingBotProcessor {
+    private final IntentProcessor unsupportedIntentProcessor;
     private final Map<String, IntentProcessor> processingStrategies = new LinkedHashMap<>();
-    private final IntentProcessor unsupportedIntentProcessor = new UnsupportedIntentProcessor();
 
-    public ShoppingBotProcessor(UserService userService, ShoppingCartService shoppingCartService) {
-        processingStrategies.put(BakeryDepartmentIntent.Name, new OrderProductIntentProcessor(shoppingCartService));
-        processingStrategies.put(GreetingsIntent.Name, new GreetingsIntentProcessor(userService));
+    public ShoppingBotProcessor(UserService userService, ShoppingCartService shoppingCartService, Logger logger) {
+        unsupportedIntentProcessor = new UnsupportedIntentProcessor(logger);
+        OrderProductIntentProcessor orderProductIntentProcessor = new OrderProductIntentProcessor(shoppingCartService, userService, logger);
+        processingStrategies.put(BakeryDepartmentIntent.Name, orderProductIntentProcessor);
+        processingStrategies.put(MilkDepartmentIntent.Name, orderProductIntentProcessor);
+        processingStrategies.put(VegetableDepartmentIntent.Name, orderProductIntentProcessor);
+        processingStrategies.put(GreetingsIntent.Name, new GreetingsIntentProcessor(userService, logger));
     }
 
     public LexResponse Process(LexRequest lexRequest) {

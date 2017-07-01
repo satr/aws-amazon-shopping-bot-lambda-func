@@ -15,9 +15,7 @@ import org.mockito.Mockito;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class GreetingsIntentProcessorTestCases {
     private ShoppingBotLambda shoppingBotLambda;
@@ -33,7 +31,7 @@ public class GreetingsIntentProcessorTestCases {
     }
 
     @Test
-    public void setUserAttrsToSessionForNonExistingUserWhenGreetingsWithNames() throws Exception {
+    public void setUserAttrsToSessionForNewUserWhenGreetingsWithNames() throws Exception {
         String firstName = ObjectMother.createRandomString();
         String lastName = ObjectMother.createRandomString();
         Map<String, Object> greetingsRequestMap = ObjectMother.createGreetingsIntentMapWithNamesInSlots(firstName, lastName);
@@ -42,6 +40,7 @@ public class GreetingsIntentProcessorTestCases {
 
         LexResponse lexResponse = shoppingBotLambda.handleRequest(greetingsRequestMap, null);
 
+        verify(userServiceMock, times(1)).getUserByName(firstName, lastName);
         ArgumentCaptor<User> userArgumentCaptor = ArgumentCaptor.forClass(User.class);
         verify(userServiceMock, times(1)).save(userArgumentCaptor.capture());
         User newUser = userArgumentCaptor.getValue();
@@ -63,6 +62,29 @@ public class GreetingsIntentProcessorTestCases {
 
         LexResponse lexResponse = shoppingBotLambda.handleRequest(greetingsRequestMap, null);
 
+        verify(userServiceMock, times(1)).getUserByName(firstName, lastName);
+        verify(userServiceMock, Mockito.never()).save(Mockito.any(User.class));
+        assertEquals(firstName, lexResponse.getSessionAttribute(LexRequestAttribute.SessionAttribute.FirstName));
+        assertEquals(lastName, lexResponse.getSessionAttribute(LexRequestAttribute.SessionAttribute.LastName));
+        assertEquals(user.getUserId(), lexResponse.getSessionAttribute(LexRequestAttribute.SessionAttribute.UserId));
+    }
+
+    @Test
+    public void noActionForUserSetToSessionWhenGreetingsWithNames() throws Exception {
+        User user = ObjectMother.createUser();
+        String firstName = user.getFirstName();
+        String lastName = user.getLastName();
+        Map<String, Object> greetingsRequestMap = ObjectMother.createGreetingsIntentMapWithNamesInSlots(firstName, lastName);
+        ObjectMother.setSessionAttribute(greetingsRequestMap, LexRequestAttribute.SessionAttribute.FirstName, firstName);
+        ObjectMother.setSessionAttribute(greetingsRequestMap, LexRequestAttribute.SessionAttribute.LastName, lastName);
+        ObjectMother.setSessionAttribute(greetingsRequestMap, LexRequestAttribute.SessionAttribute.UserId, user.getUserId());
+        when(userServiceMock.getUserByName(firstName, lastName)).thenReturn(user);
+
+        LexResponse lexResponse = shoppingBotLambda.handleRequest(greetingsRequestMap, null);
+
+        verify(userServiceMock, Mockito.never()).getUserById(user.getUserId());
+        verify(userServiceMock, Mockito.never()).getUserByName(firstName, lastName);
+        verify(userServiceMock, Mockito.never()).save(Mockito.any(User.class));
         assertEquals(firstName, lexResponse.getSessionAttribute(LexRequestAttribute.SessionAttribute.FirstName));
         assertEquals(lastName, lexResponse.getSessionAttribute(LexRequestAttribute.SessionAttribute.LastName));
         assertEquals(user.getUserId(), lexResponse.getSessionAttribute(LexRequestAttribute.SessionAttribute.UserId));

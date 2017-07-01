@@ -6,6 +6,5 @@ public class GreetingsIntent {
     public class Slot {
         public static final String FirstName = "FirstName";
         public static final String LastName = "LastName";
-        public static final String SessionId = "SessionId";
     }
 }

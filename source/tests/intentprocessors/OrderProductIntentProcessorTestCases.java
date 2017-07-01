@@ -6,59 +6,116 @@ import io.github.satr.aws.lambda.shoppingbot.ShoppingBotLambda;
 import io.github.satr.aws.lambda.shoppingbot.entity.ShoppingCart;
 import io.github.satr.aws.lambda.shoppingbot.entity.ShoppingCartItem;
 import io.github.satr.aws.lambda.shoppingbot.entity.User;
+import io.github.satr.aws.lambda.shoppingbot.intent.BakeryDepartmentIntent;
+import io.github.satr.aws.lambda.shoppingbot.intent.MilkDepartmentIntent;
+import io.github.satr.aws.lambda.shoppingbot.intent.VegetableDepartmentIntent;
 import io.github.satr.aws.lambda.shoppingbot.repositories.RepositoryFactory;
-import io.github.satr.aws.lambda.shoppingbot.repositories.ShoppingCartRepository;
-import io.github.satr.aws.lambda.shoppingbot.repositories.UserRepository;
-import io.github.satr.aws.lambda.shoppingbot.intent.GreetingsIntent;
 import io.github.satr.aws.lambda.shoppingbot.request.LexRequestAttribute;
 import io.github.satr.aws.lambda.shoppingbot.response.DialogAction;
 import io.github.satr.aws.lambda.shoppingbot.response.LexResponse;
 import io.github.satr.aws.lambda.shoppingbot.services.ShoppingCartService;
 import io.github.satr.aws.lambda.shoppingbot.services.UserService;
-import io.github.satr.aws.lambda.shoppingbot.services.UserServiceImpl;
+import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@RunWith(Parameterized.class)
 public class OrderProductIntentProcessorTestCases {
+    @Parameters
+    public static Collection<Object[]> data() {
+        return Arrays.asList(new Object[][] {
+                {   BakeryDepartmentIntent.Name,
+                    BakeryDepartmentIntent.Slot.Product,
+                    BakeryDepartmentIntent.Slot.Amount,
+                    BakeryDepartmentIntent.Slot.Unit},
+                {   MilkDepartmentIntent.Name,
+                    MilkDepartmentIntent.Slot.Product,
+                    MilkDepartmentIntent.Slot.Amount,
+                    MilkDepartmentIntent.Slot.Unit},
+                {
+                    VegetableDepartmentIntent.Name,
+                    VegetableDepartmentIntent.Slot.Product,
+                    VegetableDepartmentIntent.Slot.Amount,
+                    VegetableDepartmentIntent.Slot.Unit},
+        });
+    }
     private ShoppingBotLambda shoppingBotLambda;
     private UserService userServiceMock;
     private ShoppingCartService shoppingCartServiceMock;
     RepositoryFactory repositoryFactoryMock = Mockito.mock(RepositoryFactory.class);
+    private String intentName;
+    private String productSlotName;
+    private String amountSlotName;
+    private String unitSlotName;
+    private String product;
+    private Double amount;
+    private String unit;
+
+    public OrderProductIntentProcessorTestCases(String intentName, String productSlotNAme, String amountSlotNAme, String unitSlotNAme) {
+        this.intentName = intentName;
+        this.productSlotName = productSlotNAme;
+        this.amountSlotName = amountSlotNAme;
+        this.unitSlotName = unitSlotNAme;
+    }
 
     @org.junit.Before
     public void setUp() throws Exception {
         userServiceMock = Mockito.mock(UserService.class);
         shoppingCartServiceMock = Mockito.mock(ShoppingCartService.class);
         shoppingBotLambda = new ShoppingBotLambda(repositoryFactoryMock, userServiceMock, shoppingCartServiceMock);
+        product = ObjectMother.createRandomString();
+        amount = ObjectMother.createRandomNumber();
+        unit = ObjectMother.createRandomString();
     }
 
     @Test
-    public void workflowOrderBread() throws Exception {
-        String product = ObjectMother.createRandomString();
-        Double amount = ObjectMother.createRandomNumber();
-        String unit = ObjectMother.createRandomString();
-        LinkedHashMap<String, Object> requestToBuyBread = ObjectMother.createRequestForBakeryDepartment(product, amount, unit);
-        String userId = ObjectMother.setSessionAttributeWithRundomString(requestToBuyBread, LexRequestAttribute.SessionAttribute.UserId);
+    public void orderProductForSessionUserId() throws Exception {
+        LinkedHashMap<String, Object> requestToOrderProduct = ObjectMother.createRequestFor(intentName, productSlotName,
+                                                                    product, amountSlotName, amount, unitSlotName, unit);
+        User user = ObjectMother.createUser();
+        String userId = user.getUserId();
+        ObjectMother.setSessionAttribute(requestToOrderProduct, LexRequestAttribute.SessionAttribute.UserId, userId);
+        when(userServiceMock.getUserById(user.getUserId())).thenReturn(user);
+        ShoppingCart shoppingCart = ObjectMother.createShoppingCart(userId);
+        when(shoppingCartServiceMock.getShoppingCartByUserId(user.getUserId())).thenReturn(shoppingCart);
+        LexResponse lexResponse = shoppingBotLambda.handleRequest(requestToOrderProduct, null);
 
-        LexResponse lexResponse = shoppingBotLambda.handleRequest(requestToBuyBread, null);
+        Assert.assertEquals(DialogAction.FulfillmentState.Fulfilled, lexResponse.getDialogAction().getFulfillmentState());
 
-        assertEquals(DialogAction.FulfillmentState.Fulfilled, lexResponse.getDialogAction().getFulfillmentState());
-
-        Mockito.verify(shoppingCartServiceMock, Mockito.atLeastOnce()).getShoppingCartByUserId(userId);
+        verify(shoppingCartServiceMock, Mockito.atLeastOnce()).getShoppingCartByUserId(userId);
         ArgumentCaptor<ShoppingCart> cartArgument = ArgumentCaptor.forClass(ShoppingCart.class);
-        Mockito.verify(shoppingCartServiceMock, Mockito.atLeastOnce()).save(cartArgument.capture());
-        ShoppingCart shoppingCart = cartArgument.getValue();
-        assertEquals(1, shoppingCart.getItems().size());
-        ShoppingCartItem cartItem = shoppingCart.getItems().get(0);
-        assertEquals(product, cartItem.getProduct());
-        assertEquals(amount, cartItem.getAmount());
-        assertEquals(unit, cartItem.getUnit());
+        verify(shoppingCartServiceMock, Mockito.atLeastOnce()).save(cartArgument.capture());
+        ShoppingCart calledShoppingCart = cartArgument.getValue();
+        Assert.assertEquals(1, calledShoppingCart.getItems().size());
+        Assert.assertEquals(userId, calledShoppingCart.getUserId());
+        ShoppingCartItem cartItem = calledShoppingCart.getItems().get(0);
+        Assert.assertEquals(product, cartItem.getProduct());
+        Assert.assertEquals(amount, cartItem.getAmount());
+        Assert.assertEquals(unit, cartItem.getUnit());
+    }
+
+    @Test
+    public void canotOrderProductWithoutSessionUserId() throws Exception {
+        LinkedHashMap<String, Object> requestToOrderProduct = ObjectMother.createRequestFor(intentName, productSlotName,
+                product, amountSlotName, amount, unitSlotName, unit);
+        //No UserId in the session
+        LexResponse lexResponse = shoppingBotLambda.handleRequest(requestToOrderProduct, null);
+
+        Assert.assertEquals(DialogAction.FulfillmentState.Failed, lexResponse.getDialogAction().getFulfillmentState());
+
+        verify(shoppingCartServiceMock, Mockito.never()).getShoppingCartByUserId(Mockito.any(String.class));
+        verify(shoppingCartServiceMock, Mockito.never()).save(Mockito.any(ShoppingCart.class));
     }
 }

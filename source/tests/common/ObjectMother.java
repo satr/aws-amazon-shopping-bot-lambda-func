@@ -65,10 +65,14 @@ public class ObjectMother {
     }
 
     public static LinkedHashMap<String, Object> createRequestForBakeryDepartment(String product, Double amount, String unit) {
-        return ObjectMother.createRequestMap(BakeryDepartmentIntent.Name,
-                BakeryDepartmentIntent.Slot.Product, product,
-                BakeryDepartmentIntent.Slot.Amount, amount.toString(),
-                BakeryDepartmentIntent.Slot.Unit, unit);
+        return createRequestFor(BakeryDepartmentIntent.Name, BakeryDepartmentIntent.Slot.Product, product, BakeryDepartmentIntent.Slot.Amount, amount, BakeryDepartmentIntent.Slot.Unit, unit);
+    }
+
+    public static LinkedHashMap<String, Object> createRequestFor(String intentName, String productSlotName, String product, String amountSlotName, Double amount, String unitSlotName, String unit) {
+        return ObjectMother.createRequestMap(intentName,
+                productSlotName, product,
+                amountSlotName, amount.toString(),
+                unitSlotName, unit);
     }
 
     public static AmazonDynamoDB createInMemoryDb() {
@@ -128,9 +132,22 @@ public class ObjectMother {
         sessionAttrsMap.remove(attributeName);
     }
 
+    public static void setSessionAttribute(Map<String, Object> requestMap, String attributeName, String value) {
+        Map<String, Object> sessionAttrsMap = (Map<String, Object>) requestMap.get(LexRequestAttribute.SessionAttributes);
+        if(sessionAttrsMap == null){
+            sessionAttrsMap = new LinkedHashMap<>();
+            requestMap.put(LexRequestAttribute.SessionAttributes, sessionAttrsMap);
+        };
+        sessionAttrsMap.put(attributeName, value);
+    }
+
     public static ShoppingCart createShoppingCart() {
         User user = new User();
         return createShoppingCart(user);
+    }
+
+    public static ShoppingCart createShoppingCart(String userId) {
+        return createShoppingCart(userId, 2017);
     }
 
     public static ShoppingCart createShoppingCart(String userId, int year) {

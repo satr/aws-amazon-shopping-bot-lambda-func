@@ -30,6 +30,7 @@ public class RepositoryFactoryImpl implements RepositoryFactory {
     @Override
     public void shutdown() {
         userRepository = null;
+        shoppingCartRepository = null;
         dynamoDbClient.shutdown();
     }
 }
