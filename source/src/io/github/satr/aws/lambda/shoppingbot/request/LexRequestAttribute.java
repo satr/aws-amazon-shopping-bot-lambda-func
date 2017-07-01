@@ -1,4 +1,5 @@
 package io.github.satr.aws.lambda.shoppingbot.request;
+// Copyright © 2017, github.com/satr, MIT License
 
 public final class LexRequestAttribute {
     public static final String Bot = "bot";

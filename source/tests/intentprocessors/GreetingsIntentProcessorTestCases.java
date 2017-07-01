@@ -1,4 +1,5 @@
 package intentprocessors;
+// Copyright © 2017, github.com/satr, MIT License
 
 import common.ObjectMother;
 import io.github.satr.aws.lambda.shoppingbot.ShoppingBotLambda;
@@ -6,6 +7,7 @@ import io.github.satr.aws.lambda.shoppingbot.entity.User;
 import io.github.satr.aws.lambda.shoppingbot.repositories.RepositoryFactory;
 import io.github.satr.aws.lambda.shoppingbot.request.LexRequestAttribute;
 import io.github.satr.aws.lambda.shoppingbot.response.LexResponse;
+import io.github.satr.aws.lambda.shoppingbot.services.ProductService;
 import io.github.satr.aws.lambda.shoppingbot.services.ShoppingCartService;
 import io.github.satr.aws.lambda.shoppingbot.services.UserService;
 import org.junit.Test;
@@ -21,13 +23,15 @@ public class GreetingsIntentProcessorTestCases {
     private ShoppingBotLambda shoppingBotLambda;
     private UserService userServiceMock;
     private ShoppingCartService shoppingCartServiceMock;
+    private ProductService productServiceMock;
     RepositoryFactory repositoryFactoryMock = Mockito.mock(RepositoryFactory.class);
 
     @org.junit.Before
     public void setUp() throws Exception {
         userServiceMock = Mockito.mock(UserService.class);
         shoppingCartServiceMock = Mockito.mock(ShoppingCartService.class);
-        shoppingBotLambda = new ShoppingBotLambda(repositoryFactoryMock, userServiceMock, shoppingCartServiceMock);
+        productServiceMock = Mockito.mock(ProductService.class);
+        shoppingBotLambda = new ShoppingBotLambda(repositoryFactoryMock, userServiceMock, shoppingCartServiceMock, productServiceMock);
     }
 
     @Test

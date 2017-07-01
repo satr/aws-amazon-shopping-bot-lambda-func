@@ -1,4 +1,5 @@
 package io.github.satr.aws.lambda.shoppingbot.request.strategies.intentloading;
+// Copyright © 2017, github.com/satr, MIT License
 
 import io.github.satr.aws.lambda.shoppingbot.intent.GreetingsIntent;
 import io.github.satr.aws.lambda.shoppingbot.request.LexRequest;

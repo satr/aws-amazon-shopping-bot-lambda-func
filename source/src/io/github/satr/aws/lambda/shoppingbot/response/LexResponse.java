@@ -1,6 +1,5 @@
 package io.github.satr.aws.lambda.shoppingbot.response;
-
-import io.github.satr.aws.lambda.shoppingbot.request.LexRequestAttribute;
+// Copyright © 2017, github.com/satr, MIT License
 
 import java.util.LinkedHashMap;
 import java.util.Map;

@@ -11,11 +11,11 @@
   },
   "currentIntent": {
     "confirmationStatus": "None",
-    "name": "BakeryDepartment",
+    "name": "MilkDepartment",
     "slots": {
       "Amount": "1",
-      "BakeryProduct": "bread",
-      "BakeryDepartmentUnit": "loaf"
+      "MilkProduct": "milk",
+      "MilkDepartmentUnit": "carton"
     }
   }
 }

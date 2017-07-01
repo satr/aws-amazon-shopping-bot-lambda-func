@@ -1,4 +1,5 @@
 package repositories;
+// Copyright © 2017, github.com/satr, MIT License
 
 import common.ObjectMother;
 import io.github.satr.aws.lambda.shoppingbot.repositories.RepositoryFactoryImpl;

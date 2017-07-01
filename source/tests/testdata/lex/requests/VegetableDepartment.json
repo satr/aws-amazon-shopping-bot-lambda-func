@@ -11,11 +11,11 @@
   },
   "currentIntent": {
     "confirmationStatus": "None",
-    "name": "BakeryDepartment",
+    "name": "VegetableDepartment",
     "slots": {
       "Amount": "1",
-      "BakeryProduct": "bread",
-      "BakeryDepartmentUnit": "loaf"
+      "VegetableProduct": "apple",
+      "VegetableDepartmentUnit": "kilograms"
     }
   }
 }

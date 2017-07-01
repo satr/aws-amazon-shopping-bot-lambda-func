@@ -1,4 +1,5 @@
 package repositories;
+// Copyright © 2017, github.com/satr, MIT License
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;

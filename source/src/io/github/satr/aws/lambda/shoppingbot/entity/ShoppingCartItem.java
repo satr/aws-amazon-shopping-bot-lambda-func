@@ -1,6 +1,8 @@
 package io.github.satr.aws.lambda.shoppingbot.entity;
+// Copyright © 2017, github.com/satr, MIT License
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+
 
 public class ShoppingCartItem {
     private String product;

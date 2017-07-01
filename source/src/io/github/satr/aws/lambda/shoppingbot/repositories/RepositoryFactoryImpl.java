@@ -1,4 +1,5 @@
 package io.github.satr.aws.lambda.shoppingbot.repositories;
+// Copyright © 2017, github.com/satr, MIT License
 
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
@@ -10,6 +11,7 @@ public class RepositoryFactoryImpl implements RepositoryFactory {
     private final DynamoDBMapper dbMapper;
     private UserRepository userRepository;
     private ShoppingCartRepository shoppingCartRepository;
+    private ProductRepository productRepository;
 
     public RepositoryFactoryImpl() {
         dynamoDbClient = AmazonDynamoDBClientBuilder.standard()
@@ -25,6 +27,11 @@ public class RepositoryFactoryImpl implements RepositoryFactory {
     @Override
     public ShoppingCartRepository createShoppingCartRepository() {
         return shoppingCartRepository != null ? shoppingCartRepository : (shoppingCartRepository = new ShoppingCartRepositoryImpl(dynamoDbClient, dbMapper));
+    }
+
+    @Override
+    public ProductRepository createProductRepository() {
+        return productRepository != null ? productRepository : (productRepository = new ProductRepositoryImpl(dynamoDbClient, dbMapper));
     }
 
     @Override

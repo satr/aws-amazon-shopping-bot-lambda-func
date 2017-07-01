@@ -1,8 +1,11 @@
 package repositories;
+// Copyright © 2017, github.com/satr, MIT License
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.model.*;
+import io.github.satr.aws.lambda.shoppingbot.entity.Product;
+import io.github.satr.aws.lambda.shoppingbot.repositories.ProductRepositoryImpl;
 import io.github.satr.aws.lambda.shoppingbot.repositories.ShoppingCartRepositoryImpl;
 import io.github.satr.aws.lambda.shoppingbot.repositories.UserRepositoryImpl;
 import io.github.satr.aws.lambda.shoppingbot.entity.User;
@@ -14,6 +17,10 @@ import java.util.UUID;
 public class TestRepositoryHelper {
     public static void deleteTableUser(AmazonDynamoDB dynamoDbClient) {
         dynamoDbClient.deleteTable(UserRepositoryImpl.TableName);
+    }
+
+    public static void deleteTableProduct(AmazonDynamoDB dynamoDbClient) {
+        dynamoDbClient.deleteTable(ProductRepositoryImpl.TableName);
     }
 
     public static void deleteTableShoppingCart(AmazonDynamoDB dynamoDbClient) {
@@ -36,6 +43,10 @@ public class TestRepositoryHelper {
 
     public static void createTableShoppingCart(AmazonDynamoDB dynamodb) {
         createTable(dynamodb, ShoppingCartRepositoryImpl.TableName, ShoppingCartRepositoryImpl.Attr.UserId);
+    }
+
+    public static void createTableProduct(AmazonDynamoDB dynamodb) {
+        createTable(dynamodb, ProductRepositoryImpl.TableName, ProductRepositoryImpl.Attr.ProductId);
     }
 
     private static void createTable(AmazonDynamoDB dynamodb, String tableName, String tableKeyFieldName) {

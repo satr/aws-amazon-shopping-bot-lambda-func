@@ -1,4 +1,5 @@
 package io.github.satr.aws.lambda.shoppingbot.response;
+// Copyright © 2017, github.com/satr, MIT License
 
 public class Message {
     private String contentType;

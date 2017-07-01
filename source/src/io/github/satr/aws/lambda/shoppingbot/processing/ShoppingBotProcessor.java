@@ -1,4 +1,5 @@
 package io.github.satr.aws.lambda.shoppingbot.processing;
+// Copyright © 2017, github.com/satr, MIT License
 
 import io.github.satr.aws.lambda.shoppingbot.intent.BakeryDepartmentIntent;
 import io.github.satr.aws.lambda.shoppingbot.intent.GreetingsIntent;
@@ -12,6 +13,7 @@ import io.github.satr.aws.lambda.shoppingbot.processing.strategies.IntentProcess
 import io.github.satr.aws.lambda.shoppingbot.processing.strategies.UnsupportedIntentProcessor;
 import io.github.satr.aws.lambda.shoppingbot.request.LexRequest;
 import io.github.satr.aws.lambda.shoppingbot.response.LexResponse;
+import io.github.satr.aws.lambda.shoppingbot.services.ProductService;
 import io.github.satr.aws.lambda.shoppingbot.services.ShoppingCartService;
 import io.github.satr.aws.lambda.shoppingbot.services.UserService;
 
@@ -22,9 +24,9 @@ public class ShoppingBotProcessor {
     private final IntentProcessor unsupportedIntentProcessor;
     private final Map<String, IntentProcessor> processingStrategies = new LinkedHashMap<>();
 
-    public ShoppingBotProcessor(UserService userService, ShoppingCartService shoppingCartService, Logger logger) {
+    public ShoppingBotProcessor(UserService userService, ShoppingCartService shoppingCartService, ProductService productService, Logger logger) {
         unsupportedIntentProcessor = new UnsupportedIntentProcessor(logger);
-        OrderProductIntentProcessor orderProductIntentProcessor = new OrderProductIntentProcessor(shoppingCartService, userService, logger);
+        OrderProductIntentProcessor orderProductIntentProcessor = new OrderProductIntentProcessor(shoppingCartService, userService, productService, logger);
         processingStrategies.put(BakeryDepartmentIntent.Name, orderProductIntentProcessor);
         processingStrategies.put(MilkDepartmentIntent.Name, orderProductIntentProcessor);
         processingStrategies.put(VegetableDepartmentIntent.Name, orderProductIntentProcessor);

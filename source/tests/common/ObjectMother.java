@@ -1,14 +1,12 @@
 package common;
-
-//import com.amazonaws.strategies.dynamodbv2.AmazonDynamoDB;
-//import com.amazonaws.strategies.dynamodbv2.local.embedded.DynamoDBEmbedded;
-//import com.amazonaws.strategies.dynamodbv2.local.shared.access.AmazonDynamoDBLocal;
+// Copyright © 2017, github.com/satr, MIT License
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.local.embedded.DynamoDBEmbedded;
 import com.amazonaws.services.dynamodbv2.local.shared.access.AmazonDynamoDBLocal;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.satr.aws.lambda.shoppingbot.entity.Product;
 import io.github.satr.aws.lambda.shoppingbot.entity.ShoppingCart;
 import io.github.satr.aws.lambda.shoppingbot.entity.ShoppingCartItem;
 import io.github.satr.aws.lambda.shoppingbot.entity.User;
@@ -185,5 +183,15 @@ public class ObjectMother {
         user.setFirstName(firstName);
         user.setLastName(lastName);
         return user;
+    }
+
+    public static Product createProduct() {
+        return createProduct(createRandomString());
+    }
+
+    public static Product createProduct(String productId) {
+        Product product = new Product();
+        product.setProductId(productId);
+        return product;
     }
 }

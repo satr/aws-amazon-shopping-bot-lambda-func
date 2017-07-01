@@ -1,4 +1,5 @@
 package io.github.satr.aws.lambda.shoppingbot.repositories;
+// Copyright © 2017, github.com/satr, MIT License
 
 import com.sun.media.sound.InvalidDataException;
 import io.github.satr.aws.lambda.shoppingbot.entity.ShoppingCart;

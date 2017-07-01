@@ -1,5 +1,7 @@
 package io.github.satr.aws.lambda.shoppingbot.processing.strategies;
+// Copyright © 2017, github.com/satr, MIT License
 
+import io.github.satr.aws.lambda.shoppingbot.entity.Product;
 import io.github.satr.aws.lambda.shoppingbot.entity.ShoppingCart;
 import io.github.satr.aws.lambda.shoppingbot.entity.ShoppingCartItem;
 import io.github.satr.aws.lambda.shoppingbot.entity.User;
@@ -9,17 +11,20 @@ import io.github.satr.aws.lambda.shoppingbot.request.LexRequestAttribute;
 import io.github.satr.aws.lambda.shoppingbot.response.DialogAction;
 import io.github.satr.aws.lambda.shoppingbot.response.LexResponse;
 import io.github.satr.aws.lambda.shoppingbot.response.LexResponseHelper;
+import io.github.satr.aws.lambda.shoppingbot.services.ProductService;
 import io.github.satr.aws.lambda.shoppingbot.services.ShoppingCartService;
 import io.github.satr.aws.lambda.shoppingbot.services.UserService;
 
 public class OrderProductIntentProcessor extends IntentProcessor {
     private ShoppingCartService shoppingCartService;
     private UserService userService;
+    private ProductService productService;
 
-    public OrderProductIntentProcessor(ShoppingCartService shoppingCartService, UserService userService, Logger logger) {
+    public OrderProductIntentProcessor(ShoppingCartService shoppingCartService, UserService userService, ProductService productService, Logger logger) {
         super(logger);
         this.shoppingCartService = shoppingCartService;
         this.userService = userService;
+        this.productService = productService;
     }
 
     @Override
@@ -31,12 +36,17 @@ public class OrderProductIntentProcessor extends IntentProcessor {
         if(userId == null || userId.length() == 0)
             return createLexErrorResponse(lexRequest, "User is not recognized - UserId is not specified.");
 
+        String requestedProduct = lexRequest.getRequestedProduct();
+        Product product = productService.getByProductId(requestedProduct);
+        if(product == null)
+            return createLexErrorResponse(lexRequest, String.format("Product \"%s\" is not found", requestedProduct));
+
         User user = userService.getUserById(userId);
         if(user == null)
             return createLexErrorResponse(lexRequest, String.format("UserId is not recognized by UserId %s", userId));
 
         ShoppingCart shoppingCart = getOrCreateShoppingCart(userId);
-        ShoppingCartItem cartItem = shoppingCart.getItemByProduct(lexRequest.getRequestedProduct());
+        ShoppingCartItem cartItem = shoppingCart.getItemByProduct(requestedProduct);
         updateCartItemWithRequested(lexRequest, cartItem);
         shoppingCartService.save(shoppingCart);
         LexResponse lexResponse = LexResponseHelper.createLexResponse(lexRequest, buildContent(lexRequest),

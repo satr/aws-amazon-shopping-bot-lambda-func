@@ -1,9 +1,9 @@
 package io.github.satr.aws.lambda.shoppingbot.entity;
+// Copyright © 2017, github.com/satr, MIT License
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
-
 import java.util.UUID;
 
 @DynamoDBTable(tableName = "User")

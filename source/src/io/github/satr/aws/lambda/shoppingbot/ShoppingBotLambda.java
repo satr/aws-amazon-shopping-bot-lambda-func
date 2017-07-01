@@ -1,4 +1,5 @@
 package io.github.satr.aws.lambda.shoppingbot;
+// Copyright © 2017, github.com/satr, MIT License
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
@@ -10,10 +11,7 @@ import io.github.satr.aws.lambda.shoppingbot.request.LexRequest;
 import io.github.satr.aws.lambda.shoppingbot.request.LexRequestFactory;
 import io.github.satr.aws.lambda.shoppingbot.response.LexResponse;
 import io.github.satr.aws.lambda.shoppingbot.response.LexResponseHelper;
-import io.github.satr.aws.lambda.shoppingbot.services.ShoppingCartService;
-import io.github.satr.aws.lambda.shoppingbot.services.ShoppingCartServiceImpl;
-import io.github.satr.aws.lambda.shoppingbot.services.UserService;
-import io.github.satr.aws.lambda.shoppingbot.services.UserServiceImpl;
+import io.github.satr.aws.lambda.shoppingbot.services.*;
 
 import java.util.Map;
 
@@ -26,16 +24,17 @@ public class ShoppingBotLambda implements RequestHandler<Map<String, Object>, Le
     public ShoppingBotLambda() {
         repositoryFactory = new RepositoryFactoryImpl();
         init(new UserServiceImpl(repositoryFactory.createUserRepository(), logger),
-                new ShoppingCartServiceImpl(repositoryFactory.createShoppingCartRepository(), this.logger));
+                new ShoppingCartServiceImpl(repositoryFactory.createShoppingCartRepository(), this.logger),
+                new ProductServiceImpl(repositoryFactory.createProductRepository(), this.logger));
     }
 
-    public ShoppingBotLambda(RepositoryFactory repositoryFactory, UserService userService, ShoppingCartService shoppingCartService) {
+    public ShoppingBotLambda(RepositoryFactory repositoryFactory, UserService userService, ShoppingCartService shoppingCartService, ProductService productService) {
         this.repositoryFactory = repositoryFactory;
-        init(userService, shoppingCartService);
+        init(userService, shoppingCartService, productService);
     }
 
-    private void init(UserService userService, ShoppingCartService shoppingCartService) {
-        this.shoppingBotProcessor = new ShoppingBotProcessor(userService, shoppingCartService, logger);
+    private void init(UserService userService, ShoppingCartService shoppingCartService, ProductService productService) {
+        this.shoppingBotProcessor = new ShoppingBotProcessor(userService, shoppingCartService, productService, logger);
     }
 
     @Override

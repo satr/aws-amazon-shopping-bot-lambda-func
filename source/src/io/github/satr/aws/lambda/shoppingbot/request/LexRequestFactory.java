@@ -1,4 +1,5 @@
 package io.github.satr.aws.lambda.shoppingbot.request;
+// Copyright © 2017, github.com/satr, MIT License
 
 import io.github.satr.aws.lambda.shoppingbot.intent.BakeryDepartmentIntent;
 import io.github.satr.aws.lambda.shoppingbot.intent.GreetingsIntent;

@@ -1,4 +1,5 @@
 package io.github.satr.aws.lambda.shoppingbot.entity;
+// Copyright © 2017, github.com/satr, MIT License
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import io.github.satr.aws.lambda.shoppingbot.entity.converters.ShoppingCartItemConverter;

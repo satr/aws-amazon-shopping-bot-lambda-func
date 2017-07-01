@@ -1,7 +1,9 @@
 package business;
+// Copyright © 2017, github.com/satr, MIT License
 
 import common.ObjectMother;
 import io.github.satr.aws.lambda.shoppingbot.ShoppingBotLambda;
+import io.github.satr.aws.lambda.shoppingbot.entity.Product;
 import io.github.satr.aws.lambda.shoppingbot.entity.User;
 import io.github.satr.aws.lambda.shoppingbot.log.Logger;
 import io.github.satr.aws.lambda.shoppingbot.repositories.RepositoryFactory;
@@ -10,6 +12,7 @@ import io.github.satr.aws.lambda.shoppingbot.intent.GreetingsIntent;
 import io.github.satr.aws.lambda.shoppingbot.request.LexRequestAttribute;
 import io.github.satr.aws.lambda.shoppingbot.response.DialogAction;
 import io.github.satr.aws.lambda.shoppingbot.response.LexResponse;
+import io.github.satr.aws.lambda.shoppingbot.services.ProductService;
 import io.github.satr.aws.lambda.shoppingbot.services.ShoppingCartService;
 import io.github.satr.aws.lambda.shoppingbot.services.UserService;
 import org.junit.Test;
@@ -30,13 +33,15 @@ public class ShoppingBotLambdaTestCases {
     private ShoppingBotLambda shoppingBotLambda;
     private UserService userServiceMock;
     private ShoppingCartService shoppingCartServiceMock;
+    private ProductService productServiceMock;
     RepositoryFactory repositoryFactoryMock = Mockito.mock(RepositoryFactory.class);
 
     @org.junit.Before
     public void setUp() throws Exception {
         userServiceMock = Mockito.mock(UserService.class);
         shoppingCartServiceMock = Mockito.mock(ShoppingCartService.class);
-        shoppingBotLambda = new ShoppingBotLambda(repositoryFactoryMock, userServiceMock, shoppingCartServiceMock);
+        productServiceMock = Mockito.mock(ProductService.class);
+        shoppingBotLambda = new ShoppingBotLambda(repositoryFactoryMock, userServiceMock, shoppingCartServiceMock, productServiceMock);
     }
 
     @Test
@@ -48,20 +53,22 @@ public class ShoppingBotLambdaTestCases {
 
     @org.junit.Test
     public void orderFulfilledBackeryRequest() throws Exception {
-        String product = ObjectMother.createRandomString();
+        String productName = ObjectMother.createRandomString();
         Double amount = ObjectMother.createRandomNumber();
         String unit = ObjectMother.createRandomString();
-        LinkedHashMap<String, Object> requestMap = ObjectMother.createRequestForBakeryDepartment(product, amount, unit);
+        LinkedHashMap<String, Object> requestMap = ObjectMother.createRequestForBakeryDepartment(productName, amount, unit);
         User user = ObjectMother.createUser();
         ObjectMother.setSessionAttribute(requestMap, LexRequestAttribute.SessionAttribute.UserId, user.getUserId());
         when(userServiceMock.getUserById(user.getUserId())).thenReturn(user);
+        Product product = ObjectMother.createProduct(productName);
+        when(productServiceMock.getByProductId(productName)).thenReturn(product);
 
         LexResponse lexResponse = shoppingBotLambda.handleRequest(requestMap, null);
 
         assertEquals(DialogAction.FulfillmentState.Fulfilled, lexResponse.getDialogAction().getFulfillmentState());
         String responseContent = lexResponse.getDialogAction().getMessage().getContent();
         assertTrue(responseContent.contains(amount.toString()));
-        assertTrue(responseContent.contains(product));
+        assertTrue(responseContent.contains(productName));
         assertTrue(responseContent.contains(unit));
     }
 

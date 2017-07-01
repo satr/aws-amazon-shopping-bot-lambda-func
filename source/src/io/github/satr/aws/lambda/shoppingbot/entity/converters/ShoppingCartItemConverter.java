@@ -1,11 +1,10 @@
 package io.github.satr.aws.lambda.shoppingbot.entity.converters;
+// Copyright © 2017, github.com/satr, MIT License
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverter;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.satr.aws.lambda.shoppingbot.entity.ShoppingCartItem;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingCartItemConverter  implements DynamoDBTypeConverter<String, List<ShoppingCartItem>> {
