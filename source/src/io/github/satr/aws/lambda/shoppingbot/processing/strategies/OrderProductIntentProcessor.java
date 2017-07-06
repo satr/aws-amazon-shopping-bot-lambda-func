@@ -67,7 +67,7 @@ public class OrderProductIntentProcessor extends IntentProcessor {
         cartItem.setAmount(amount);
         cartItem.setUnit(unit);
         cartItem.setPrice(unitPrice);
-        return String.format("Put %s %s of %s, price: %s.", amount, unit != null ? unit : "", unitPrice, productName);
+        return String.format("Put %s %s of %s, price: %s.", amount, unit != null ? unit : "", productName, unitPrice);
     }
 
     private ShoppingCart getOrCreateShoppingCart(String userId) {
