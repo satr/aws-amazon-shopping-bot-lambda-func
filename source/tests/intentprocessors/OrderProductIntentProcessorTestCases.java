@@ -35,6 +35,9 @@ import static org.mockito.Mockito.when;
 
 @RunWith(Parameterized.class)
 public class OrderProductIntentProcessorTestCases {
+
+    private final double doubleDelta = 0.001;
+
     @Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][] {
@@ -94,7 +97,8 @@ public class OrderProductIntentProcessorTestCases {
         when(userServiceMock.getUserById(user.getUserId())).thenReturn(user);
         ShoppingCart shoppingCart = ObjectMother.createShoppingCart(userId);
         when(shoppingCartServiceMock.getShoppingCartByUserId(user.getUserId())).thenReturn(shoppingCart);
-        Product product = ObjectMother.createProduct(this.productName);
+        Double price = ObjectMother.createRandomNumber();
+        Product product = ObjectMother.createProduct(this.productName, new String[]{this.unit}, price);
         when(productServiceMock.getByProductId(this.productName)).thenReturn(product);
 
         LexResponse lexResponse = shoppingBotLambda.handleRequest(requestToOrderProduct, null);
@@ -111,10 +115,12 @@ public class OrderProductIntentProcessorTestCases {
         Assert.assertEquals(this.productName, cartItem.getProduct());
         Assert.assertEquals(amount, cartItem.getAmount());
         Assert.assertEquals(unit, cartItem.getUnit());
+        Assert.assertEquals(amount * price, cartItem.getSum(), doubleDelta);
+        Assert.assertEquals(amount * price, calledShoppingCart.getTotalSum(), doubleDelta);
     }
 
     @Test
-    public void canotOrderProductWithoutSessionUserId() throws Exception {
+    public void cannotOrderProductWithoutSessionUserId() throws Exception {
         LinkedHashMap<String, Object> requestToOrderProduct = ObjectMother.createRequestFor(intentName, productSlotName,
                 productName, amountSlotName, amount, unitSlotName, unit);
         //No UserId in the session

@@ -1,10 +1,7 @@
 package io.github.satr.aws.lambda.shoppingbot.processing.strategies;
 // Copyright © 2017, github.com/satr, MIT License
 
-import io.github.satr.aws.lambda.shoppingbot.entity.Product;
-import io.github.satr.aws.lambda.shoppingbot.entity.ShoppingCart;
-import io.github.satr.aws.lambda.shoppingbot.entity.ShoppingCartItem;
-import io.github.satr.aws.lambda.shoppingbot.entity.User;
+import io.github.satr.aws.lambda.shoppingbot.entity.*;
 import io.github.satr.aws.lambda.shoppingbot.log.Logger;
 import io.github.satr.aws.lambda.shoppingbot.request.LexRequest;
 import io.github.satr.aws.lambda.shoppingbot.request.LexRequestAttribute;
@@ -36,38 +33,41 @@ public class OrderProductIntentProcessor extends IntentProcessor {
         if(userId == null || userId.length() == 0)
             return createLexErrorResponse(lexRequest, "User is not recognized - UserId is not specified.");
 
-        String requestedProduct = lexRequest.getRequestedProduct();
-        Product product = productService.getByProductId(requestedProduct);
+        String productName = lexRequest.getRequestedProduct();
+        Product product = productService.getByProductId(productName);
         if(product == null)
-            return createLexErrorResponse(lexRequest, String.format("Product \"%s\" is not found", requestedProduct));
+            return createLexErrorResponse(lexRequest, String.format("Product \"%s\" is not found", productName));
+
+        String unit = lexRequest.getRequestedUnit();
+        Double unitPrice = product.getUnitPriceFor(unit);
+        if(unitPrice == null || unitPrice == Product.notFoundPrice)
+            return createLexErrorResponse(lexRequest, String.format("Price for the unit \"%s\" is not found", unit));
 
         User user = userService.getUserById(userId);
         if(user == null)
             return createLexErrorResponse(lexRequest, String.format("UserId is not recognized by UserId %s", userId));
 
         ShoppingCart shoppingCart = getOrCreateShoppingCart(userId);
-        ShoppingCartItem cartItem = shoppingCart.getItemByProduct(requestedProduct);
-        updateCartItemWithRequested(lexRequest, cartItem);
+        ShoppingCartItem cartItem = shoppingCart.getItemByProduct(productName);
+        String message = updateCartItemWithRequested(cartItem, unit, unitPrice, Double.parseDouble(lexRequest.getRequestedAmount()));
         shoppingCartService.save(shoppingCart);
-        LexResponse lexResponse = LexResponseHelper.createLexResponse(lexRequest, buildContent(lexRequest),
+        LexResponse lexResponse = LexResponseHelper.createLexResponse(lexRequest, message,
                                                     DialogAction.Type.Close, DialogAction.FulfillmentState.Fulfilled);
         return lexResponse;
     }
 
-    private void updateCartItemWithRequested(LexRequest lexRequest, ShoppingCartItem cartItem) {
-        double requestedAmount = Double.parseDouble(lexRequest.getRequestedAmount());
-        String requestedUnit = lexRequest.getRequestedUnit();
+    private String updateCartItemWithRequested(ShoppingCartItem cartItem, String unit, double unitPrice, Double amount) {
         String existingUnit = cartItem.getUnit();
-        if(existingUnit == null){
-            cartItem.setAmount(requestedAmount);
-            cartItem.setUnit(requestedUnit);
-            //TODO: inform about set amount and unit
-        } else if(existingUnit.equals(requestedUnit)) {
-            cartItem.addAmount(requestedAmount);//TODO: inform about added abount
-        } else {
-            cartItem.setAmount(requestedAmount);
-            cartItem.setUnit(requestedUnit);//TODO: inform about changed unit
+        String productName = cartItem.getProduct();
+        if (existingUnit != null && existingUnit.equals(unit)) {
+            cartItem.addAmount(amount);
+            cartItem.setPrice(unitPrice);
+            return String.format("Added %s %s of %s.", amount, existingUnit, productName);
         }
+        cartItem.setAmount(amount);
+        cartItem.setUnit(unit);
+        cartItem.setPrice(unitPrice);
+        return String.format("Put %s %s of %s, price: %s.", amount, unit != null ? unit : "", unitPrice, productName);
     }
 
     private ShoppingCart getOrCreateShoppingCart(String userId) {
@@ -77,14 +77,5 @@ public class OrderProductIntentProcessor extends IntentProcessor {
         shoppingCart = new ShoppingCart();
         shoppingCart.setUserId(userId);
         return shoppingCart;
-    }
-
-    private String buildContent(LexRequest lexRequest) {
-        String requestedUnit = lexRequest.getRequestedUnit();
-        return requestedUnit != null && requestedUnit.length() > 0
-                ? String.format("You requested: %s %s of %s.",
-                                lexRequest.getRequestedAmount(), requestedUnit, lexRequest.getRequestedProduct())
-                : String.format("You requested: %s %s.",
-                                lexRequest.getRequestedAmount(), lexRequest.getRequestedProduct());
     }
 }

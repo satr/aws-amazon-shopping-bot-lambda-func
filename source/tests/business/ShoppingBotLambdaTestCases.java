@@ -60,7 +60,7 @@ public class ShoppingBotLambdaTestCases {
         User user = ObjectMother.createUser();
         ObjectMother.setSessionAttribute(requestMap, LexRequestAttribute.SessionAttribute.UserId, user.getUserId());
         when(userServiceMock.getUserById(user.getUserId())).thenReturn(user);
-        Product product = ObjectMother.createProduct(productName);
+        Product product = ObjectMother.createProduct(productName, new String[]{unit});
         when(productServiceMock.getByProductId(productName)).thenReturn(product);
 
         LexResponse lexResponse = shoppingBotLambda.handleRequest(requestMap, null);

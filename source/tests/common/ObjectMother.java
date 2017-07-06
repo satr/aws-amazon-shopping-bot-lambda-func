@@ -6,10 +6,7 @@ import com.amazonaws.services.dynamodbv2.local.embedded.DynamoDBEmbedded;
 import com.amazonaws.services.dynamodbv2.local.shared.access.AmazonDynamoDBLocal;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.github.satr.aws.lambda.shoppingbot.entity.Product;
-import io.github.satr.aws.lambda.shoppingbot.entity.ShoppingCart;
-import io.github.satr.aws.lambda.shoppingbot.entity.ShoppingCartItem;
-import io.github.satr.aws.lambda.shoppingbot.entity.User;
+import io.github.satr.aws.lambda.shoppingbot.entity.*;
 import io.github.satr.aws.lambda.shoppingbot.intent.BakeryDepartmentIntent;
 import io.github.satr.aws.lambda.shoppingbot.intent.GreetingsIntent;
 import io.github.satr.aws.lambda.shoppingbot.request.LexRequestAttribute;
@@ -185,13 +182,35 @@ public class ObjectMother {
         return user;
     }
 
+    public static Product createProduct(String productName, String[] unitForms, Double price) {
+        Product product = new Product();
+        product.setProductId(productName);
+        product.setUnitPrices(ObjectMother.createUnitPriceList(price, unitForms));
+        return product;
+    }
+
     public static Product createProduct() {
         return createProduct(createRandomString());
     }
 
-    public static Product createProduct(String productId) {
-        Product product = new Product();
-        product.setProductId(productId);
-        return product;
+    public static Product createProduct(String productName) {
+        return createProduct(productName, new String[]{createRandomString()}, createRandomNumber());
+    }
+
+    public static List<UnitPrice> createUnitPriceList(Double price, String[] unitForms) {
+        ArrayList<UnitPrice> unitPrices = new ArrayList<>();
+        unitPrices.add(createUnitPrice(price, unitForms));
+        return unitPrices;
+    }
+
+    private static UnitPrice createUnitPrice(Double price, String[] unitForms) {
+        UnitPrice unitPrice = new UnitPrice();
+        unitPrice.setPrice(price);
+        unitPrice.setUnitForms(Arrays.asList(unitForms));
+        return unitPrice;
+    }
+
+    public static Product createProduct(String productName, String[] unitForms) {
+        return createProduct(productName, unitForms, createRandomNumber());
     }
 }

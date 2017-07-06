@@ -73,13 +73,13 @@ public class ShoppingCart {
         return updatedOnAsDate;
     }
 
-//    @DynamoDBIgnore
     @DynamoDBAttribute(attributeName = "items")
     @DynamoDBTypeConverted(converter = ShoppingCartItemConverter.class)
     public List<ShoppingCartItem> getItems() {
         return items;
     }
 
+    //For DbMapper
     public void setItems(List<ShoppingCartItem> items) {
         this.items = items;
     }
@@ -99,5 +99,13 @@ public class ShoppingCart {
             cartItems.add(cartItem);
         }
         return cartItem;
+    }
+
+    @DynamoDBIgnore
+    public double getTotalSum() {
+        Double totalSum = 0.0;
+        for(ShoppingCartItem cartItem: getItems())
+            totalSum += cartItem.getSum();
+        return totalSum;
     }
 }
