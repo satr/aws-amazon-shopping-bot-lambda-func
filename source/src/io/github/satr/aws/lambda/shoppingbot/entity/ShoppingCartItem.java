@@ -55,5 +55,16 @@ public class ShoppingCartItem {
     @DynamoDBIgnore
     public double getSum() {
         return amount * price;
+
+    }
+
+    @Override
+    public String toString() {
+        if (amount <= 0.0 || price <= 0.0)
+            return "";
+        String niceAmount = amount % 1 == 0 ? ""+ Math.round(amount) : "" + amount;
+        if(unit == null)
+            return String.format("%s %s, price: %s, sum: %s", niceAmount, product, price, getSum());
+        return String.format("%s %s of %s, price: %s, sum: %s", niceAmount, unit, product, price, getSum());
     }
 }

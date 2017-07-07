@@ -33,6 +33,10 @@ public class OrderProductIntentProcessor extends IntentProcessor {
         if(userId == null || userId.length() == 0)
             return createLexErrorResponse(lexRequest, "I'm sorry, could you please tell your name?");
 
+        User user = userService.getUserById(userId);
+        if(user == null)
+            return createLexErrorResponse(lexRequest, "I'm sorry, could you please repeat your name?");
+
         String productName = lexRequest.getRequestedProduct();
         Product product = productService.getByProductId(productName);
         if(product == null)
@@ -43,17 +47,12 @@ public class OrderProductIntentProcessor extends IntentProcessor {
         if(unitPrice == null || unitPrice == Product.notFoundPrice)
             return createLexErrorResponse(lexRequest, String.format("I' sorry - price for %s is not found", unit == null ? "this" : unit));
 
-        User user = userService.getUserById(userId);
-        if(user == null)
-            return createLexErrorResponse(lexRequest, String.format("I'm sorry, could you please repeat your name?"));
-
         ShoppingCart shoppingCart = getOrCreateShoppingCart(userId);
         ShoppingCartItem cartItem = shoppingCart.getItemByProduct(productName);
         String message = updateCartItemWithRequested(cartItem, unit, unitPrice, Double.parseDouble(lexRequest.getRequestedAmount()));
         shoppingCartService.save(shoppingCart);
-        LexResponse lexResponse = LexResponseHelper.createLexResponse(lexRequest, message,
+        return LexResponseHelper.createLexResponse(lexRequest, message,
                                                     DialogAction.Type.Close, DialogAction.FulfillmentState.Fulfilled);
-        return lexResponse;
     }
 
     private String updateCartItemWithRequested(ShoppingCartItem cartItem, String unit, double unitPrice, double amount) {

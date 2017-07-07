@@ -1,16 +1,9 @@
 package io.github.satr.aws.lambda.shoppingbot.processing;
 // Copyright © 2017, github.com/satr, MIT License
 
-import io.github.satr.aws.lambda.shoppingbot.intent.BakeryDepartmentIntent;
-import io.github.satr.aws.lambda.shoppingbot.intent.GreetingsIntent;
-import io.github.satr.aws.lambda.shoppingbot.intent.MilkDepartmentIntent;
-import io.github.satr.aws.lambda.shoppingbot.intent.VegetableDepartmentIntent;
-import io.github.satr.aws.lambda.shoppingbot.log.CompositeLogger;
+import io.github.satr.aws.lambda.shoppingbot.intent.*;
 import io.github.satr.aws.lambda.shoppingbot.log.Logger;
-import io.github.satr.aws.lambda.shoppingbot.processing.strategies.GreetingsIntentProcessor;
-import io.github.satr.aws.lambda.shoppingbot.processing.strategies.OrderProductIntentProcessor;
-import io.github.satr.aws.lambda.shoppingbot.processing.strategies.IntentProcessor;
-import io.github.satr.aws.lambda.shoppingbot.processing.strategies.UnsupportedIntentProcessor;
+import io.github.satr.aws.lambda.shoppingbot.processing.strategies.*;
 import io.github.satr.aws.lambda.shoppingbot.request.LexRequest;
 import io.github.satr.aws.lambda.shoppingbot.response.LexResponse;
 import io.github.satr.aws.lambda.shoppingbot.services.ProductService;
@@ -31,6 +24,7 @@ public class ShoppingBotProcessor {
         processingStrategies.put(MilkDepartmentIntent.Name, orderProductIntentProcessor);
         processingStrategies.put(VegetableDepartmentIntent.Name, orderProductIntentProcessor);
         processingStrategies.put(GreetingsIntent.Name, new GreetingsIntentProcessor(userService, logger));
+        processingStrategies.put(ReviewShoppingCartIntent.Name, new ReviewShoppingCartIntentProcessor(shoppingCartService, userService, logger));
     }
 
     public LexResponse Process(LexRequest lexRequest) {
@@ -38,6 +32,6 @@ public class ShoppingBotProcessor {
     }
 
     private IntentProcessor getProcessingStrategy(String intentName) {
-        return processingStrategies.containsKey(intentName) ? processingStrategies.get(intentName) : unsupportedIntentProcessor;
+        return processingStrategies.getOrDefault(intentName, unsupportedIntentProcessor);
     }
 }
