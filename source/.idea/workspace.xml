@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a3bf89bc-f937-42e9-9932-c78a5fde736b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/repositories/realconnection/PopulateDataInRealDatabase.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/tests/repositories/ProductRepositoryRepositoryRealConnectionTestCases.java" afterPath="$PROJECT_DIR$/tests/repositories/realconnection/ProductRepositoryRepositoryRealConnectionTestCases.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/tests/repositories/UserRepositoryRealConnectionTestCases.java" afterPath="$PROJECT_DIR$/tests/repositories/realconnection/UserRepositoryRealConnectionTestCases.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/strategies/OrderProductIntentProcessor.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/strategies/OrderProductIntentProcessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/common/ObjectMother.java" afterPath="$PROJECT_DIR$/tests/common/ObjectMother.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/intentprocessors/OrderProductIntentProcessorTestCases.java" afterPath="$PROJECT_DIR$/tests/intentprocessors/OrderProductIntentProcessorTestCases.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -1113,7 +1107,7 @@
       <workItem from="1498936393850" duration="6162000" />
       <workItem from="1499142478766" duration="92000" />
       <workItem from="1499142602480" duration="536000" />
-      <workItem from="1499186504856" duration="20952000" />
+      <workItem from="1499186504856" duration="21065000" />
     </task>
     <task id="LOCAL-00001" summary="Initial code">
       <created>1497481081458</created>
@@ -1234,7 +1228,14 @@
       <option name="project" value="LOCAL" />
       <updated>1499381694995</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Added unit-tests for ordering products, added a class to unit-tests - to populate read database tables.">
+      <created>1499404294647</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1499404294647</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1270,7 +1271,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="157901000" />
+    <option name="totallyTimeSpent" value="158014000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1368,7 +1369,8 @@
     <MESSAGE value="Added product entity (basic), its repository and service with unit-tests.&#10;Added copyright to files." />
     <MESSAGE value="Added prices for products, individual to different units, with support of multiple unit-forms and synonyms." />
     <MESSAGE value="Fixed message" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed message" />
+    <MESSAGE value="Added unit-tests for ordering products, added a class to unit-tests - to populate read database tables." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added unit-tests for ordering products, added a class to unit-tests - to populate read database tables." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
