@@ -203,7 +203,7 @@ public class ObjectMother {
         return unitPrices;
     }
 
-    private static UnitPrice createUnitPrice(Double price, String[] unitForms) {
+    public static UnitPrice createUnitPrice(Double price, String[] unitForms) {
         UnitPrice unitPrice = new UnitPrice();
         unitPrice.setPrice(price);
         unitPrice.setUnitForms(Arrays.asList(unitForms));
@@ -212,5 +212,14 @@ public class ObjectMother {
 
     public static Product createProduct(String productName, String[] unitForms) {
         return createProduct(productName, unitForms, createRandomNumber());
+    }
+
+    public static ShoppingCartItem createShoppingCartItem(String productName, double amount, double price, String unit) {
+        ShoppingCartItem cartItem1 = new ShoppingCartItem();
+        cartItem1.setPrice(price);
+        cartItem1.setProduct(productName);
+        cartItem1.setUnit(unit);
+        cartItem1.setAmount(amount);
+        return cartItem1;
     }
 }

@@ -56,7 +56,7 @@ public class OrderProductIntentProcessor extends IntentProcessor {
         return lexResponse;
     }
 
-    private String updateCartItemWithRequested(ShoppingCartItem cartItem, String unit, double unitPrice, Double amount) {
+    private String updateCartItemWithRequested(ShoppingCartItem cartItem, String unit, double unitPrice, double amount) {
         String existingUnit = cartItem.getUnit();
         String productName = cartItem.getProduct();
         if (existingUnit != null && existingUnit.equals(unit)) {

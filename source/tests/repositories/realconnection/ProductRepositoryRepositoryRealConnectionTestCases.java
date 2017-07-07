@@ -1,4 +1,4 @@
-package repositories;
+package repositories.realconnection;
 // Copyright © 2017, github.com/satr, MIT License
 
 import common.ObjectMother;
