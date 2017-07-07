@@ -31,7 +31,7 @@ public class OrderProductIntentProcessor extends IntentProcessor {
 
         String userId = (String) lexRequest.getSessionAttribute(LexRequestAttribute.SessionAttribute.UserId);
         if(userId == null || userId.length() == 0)
-            return createLexErrorResponse(lexRequest, "User is not recognized - UserId is not specified.");
+            return createLexErrorResponse(lexRequest, "I'm sorry, could you please tell your name?");
 
         String productName = lexRequest.getRequestedProduct();
         Product product = productService.getByProductId(productName);
@@ -39,13 +39,13 @@ public class OrderProductIntentProcessor extends IntentProcessor {
             return createLexErrorResponse(lexRequest, String.format("Product \"%s\" is not found", productName));
 
         String unit = lexRequest.getRequestedUnit();
-        Double unitPrice = product.getUnitPriceFor(unit);
+        Double unitPrice = product.getUnitPriceFor(unit == null ? "piece" : unit);
         if(unitPrice == null || unitPrice == Product.notFoundPrice)
-            return createLexErrorResponse(lexRequest, String.format("Price for the unit \"%s\" is not found", unit));
+            return createLexErrorResponse(lexRequest, String.format("I' sorry - price for %s is not found", unit == null ? "this" : unit));
 
         User user = userService.getUserById(userId);
         if(user == null)
-            return createLexErrorResponse(lexRequest, String.format("UserId is not recognized by UserId %s", userId));
+            return createLexErrorResponse(lexRequest, String.format("I'm sorry, could you please repeat your name?"));
 
         ShoppingCart shoppingCart = getOrCreateShoppingCart(userId);
         ShoppingCartItem cartItem = shoppingCart.getItemByProduct(productName);

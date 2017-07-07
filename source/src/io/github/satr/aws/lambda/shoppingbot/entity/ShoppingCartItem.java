@@ -8,9 +8,9 @@ import com.fasterxml.jackson.annotation.JacksonInject;
 
 public class ShoppingCartItem {
     private String product;
-    private Double amount;
-    private String unit;
-    private double price;
+    private Double amount = 0.0;
+    private String unit = null;
+    private double price = 0.0;
 
     public void setProduct(String product) {
         this.product = product;
