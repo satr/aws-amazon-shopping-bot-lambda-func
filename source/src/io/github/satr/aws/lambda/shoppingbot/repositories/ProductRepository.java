@@ -1,7 +1,7 @@
 package io.github.satr.aws.lambda.shoppingbot.repositories;
 // Copyright © 2017, github.com/satr, MIT License
 
-import io.github.satr.aws.lambda.shoppingbot.entity.Product;
+import io.github.satr.aws.lambda.shoppingbot.entities.Product;
 
 import java.util.List;
 

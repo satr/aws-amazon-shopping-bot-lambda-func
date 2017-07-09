@@ -5,7 +5,7 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
-import io.github.satr.aws.lambda.shoppingbot.entity.User;
+import io.github.satr.aws.lambda.shoppingbot.entities.User;
 
 import java.util.HashMap;
 import java.util.List;

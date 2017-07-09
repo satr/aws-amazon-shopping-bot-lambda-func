@@ -1,10 +1,10 @@
 package io.github.satr.aws.lambda.shoppingbot.request;
 // Copyright © 2017, github.com/satr, MIT License
 
-import io.github.satr.aws.lambda.shoppingbot.intent.BakeryDepartmentIntent;
-import io.github.satr.aws.lambda.shoppingbot.intent.GreetingsIntent;
-import io.github.satr.aws.lambda.shoppingbot.intent.MilkDepartmentIntent;
-import io.github.satr.aws.lambda.shoppingbot.intent.VegetableDepartmentIntent;
+import io.github.satr.aws.lambda.shoppingbot.intents.BakeryDepartmentIntent;
+import io.github.satr.aws.lambda.shoppingbot.intents.GreetingsIntent;
+import io.github.satr.aws.lambda.shoppingbot.intents.MilkDepartmentIntent;
+import io.github.satr.aws.lambda.shoppingbot.intents.VegetableDepartmentIntent;
 import io.github.satr.aws.lambda.shoppingbot.request.strategies.intentloading.*;
 
 import java.util.HashMap;

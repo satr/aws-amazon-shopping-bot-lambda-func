@@ -2,7 +2,7 @@ package io.github.satr.aws.lambda.shoppingbot.services;
 // Copyright © 2017, github.com/satr, MIT License
 
 import com.sun.istack.internal.NotNull;
-import io.github.satr.aws.lambda.shoppingbot.entity.User;
+import io.github.satr.aws.lambda.shoppingbot.entities.User;
 import io.github.satr.aws.lambda.shoppingbot.log.Logger;
 import io.github.satr.aws.lambda.shoppingbot.repositories.UserRepository;
 

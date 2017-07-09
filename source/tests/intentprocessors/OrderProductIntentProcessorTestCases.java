@@ -3,13 +3,13 @@ package intentprocessors;
 
 import common.ObjectMother;
 import io.github.satr.aws.lambda.shoppingbot.ShoppingBotLambda;
-import io.github.satr.aws.lambda.shoppingbot.entity.Product;
-import io.github.satr.aws.lambda.shoppingbot.entity.ShoppingCart;
-import io.github.satr.aws.lambda.shoppingbot.entity.ShoppingCartItem;
-import io.github.satr.aws.lambda.shoppingbot.entity.User;
-import io.github.satr.aws.lambda.shoppingbot.intent.BakeryDepartmentIntent;
-import io.github.satr.aws.lambda.shoppingbot.intent.MilkDepartmentIntent;
-import io.github.satr.aws.lambda.shoppingbot.intent.VegetableDepartmentIntent;
+import io.github.satr.aws.lambda.shoppingbot.entities.Product;
+import io.github.satr.aws.lambda.shoppingbot.entities.ShoppingCart;
+import io.github.satr.aws.lambda.shoppingbot.entities.ShoppingCartItem;
+import io.github.satr.aws.lambda.shoppingbot.entities.User;
+import io.github.satr.aws.lambda.shoppingbot.intents.BakeryDepartmentIntent;
+import io.github.satr.aws.lambda.shoppingbot.intents.MilkDepartmentIntent;
+import io.github.satr.aws.lambda.shoppingbot.intents.VegetableDepartmentIntent;
 import io.github.satr.aws.lambda.shoppingbot.repositories.RepositoryFactory;
 import io.github.satr.aws.lambda.shoppingbot.request.LexRequestAttribute;
 import io.github.satr.aws.lambda.shoppingbot.response.DialogAction;
@@ -29,7 +29,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -98,7 +97,7 @@ public class OrderProductIntentProcessorTestCases {
         userId = user.getUserId();
         when(userServiceMock.getUserById(user.getUserId())).thenReturn(user);
 
-        product = ObjectMother.createProduct(productName, new String[]{unit}, price);
+        product = ObjectMother.createProduct(productName, price, unit, new String[]{unit});
         when(productServiceMock.getByProductId(productName)).thenReturn(product);
     }
 

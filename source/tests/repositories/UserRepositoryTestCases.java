@@ -5,7 +5,7 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import common.ObjectMother;
 import io.github.satr.aws.lambda.shoppingbot.repositories.UserRepositoryImpl;
-import io.github.satr.aws.lambda.shoppingbot.entity.User;
+import io.github.satr.aws.lambda.shoppingbot.entities.User;
 import org.junit.*;
 
 import java.util.ArrayList;

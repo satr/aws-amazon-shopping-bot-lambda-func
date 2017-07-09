@@ -1,11 +1,11 @@
-package io.github.satr.aws.lambda.shoppingbot.entity;
+package io.github.satr.aws.lambda.shoppingbot.entities;
 // Copyright © 2017, github.com/satr, MIT License
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted;
-import io.github.satr.aws.lambda.shoppingbot.entity.converters.UnitPriceConverter;
+import io.github.satr.aws.lambda.shoppingbot.entities.converters.UnitPriceConverter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,14 +35,14 @@ public class Product {
         this.unitPrices = unitPrices != null ? unitPrices : new ArrayList<>();
     }
 
-    public Double getUnitPriceFor(String unit){
+    public UnitPrice getUnitPriceFor(String unit){
         for (UnitPrice unitPrice: getUnitPrices()){
             for(String unitForm: unitPrice.getUnitForms()){
                 if(unitForm.equals(unit))
-                    return unitPrice.getPrice();
+                    return unitPrice;
             }
         }
-        return notFoundPrice;
+        return null;
     }
 
     @Override

@@ -5,15 +5,15 @@ import common.ObjectMother;
 import io.github.satr.aws.lambda.shoppingbot.repositories.RepositoryFactoryImpl;
 import io.github.satr.aws.lambda.shoppingbot.repositories.ShoppingCartRepository;
 import io.github.satr.aws.lambda.shoppingbot.repositories.UserRepository;
-import io.github.satr.aws.lambda.shoppingbot.entity.ShoppingCart;
-import io.github.satr.aws.lambda.shoppingbot.entity.User;
+import io.github.satr.aws.lambda.shoppingbot.entities.ShoppingCart;
+import io.github.satr.aws.lambda.shoppingbot.entities.User;
 import org.junit.*;
 
 import java.util.List;
 
 import static org.junit.Assert.*;
 
-@Ignore  //Real database access
+@Ignore("Real database access")
 public class UserRepositoryRealConnectionTestCases {
     private final static String testingFirstName1 = "firstName1";
     private final static String testingLastName1 = "testingLastName1";

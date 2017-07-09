@@ -1,12 +1,9 @@
-package io.github.satr.aws.lambda.shoppingbot.entity;
+package io.github.satr.aws.lambda.shoppingbot.entities;
 // Copyright © 2017, github.com/satr, MIT License
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIgnore;
-import com.fasterxml.jackson.annotation.JacksonInject;
 
-
-public class ShoppingCartItem {
+public class OrderItemInfo {
     private String product;
     private Double amount = 0.0;
     private String unit = null;
@@ -16,7 +13,6 @@ public class ShoppingCartItem {
         this.product = product;
     }
 
-    @DynamoDBAttribute(attributeName = "product")
     public String getProduct() {
         return product;
     }
@@ -25,7 +21,6 @@ public class ShoppingCartItem {
         this.amount = amount;
     }
 
-    @DynamoDBAttribute(attributeName = "amount")
     public Double getAmount() {
         return amount;
     }
@@ -34,12 +29,10 @@ public class ShoppingCartItem {
         this.unit = unit;
     }
 
-    @DynamoDBAttribute(attributeName = "unit")
     public String getUnit() {
         return unit;
     }
 
-    @DynamoDBAttribute(attributeName = "price")
     public double getPrice() {
         return price;
     }
@@ -55,16 +48,20 @@ public class ShoppingCartItem {
     @DynamoDBIgnore
     public double getSum() {
         return amount * price;
-
     }
 
     @Override
     public String toString() {
-        if (amount <= 0.0 || price <= 0.0)
+        if (isEmpty())
             return "";
         String niceAmount = amount % 1 == 0 ? ""+ Math.round(amount) : "" + amount;
-        if(unit == null)
+        if(unit == null || UnitPrice.UnitPieces.equals(unit))
             return String.format("%s %s, price: %s, sum: %s", niceAmount, product, price, getSum());
-        return String.format("%s %s of %s, price: %s, sum: %s", niceAmount, unit, product, price, getSum());
+        return String.format("%s (%s) of %s, price: %s, sum: %s", niceAmount, unit, product, price, getSum());
+    }
+
+    @DynamoDBIgnore
+    public boolean isEmpty() {
+        return getAmount() <= 0.0 || getPrice() <= 0.0;
     }
 }

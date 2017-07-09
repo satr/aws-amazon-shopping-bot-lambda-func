@@ -23,18 +23,20 @@ public class ShoppingBotLambda implements RequestHandler<Map<String, Object>, Le
 
     public ShoppingBotLambda() {
         repositoryFactory = new RepositoryFactoryImpl();
-        init(new UserServiceImpl(repositoryFactory.createUserRepository(), logger),
-                new ShoppingCartServiceImpl(repositoryFactory.createShoppingCartRepository(), this.logger),
-                new ProductServiceImpl(repositoryFactory.createProductRepository(), this.logger));
+        UserServiceImpl userService = new UserServiceImpl(repositoryFactory.createUserRepository(), logger);
+        init(userService,
+             new ShoppingCartServiceImpl(repositoryFactory.createShoppingCartRepository(), userService, this.logger),
+             new ProductServiceImpl(repositoryFactory.createProductRepository(), this.logger),
+             new OrderServiceImpl(repositoryFactory.createOrderRepository(), this.logger));
     }
 
     public ShoppingBotLambda(RepositoryFactory repositoryFactory, UserService userService, ShoppingCartService shoppingCartService, ProductService productService) {
         this.repositoryFactory = repositoryFactory;
-        init(userService, shoppingCartService, productService);
+        init(userService, shoppingCartService, productService, new OrderServiceImpl(repositoryFactory.createOrderRepository(), this.logger));
     }
 
-    private void init(UserService userService, ShoppingCartService shoppingCartService, ProductService productService) {
-        this.shoppingBotProcessor = new ShoppingBotProcessor(userService, shoppingCartService, productService, logger);
+    private void init(UserService userService, ShoppingCartService shoppingCartService, ProductService productService, OrderService orderService) {
+        this.shoppingBotProcessor = new ShoppingBotProcessor(userService, shoppingCartService, productService, orderService, logger);
     }
 
     @Override

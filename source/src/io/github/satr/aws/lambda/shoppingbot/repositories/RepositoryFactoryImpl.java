@@ -11,6 +11,7 @@ public class RepositoryFactoryImpl implements RepositoryFactory {
     private final DynamoDBMapper dbMapper;
     private UserRepository userRepository;
     private ShoppingCartRepository shoppingCartRepository;
+    private OrderRepository orderRepository;
     private ProductRepository productRepository;
 
     public RepositoryFactoryImpl() {
@@ -30,6 +31,11 @@ public class RepositoryFactoryImpl implements RepositoryFactory {
     }
 
     @Override
+    public OrderRepository createOrderRepository() {
+        return orderRepository != null ? orderRepository : (orderRepository = new OrderRepositoryImpl(dynamoDbClient, dbMapper));
+    }
+
+    @Override
     public ProductRepository createProductRepository() {
         return productRepository != null ? productRepository : (productRepository = new ProductRepositoryImpl(dynamoDbClient, dbMapper));
     }
@@ -38,6 +44,8 @@ public class RepositoryFactoryImpl implements RepositoryFactory {
     public void shutdown() {
         userRepository = null;
         shoppingCartRepository = null;
+        orderRepository = null;
+        productRepository = null;
         dynamoDbClient.shutdown();
     }
 }

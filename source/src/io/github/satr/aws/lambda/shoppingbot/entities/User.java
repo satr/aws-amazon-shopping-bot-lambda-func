@@ -1,4 +1,4 @@
-package io.github.satr.aws.lambda.shoppingbot.entity;
+package io.github.satr.aws.lambda.shoppingbot.entities;
 // Copyright © 2017, github.com/satr, MIT License
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;

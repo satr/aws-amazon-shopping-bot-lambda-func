@@ -6,9 +6,9 @@ import com.amazonaws.services.dynamodbv2.local.embedded.DynamoDBEmbedded;
 import com.amazonaws.services.dynamodbv2.local.shared.access.AmazonDynamoDBLocal;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.github.satr.aws.lambda.shoppingbot.entity.*;
-import io.github.satr.aws.lambda.shoppingbot.intent.BakeryDepartmentIntent;
-import io.github.satr.aws.lambda.shoppingbot.intent.GreetingsIntent;
+import io.github.satr.aws.lambda.shoppingbot.entities.*;
+import io.github.satr.aws.lambda.shoppingbot.intents.BakeryDepartmentIntent;
+import io.github.satr.aws.lambda.shoppingbot.intents.GreetingsIntent;
 import io.github.satr.aws.lambda.shoppingbot.request.LexRequestAttribute;
 import testdata.FileNames;
 
@@ -182,10 +182,10 @@ public class ObjectMother {
         return user;
     }
 
-    public static Product createProduct(String productName, String[] unitForms, Double price) {
+    public static Product createProduct(String productName, Double price, String unit, String[] unitForms) {
         Product product = new Product();
         product.setProductId(productName);
-        product.setUnitPrices(ObjectMother.createUnitPriceList(price, unitForms));
+        product.setUnitPrices(ObjectMother.createUnitPriceList(price, unitForms, unit));
         return product;
     }
 
@@ -194,24 +194,26 @@ public class ObjectMother {
     }
 
     public static Product createProduct(String productName) {
-        return createProduct(productName, new String[]{createRandomString()}, createRandomNumber());
+        String unit = createRandomString();
+        return createProduct(productName, createRandomNumber(), unit, new String[]{unit});
     }
 
-    public static List<UnitPrice> createUnitPriceList(Double price, String[] unitForms) {
+    public static List<UnitPrice> createUnitPriceList(Double price, String[] unitForms, String unit) {
         ArrayList<UnitPrice> unitPrices = new ArrayList<>();
-        unitPrices.add(createUnitPrice(price, unitForms));
+        unitPrices.add(createUnitPrice(price, unit, unitForms));
         return unitPrices;
     }
 
-    public static UnitPrice createUnitPrice(Double price, String[] unitForms) {
+    public static UnitPrice createUnitPrice(Double price, String unit, String[] unitForms) {
         UnitPrice unitPrice = new UnitPrice();
         unitPrice.setPrice(price);
+        unitPrice.setUnit(unit);
         unitPrice.setUnitForms(Arrays.asList(unitForms));
         return unitPrice;
     }
 
-    public static Product createProduct(String productName, String[] unitForms) {
-        return createProduct(productName, unitForms, createRandomNumber());
+    public static Product createProduct(String productName, String unit, String[] unitForms) {
+        return createProduct(productName, createRandomNumber(), unit, unitForms);
     }
 
     public static ShoppingCartItem createShoppingCartItem(String productName, double amount, double price, String unit) {
@@ -221,5 +223,11 @@ public class ObjectMother {
         cartItem1.setUnit(unit);
         cartItem1.setAmount(amount);
         return cartItem1;
+    }
+
+    public static Order createOrder() {
+        Order order = new Order();
+        order.setUser(createUser());
+        return order;
     }
 }

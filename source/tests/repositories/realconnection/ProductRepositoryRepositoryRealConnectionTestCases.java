@@ -2,7 +2,8 @@ package repositories.realconnection;
 // Copyright © 2017, github.com/satr, MIT License
 
 import common.ObjectMother;
-import io.github.satr.aws.lambda.shoppingbot.entity.Product;
+import io.github.satr.aws.lambda.shoppingbot.entities.Product;
+import io.github.satr.aws.lambda.shoppingbot.entities.UnitPrice;
 import io.github.satr.aws.lambda.shoppingbot.repositories.RepositoryFactoryImpl;
 import org.junit.AfterClass;
 import org.junit.Ignore;
@@ -16,7 +17,7 @@ import java.util.Collection;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-@Ignore
+@Ignore("Real database access")
 @RunWith(Parameterized.class)
 public class ProductRepositoryRepositoryRealConnectionTestCases {
     private final static RepositoryFactoryImpl repositoryFactory = new RepositoryFactoryImpl();
@@ -63,9 +64,9 @@ public class ProductRepositoryRepositoryRealConnectionTestCases {
         assertNotNull(product.getUnitPrices().get(0).getUnitForms());
         assertTrue(product.getUnitPrices().get(0).getUnitForms().size() > 0);
         assertNotNull(product.getUnitPrices().get(0).getUnitForms().get(0));
-        Double priceForLoaf = product.getUnitPriceFor(unit);
-        assertNotNull(priceForLoaf);
-        assertTrue(priceForLoaf > 0);
+        UnitPrice unitPriceForLoaf = product.getUnitPriceFor(unit);
+        assertNotNull(unitPriceForLoaf);
+        assertTrue(unitPriceForLoaf.getPrice() > 0);
     }
 
     @Test

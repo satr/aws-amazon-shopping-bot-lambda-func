@@ -4,7 +4,7 @@ package io.github.satr.aws.lambda.shoppingbot.repositories;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
-import io.github.satr.aws.lambda.shoppingbot.entity.Product;
+import io.github.satr.aws.lambda.shoppingbot.entities.Product;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package io.github.satr.aws.lambda.shoppingbot.processing.strategies;
 // Copyright © 2017, github.com/satr, MIT License
 
-import io.github.satr.aws.lambda.shoppingbot.entity.User;
+import io.github.satr.aws.lambda.shoppingbot.entities.User;
 import io.github.satr.aws.lambda.shoppingbot.log.Logger;
 import io.github.satr.aws.lambda.shoppingbot.request.LexRequest;
 import io.github.satr.aws.lambda.shoppingbot.request.LexRequestAttribute;
@@ -9,8 +9,6 @@ import io.github.satr.aws.lambda.shoppingbot.response.DialogAction;
 import io.github.satr.aws.lambda.shoppingbot.response.LexResponse;
 import io.github.satr.aws.lambda.shoppingbot.response.LexResponseHelper;
 import io.github.satr.aws.lambda.shoppingbot.services.UserService;
-
-import java.util.Map;
 
 public class GreetingsIntentProcessor extends IntentProcessor {
     private UserService userService;

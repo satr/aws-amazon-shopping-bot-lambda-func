@@ -1,15 +1,16 @@
-package io.github.satr.aws.lambda.shoppingbot.entity;
+package io.github.satr.aws.lambda.shoppingbot.entities;
 // Copyright © 2017, github.com/satr, MIT License
 
-import com.fasterxml.jackson.annotation.JacksonAnnotation;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class UnitPrice {
+    public static final String UnitPieces = "pieces";
     private List<String> unitForms = new ArrayList<>();
-    private Double price;
+    private double price;
+    private String unit;
 
     @JsonProperty("unit_forms")
     public List<String> getUnitForms() {
@@ -21,12 +22,21 @@ public class UnitPrice {
     }
 
     @JsonProperty("price")
-    public Double getPrice() {
+    public double getPrice() {
         return price;
     }
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    @JsonProperty("unit")
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
     @Override

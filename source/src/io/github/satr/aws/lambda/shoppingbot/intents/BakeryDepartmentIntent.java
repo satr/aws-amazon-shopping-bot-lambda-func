@@ -1,4 +1,4 @@
-package io.github.satr.aws.lambda.shoppingbot.intent;
+package io.github.satr.aws.lambda.shoppingbot.intents;
 // Copyright © 2017, github.com/satr, MIT License
 
 public class BakeryDepartmentIntent {

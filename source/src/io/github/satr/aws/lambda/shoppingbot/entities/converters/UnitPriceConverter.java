@@ -1,10 +1,9 @@
-package io.github.satr.aws.lambda.shoppingbot.entity.converters;
+package io.github.satr.aws.lambda.shoppingbot.entities.converters;
 // Copyright © 2017, github.com/satr, MIT License
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverter;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.github.satr.aws.lambda.shoppingbot.entity.UnitPrice;
+import io.github.satr.aws.lambda.shoppingbot.entities.UnitPrice;
 
 import java.util.List;
 

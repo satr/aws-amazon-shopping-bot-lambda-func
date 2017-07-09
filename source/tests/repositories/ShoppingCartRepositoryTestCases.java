@@ -5,10 +5,10 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import common.ObjectMother;
 import common.TestHelper;
-import io.github.satr.aws.lambda.shoppingbot.entity.ShoppingCartItem;
+import io.github.satr.aws.lambda.shoppingbot.entities.ShoppingCart;
+import io.github.satr.aws.lambda.shoppingbot.entities.ShoppingCartItem;
+import io.github.satr.aws.lambda.shoppingbot.entities.User;
 import io.github.satr.aws.lambda.shoppingbot.repositories.ShoppingCartRepositoryImpl;
-import io.github.satr.aws.lambda.shoppingbot.entity.ShoppingCart;
-import io.github.satr.aws.lambda.shoppingbot.entity.User;
 import org.junit.*;
 
 import java.util.List;
@@ -18,8 +18,6 @@ import static junit.framework.TestCase.*;
 public class ShoppingCartRepositoryTestCases {
     private static AmazonDynamoDB dynamoDbClient;
     private static DynamoDBMapper dbMapper;
-    private final String testingFirstName1 = "firstName1";
-    private final String testingLastName1 = "testingLastName1";
     private ShoppingCartRepositoryImpl shoppingCartRepository;
 
     @BeforeClass
@@ -141,7 +139,9 @@ public class ShoppingCartRepositoryTestCases {
 
         assertNotNull(dbCart.getItems());
         assertEquals(2, dbCart.getItems().size());
-        ShoppingCartItem dbCartItem1 = dbCart.getItems().get(0);
+        List<ShoppingCartItem> items = dbCart.getItems();
+        Object cartItem = items.get(0);
+        ShoppingCartItem dbCartItem1 = (ShoppingCartItem) cartItem;
         assertEquals(product1, dbCartItem1.getProduct());
         assertEquals(amount1, dbCartItem1.getAmount());
         assertEquals(unit1, dbCartItem1.getUnit());

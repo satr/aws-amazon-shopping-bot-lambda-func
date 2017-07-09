@@ -5,7 +5,7 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import common.ObjectMother;
 import common.TestHelper;
-import io.github.satr.aws.lambda.shoppingbot.entity.Product;
+import io.github.satr.aws.lambda.shoppingbot.entities.Product;
 import io.github.satr.aws.lambda.shoppingbot.repositories.ProductRepository;
 import io.github.satr.aws.lambda.shoppingbot.repositories.ProductRepositoryImpl;
 import org.junit.*;

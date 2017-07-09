@@ -3,12 +3,12 @@ package business;
 
 import common.ObjectMother;
 import io.github.satr.aws.lambda.shoppingbot.ShoppingBotLambda;
-import io.github.satr.aws.lambda.shoppingbot.entity.Product;
-import io.github.satr.aws.lambda.shoppingbot.entity.User;
-import io.github.satr.aws.lambda.shoppingbot.log.Logger;
+import io.github.satr.aws.lambda.shoppingbot.entities.Product;
+import io.github.satr.aws.lambda.shoppingbot.entities.UnitPrice;
+import io.github.satr.aws.lambda.shoppingbot.entities.User;
+import io.github.satr.aws.lambda.shoppingbot.intents.BakeryDepartmentIntent;
+import io.github.satr.aws.lambda.shoppingbot.intents.GreetingsIntent;
 import io.github.satr.aws.lambda.shoppingbot.repositories.RepositoryFactory;
-import io.github.satr.aws.lambda.shoppingbot.intent.BakeryDepartmentIntent;
-import io.github.satr.aws.lambda.shoppingbot.intent.GreetingsIntent;
 import io.github.satr.aws.lambda.shoppingbot.request.LexRequestAttribute;
 import io.github.satr.aws.lambda.shoppingbot.response.DialogAction;
 import io.github.satr.aws.lambda.shoppingbot.response.LexResponse;
@@ -60,7 +60,7 @@ public class ShoppingBotLambdaTestCases {
         User user = ObjectMother.createUser();
         ObjectMother.setSessionAttribute(requestMap, LexRequestAttribute.SessionAttribute.UserId, user.getUserId());
         when(userServiceMock.getUserById(user.getUserId())).thenReturn(user);
-        Product product = ObjectMother.createProduct(productName, new String[]{unit});
+        Product product = ObjectMother.createProduct(productName, unit, new String[]{unit});
         when(productServiceMock.getByProductId(productName)).thenReturn(product);
 
         LexResponse lexResponse = shoppingBotLambda.handleRequest(requestMap, null);
@@ -75,7 +75,7 @@ public class ShoppingBotLambdaTestCases {
 
     @org.junit.Test
     public void orderFailuredUnknownIntentRequest() throws Exception {
-        LinkedHashMap<String, Object> requestMap = ObjectMother.createRequestMap(unknownIntentName, BakeryDepartmentIntent.Slot.Product, "bread", BakeryDepartmentIntent.Slot.Amount, "123456", BakeryDepartmentIntent.Slot.Unit, "pieces");
+        LinkedHashMap<String, Object> requestMap = ObjectMother.createRequestMap(unknownIntentName, BakeryDepartmentIntent.Slot.Product, "bread", BakeryDepartmentIntent.Slot.Amount, "123456", BakeryDepartmentIntent.Slot.Unit, UnitPrice.UnitPieces);
 
         LexResponse lexResponse = shoppingBotLambda.handleRequest(requestMap, null);
 

@@ -4,11 +4,11 @@ package repositories;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.model.*;
-import io.github.satr.aws.lambda.shoppingbot.entity.Product;
+import io.github.satr.aws.lambda.shoppingbot.entities.User;
+import io.github.satr.aws.lambda.shoppingbot.repositories.OrderRepositoryImpl;
 import io.github.satr.aws.lambda.shoppingbot.repositories.ProductRepositoryImpl;
 import io.github.satr.aws.lambda.shoppingbot.repositories.ShoppingCartRepositoryImpl;
 import io.github.satr.aws.lambda.shoppingbot.repositories.UserRepositoryImpl;
-import io.github.satr.aws.lambda.shoppingbot.entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +27,10 @@ public class TestRepositoryHelper {
         dynamoDbClient.deleteTable(ShoppingCartRepositoryImpl.TableName);
     }
 
+    public static void deleteTableOrder(AmazonDynamoDB dynamoDbClient) {
+        dynamoDbClient.deleteTable(OrderRepositoryImpl.TableName);
+    }
+
     public static User addUser(DynamoDBMapper dbMapper, String firstName, String lastName, String address) {
         User user = new User();
         user.setUserId(UUID.randomUUID().toString());
@@ -43,6 +47,10 @@ public class TestRepositoryHelper {
 
     public static void createTableShoppingCart(AmazonDynamoDB dynamodb) {
         createTable(dynamodb, ShoppingCartRepositoryImpl.TableName, ShoppingCartRepositoryImpl.Attr.UserId);
+    }
+
+    public static void createTableOrder(AmazonDynamoDB dynamodb) {
+        createTable(dynamodb, OrderRepositoryImpl.TableName, OrderRepositoryImpl.Attr.OrderId);
     }
 
     public static void createTableProduct(AmazonDynamoDB dynamodb) {

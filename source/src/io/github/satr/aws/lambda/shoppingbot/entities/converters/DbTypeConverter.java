@@ -1,4 +1,4 @@
-package io.github.satr.aws.lambda.shoppingbot.entity.converters;
+package io.github.satr.aws.lambda.shoppingbot.entities.converters;
 // Copyright © 2017, github.com/satr, MIT License
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
