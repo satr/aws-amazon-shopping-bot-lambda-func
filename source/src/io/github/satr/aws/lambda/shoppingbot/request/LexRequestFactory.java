@@ -28,14 +28,43 @@ public class LexRequestFactory {
         if(input == null)
             return request;
 
-        loadSessionAttributes(input, request);
+        loadMainAttributes(input, request);
         loadBotName(input, request);
+        loadSessionAttributes(input, request);
 
         Map<String, Object> currentIntent = loadCurrentIntent(input);
         if (currentIntent != null)
             loadIntentParameters(currentIntent, request);
 
         return request;
+    }
+
+    private static void loadMainAttributes(Map<String, Object> input, LexRequest request) {
+        loadUserId(input, request);
+        request.setInputTranscript((String) input.get(LexRequestAttribute.InputTranscript));
+        request.setInvocationSource(getInvocationSource(input));
+        request.setOutputDialogMode(getOutputDialogMode(input));
+    }
+
+    private static void loadUserId(Map<String, Object> input, LexRequest request) {
+        String userId = (String) input.get(LexRequestAttribute.UserId);
+        request.setUserId(userId);
+        if(userId == null)
+            request.setUserIdType(UserIdType.Undefined);
+        else if(userId.matches("ˆ\\d{16}$"))
+            request.setUserIdType(UserIdType.Facebook);
+        else
+            request.setUserIdType(UserIdType.Undefined);
+    }
+
+    private static OutputDialogMode getOutputDialogMode(Map<String, Object> input) {
+        return LexRequestAttribute.OutputDialogModeValue.Voice.equals((String) input.get(LexRequestAttribute.OutputDialogMode))
+                ? OutputDialogMode.Voice : OutputDialogMode.Text;
+    }
+
+    private static InvocationSource getInvocationSource(Map<String, Object> input) {
+        return LexRequestAttribute.InvocationSourceValue.DialogCodeHook.equals((String) input.get(LexRequestAttribute.InvocationSource))
+                                        ? InvocationSource.DialogCodeHook : InvocationSource.FulfillmentCodeHook;
     }
 
     private static void loadSessionAttributes(Map<String, Object> input, LexRequest request) {
@@ -45,12 +74,19 @@ public class LexRequestFactory {
     }
 
     private static void loadIntentParameters(Map<String, Object> currentIntent, LexRequest request) {
-        request.setConfirmationStatus((String) currentIntent.get(LexRequestAttribute.ConfirmationStatus));
+        request.setConfirmationStatus(getConfirmationStatus(currentIntent));
         request.setIntentName((String) currentIntent.get(LexRequestAttribute.CurrentIntentName));
-        request.setInvocationSource((String) currentIntent.get(LexRequestAttribute.InvocationSource));
-        request.setOutputDialogMode((String) currentIntent.get(LexRequestAttribute.OutputDialogMode));
 
         loadIntentSlots(currentIntent, request);
+    }
+
+    private static ConfirmationStatus getConfirmationStatus(Map<String, Object> currentIntent) {
+        String confirmationStatus = (String) currentIntent.get(LexRequestAttribute.InvocationSource);
+        return LexRequestAttribute.ConfirmationStatusValue.Confirmed.equals(confirmationStatus)
+                ? ConfirmationStatus.Confirmed
+                : LexRequestAttribute.ConfirmationStatusValue.Denied.equals(confirmationStatus)
+                    ? ConfirmationStatus.Denied
+                    : ConfirmationStatus.None;
     }
 
     private static Map<String, Object> loadCurrentIntent(Map<String, Object> input) {

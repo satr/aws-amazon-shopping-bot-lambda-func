@@ -1,0 +1,642 @@
+{
+  "name": "ShoppingBot",
+  "description": null,
+  "intents": [
+    {
+      "intentName": "CompleteOrder",
+      "intentVersion": "1"
+    },
+    {
+      "intentName": "BakeryDepartment",
+      "intentVersion": "14"
+    },
+    {
+      "intentName": "VegetableDepartment",
+      "intentVersion": "14"
+    },
+    {
+      "intentName": "Greetings",
+      "intentVersion": "7"
+    },
+    {
+      "intentName": "MilkDepartment",
+      "intentVersion": "15"
+    },
+    {
+      "intentName": "ReviewShoppingCart",
+      "intentVersion": "2"
+    }
+  ],
+  "clarificationPrompt": {
+    "messages": [
+      {
+        "contentType": "PlainText",
+        "content": "Sorry, my responses are limited. I can help to order products from bakery, milk or vegetables departments and revise your shopping cart."
+      }
+    ],
+    "maxAttempts": 5,
+    "responseCard": null
+  },
+  "abortStatement": {
+    "messages": [
+      {
+        "contentType": "PlainText",
+        "content": "Sorry, I could not understand. Please try to rephrase the question."
+      }
+    ],
+    "responseCard": null
+  },
+  "status": "READY",
+  "failureReason": null,
+  "lastUpdatedDate": "2017-07-11T18:27:46.322Z",
+  "createdDate": "2017-06-14T14:38:41.357Z",
+  "idleSessionTTLInSeconds": 60,
+  "voiceId": "Joanna",
+  "checksum": "9dc6896a-c28f-4ff5-99bc-203d9c232684",
+  "version": "$LATEST",
+  "locale": "en-US",
+  "childDirected": false,
+  "dependencies": {
+    "intents": [
+      {
+        "name": "ReviewShoppingCart",
+        "description": null,
+        "slots": [],
+        "sampleUtterances": [
+          "What did I order already",
+          "What is in my cart",
+          "What is in my shopping cart",
+          "What have I added to my order",
+          "What have I put to my cart",
+          "What do I have in my cart",
+          "I do I have already",
+          "Revise shopping cart",
+          "Review shopping cart",
+          "Shopping cart"
+        ],
+        "fulfillmentActivity": {
+          "type": "CodeHook",
+          "codeHook": {
+            "uri": "arn:aws:lambda:us-east-1:653446132031:function:ShoppingBotLambda",
+            "messageVersion": "1.0"
+          }
+        },
+        "parentIntentSignature": null,
+        "lastUpdatedDate": "2017-07-10T18:54:17.186Z",
+        "createdDate": "2017-07-10T18:54:17.186Z",
+        "version": "2",
+        "checksum": "0e3a6aa0-3e12-412a-ba07-452f1842d75d"
+      },
+      {
+        "name": "CompleteOrder",
+        "description": null,
+        "slots": [],
+        "sampleUtterances": [
+          "I would like to complete the order",
+          "I would like to finish the order",
+          "Complete the order",
+          "I do not need anything else",
+          "I need to complete the order",
+          "This is all",
+          "That's it"
+        ],
+        "confirmationPrompt": {
+          "messages": [
+            {
+              "contentType": "PlainText",
+              "content": "Can order be completed?"
+            }
+          ],
+          "maxAttempts": 3,
+          "responseCard": null
+        },
+        "rejectionStatement": {
+          "messages": [
+            {
+              "contentType": "PlainText",
+              "content": "Sure. The order can be completed later."
+            }
+          ],
+          "responseCard": null
+        },
+        "conclusionStatement": {
+          "messages": [
+            {
+              "contentType": "PlainText",
+              "content": "Thank you! The ordered products will be delivered shortly.  Hope you visit us again soon!"
+            }
+          ],
+          "responseCard": null
+        },
+        "fulfillmentActivity": {
+          "type": "CodeHook",
+          "codeHook": {
+            "uri": "arn:aws:lambda:us-east-1:653446132031:function:ShoppingBotLambda",
+            "messageVersion": "1.0"
+          }
+        },
+        "parentIntentSignature": null,
+        "lastUpdatedDate": "2017-07-08T20:08:13.493Z",
+        "createdDate": "2017-07-08T20:08:13.493Z",
+        "version": "1",
+        "checksum": "9faf9727-e1bc-4252-b638-e0f3361f804d"
+      },
+      {
+        "name": "MilkDepartment",
+        "description": null,
+        "slots": [
+          {
+            "name": "MilkDepartmentUnit",
+            "description": null,
+            "slotConstraint": "Required",
+            "slotType": "MilkDepartmentUnits",
+            "slotTypeVersion": "3",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "In what units?"
+                }
+              ],
+              "maxAttempts": 2,
+              "responseCard": null
+            },
+            "priority": 3,
+            "sampleUtterances": [],
+            "responseCard": null
+          },
+          {
+            "name": "Amount",
+            "description": null,
+            "slotConstraint": "Required",
+            "slotType": "AMAZON.NUMBER",
+            "slotTypeVersion": null,
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "How much?"
+                }
+              ],
+              "maxAttempts": 2,
+              "responseCard": null
+            },
+            "priority": 2,
+            "sampleUtterances": [],
+            "responseCard": null
+          },
+          {
+            "name": "MilkProduct",
+            "description": null,
+            "slotConstraint": "Required",
+            "slotType": "MilkProducts",
+            "slotTypeVersion": "2",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "What product?"
+                }
+              ],
+              "maxAttempts": 2,
+              "responseCard": null
+            },
+            "priority": 1,
+            "sampleUtterances": [],
+            "responseCard": null
+          }
+        ],
+        "sampleUtterances": [
+          "I need {MilkProduct}",
+          "I need {Amount} {MilkDepartmentUnit} of {MilkProduct}",
+          "I would like to buy {MilkProduct}",
+          "{Amount} {MilkDepartmentUnit}",
+          "I also need {Amount} {MilkDepartmentUnit} of {MilkProduct}",
+          "I also would like to get {Amount} {MilkDepartmentUnit} of {MilkProduct}",
+          "I also would like to have some {MilkProduct}"
+        ],
+        "fulfillmentActivity": {
+          "type": "CodeHook",
+          "codeHook": {
+            "uri": "arn:aws:lambda:us-east-1:653446132031:function:ShoppingBotLambda",
+            "messageVersion": "1.0"
+          }
+        },
+        "parentIntentSignature": null,
+        "lastUpdatedDate": "2017-07-09T17:26:59.122Z",
+        "createdDate": "2017-07-09T17:26:59.122Z",
+        "version": "15",
+        "checksum": "70fe534b-4846-4607-82f5-3cb0fd262ad8"
+      },
+      {
+        "name": "VegetableDepartment",
+        "description": null,
+        "slots": [
+          {
+            "name": "VegetableProduct",
+            "description": null,
+            "slotConstraint": "Required",
+            "slotType": "VegetableProducts",
+            "slotTypeVersion": "3",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "What product?"
+                }
+              ],
+              "maxAttempts": 2,
+              "responseCard": null
+            },
+            "priority": 1,
+            "sampleUtterances": [],
+            "responseCard": null
+          },
+          {
+            "name": "VegetableDepartmentUnit",
+            "description": null,
+            "slotConstraint": "Optional",
+            "slotType": "VegetableDepartmentUnits",
+            "slotTypeVersion": "2",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "What unit?"
+                }
+              ],
+              "maxAttempts": 2,
+              "responseCard": null
+            },
+            "priority": 3,
+            "sampleUtterances": [],
+            "responseCard": null
+          },
+          {
+            "name": "Amount",
+            "description": null,
+            "slotConstraint": "Required",
+            "slotType": "AMAZON.NUMBER",
+            "slotTypeVersion": null,
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "How much?"
+                }
+              ],
+              "maxAttempts": 2,
+              "responseCard": null
+            },
+            "priority": 2,
+            "sampleUtterances": [],
+            "responseCard": null
+          }
+        ],
+        "sampleUtterances": [
+          "I need {VegetableProduct}",
+          "I need {Amount} {VegetableDepartmentUnit} of {VegetableProduct}",
+          "I need {Amount} {VegetableProduct}",
+          "{Amount} {VegetableDepartmentUnit}",
+          "Please also add {Amount} {VegetableDepartmentUnit} of {VegetableProduct}",
+          "I also need {Amount} {VegetableDepartmentUnit} of {VegetableProduct}",
+          "I would like to get some {VegetableProduct}"
+        ],
+        "fulfillmentActivity": {
+          "type": "CodeHook",
+          "codeHook": {
+            "uri": "arn:aws:lambda:us-east-1:653446132031:function:ShoppingBotLambda",
+            "messageVersion": "1.0"
+          }
+        },
+        "parentIntentSignature": null,
+        "lastUpdatedDate": "2017-07-09T15:51:35.548Z",
+        "createdDate": "2017-07-09T15:51:35.548Z",
+        "version": "14",
+        "checksum": "f14dbac3-b44c-4b26-8ea9-e15a551a3ab4"
+      },
+      {
+        "name": "Greetings",
+        "description": null,
+        "slots": [
+          {
+            "name": "FirstName",
+            "description": null,
+            "slotConstraint": "Required",
+            "slotType": "Names",
+            "slotTypeVersion": "1",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "What is you first name?"
+                }
+              ],
+              "maxAttempts": 2,
+              "responseCard": null
+            },
+            "priority": 1,
+            "sampleUtterances": [],
+            "responseCard": null
+          },
+          {
+            "name": "LastName",
+            "description": null,
+            "slotConstraint": "Required",
+            "slotType": "Names",
+            "slotTypeVersion": "1",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "What is you last name?"
+                }
+              ],
+              "maxAttempts": 2,
+              "responseCard": null
+            },
+            "priority": 2,
+            "sampleUtterances": [],
+            "responseCard": null
+          }
+        ],
+        "sampleUtterances": [
+          "Hi",
+          "My name is {FirstName} {LastName}",
+          "Good morning",
+          "My name is {FirstName}",
+          "My last name is {LastName}"
+        ],
+        "fulfillmentActivity": {
+          "type": "CodeHook",
+          "codeHook": {
+            "uri": "arn:aws:lambda:us-east-1:653446132031:function:ShoppingBotLambda",
+            "messageVersion": "1.0"
+          }
+        },
+        "parentIntentSignature": null,
+        "lastUpdatedDate": "2017-07-11T18:27:24.111Z",
+        "createdDate": "2017-07-11T18:27:24.111Z",
+        "version": "7",
+        "checksum": "9b90b78f-b880-44c8-b6a6-de4320acadd8"
+      },
+      {
+        "name": "BakeryDepartment",
+        "description": null,
+        "slots": [
+          {
+            "name": "BakeryDepartmentUnit",
+            "description": null,
+            "slotConstraint": "Required",
+            "slotType": "BakeryDepartmentUnits",
+            "slotTypeVersion": "2",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "What units?"
+                }
+              ],
+              "maxAttempts": 2,
+              "responseCard": null
+            },
+            "priority": 3,
+            "sampleUtterances": [],
+            "responseCard": null
+          },
+          {
+            "name": "Amount",
+            "description": null,
+            "slotConstraint": "Required",
+            "slotType": "AMAZON.NUMBER",
+            "slotTypeVersion": null,
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "How much?"
+                }
+              ],
+              "maxAttempts": 2,
+              "responseCard": null
+            },
+            "priority": 2,
+            "sampleUtterances": [],
+            "responseCard": null
+          },
+          {
+            "name": "BakeryProduct",
+            "description": null,
+            "slotConstraint": "Required",
+            "slotType": "BakeryProducts",
+            "slotTypeVersion": "2",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "What product?"
+                }
+              ],
+              "maxAttempts": 2,
+              "responseCard": null
+            },
+            "priority": 1,
+            "sampleUtterances": [],
+            "responseCard": null
+          }
+        ],
+        "sampleUtterances": [
+          "I need {BakeryProduct}",
+          "I need {Amount} {BakeryDepartmentUnit} of {BakeryProduct}",
+          "{Amount} {BakeryDepartmentUnit}",
+          "I also need some {BakeryProduct}",
+          "I would also get some {BakeryProduct}",
+          "I would also buy {BakeryProduct}",
+          "I would also buy {Amount} {BakeryDepartmentUnit} of {BakeryProduct}",
+          "Please also add {Amount} {BakeryDepartmentUnit} of {BakeryProduct}"
+        ],
+        "fulfillmentActivity": {
+          "type": "CodeHook",
+          "codeHook": {
+            "uri": "arn:aws:lambda:us-east-1:653446132031:function:ShoppingBotLambda",
+            "messageVersion": "1.0"
+          }
+        },
+        "parentIntentSignature": null,
+        "lastUpdatedDate": "2017-07-09T15:44:44.010Z",
+        "createdDate": "2017-07-09T15:44:44.010Z",
+        "version": "14",
+        "checksum": "69f2cdf9-c942-4859-9996-a2a1628ee897"
+      }
+    ],
+    "slotTypes": [
+      {
+        "name": "VegetableProducts",
+        "description": null,
+        "enumerationValues": [
+          {
+            "value": "orange"
+          },
+          {
+            "value": "pepper"
+          },
+          {
+            "value": "apple"
+          },
+          {
+            "value": "lemon"
+          },
+          {
+            "value": "cucumber"
+          },
+          {
+            "value": "tomato"
+          },
+          {
+            "value": "carrot"
+          }
+        ],
+        "lastUpdatedDate": "2017-07-09T15:43:25.167Z",
+        "createdDate": "2017-07-09T15:43:25.167Z",
+        "version": "3",
+        "checksum": null
+      },
+      {
+        "name": "MilkProducts",
+        "description": null,
+        "enumerationValues": [
+          {
+            "value": "milk"
+          },
+          {
+            "value": "cream"
+          }
+        ],
+        "lastUpdatedDate": "2017-07-09T15:43:47.793Z",
+        "createdDate": "2017-07-09T15:43:47.793Z",
+        "version": "2",
+        "checksum": null
+      },
+      {
+        "name": "Names",
+        "description": null,
+        "enumerationValues": [
+          {
+            "value": "John"
+          }
+        ],
+        "lastUpdatedDate": "2017-06-18T18:58:36.957Z",
+        "createdDate": "2017-06-18T18:58:36.957Z",
+        "version": "1",
+        "checksum": null
+      },
+      {
+        "name": "Names",
+        "description": null,
+        "enumerationValues": [
+          {
+            "value": "John"
+          }
+        ],
+        "lastUpdatedDate": "2017-06-18T18:58:36.957Z",
+        "createdDate": "2017-06-18T18:58:36.957Z",
+        "version": "1",
+        "checksum": null
+      },
+      {
+        "name": "VegetableDepartmentUnits",
+        "description": null,
+        "enumerationValues": [
+          {
+            "value": "kilo"
+          },
+          {
+            "value": "piece"
+          },
+          {
+            "value": "gram"
+          },
+          {
+            "value": "bag"
+          },
+          {
+            "value": "kilogram"
+          },
+          {
+            "value": "kg"
+          },
+          {
+            "value": "pack"
+          }
+        ],
+        "lastUpdatedDate": "2017-07-09T15:51:21.233Z",
+        "createdDate": "2017-07-09T15:51:21.233Z",
+        "version": "2",
+        "checksum": null
+      },
+      {
+        "name": "MilkDepartmentUnits",
+        "description": null,
+        "enumerationValues": [
+          {
+            "value": "bar"
+          },
+          {
+            "value": "carton"
+          },
+          {
+            "value": "liter"
+          },
+          {
+            "value": "bottle"
+          }
+        ],
+        "lastUpdatedDate": "2017-07-09T15:47:33.194Z",
+        "createdDate": "2017-07-09T15:47:33.194Z",
+        "version": "3",
+        "checksum": null
+      },
+      {
+        "name": "BakeryDepartmentUnits",
+        "description": null,
+        "enumerationValues": [
+          {
+            "value": "kilo"
+          },
+          {
+            "value": "loaf"
+          },
+          {
+            "value": "kilogram"
+          },
+          {
+            "value": "kg"
+          },
+          {
+            "value": "pack"
+          }
+        ],
+        "lastUpdatedDate": "2017-07-06T22:49:22.692Z",
+        "createdDate": "2017-07-06T22:49:22.692Z",
+        "version": "2",
+        "checksum": null
+      },
+      {
+        "name": "BakeryProducts",
+        "description": null,
+        "enumerationValues": [
+          {
+            "value": "bread"
+          },
+          {
+            "value": "muffin"
+          }
+        ],
+        "lastUpdatedDate": "2017-07-09T15:44:14.486Z",
+        "createdDate": "2017-07-09T15:44:14.486Z",
+        "version": "2",
+        "checksum": null
+      }
+    ]
+  }
+}

@@ -4,13 +4,18 @@ package io.github.satr.aws.lambda.shoppingbot.entities;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import io.github.satr.aws.lambda.shoppingbot.request.UserIdType;
+
 import java.util.UUID;
+
+import static org.apache.http.util.TextUtils.isEmpty;
 
 @DynamoDBTable(tableName = "User")
 public class User {
     private String userId;
     private String firstName;
     private String lastName;
+    private String facebookId;
     private String address;
 
     public User() {
@@ -53,6 +58,15 @@ public class User {
         this.address = address;
     }
 
+    @DynamoDBAttribute(attributeName = "facebook_id")
+    public String getFacebookId() {
+        return facebookId;
+    }
+
+    public void setFacebookId(String facebookId) {
+        this.facebookId = facebookId;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -60,6 +74,19 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", address='" + address + '\'' +
+                ", facebook_id='" + facebookId + '\'' +
                 '}';
+    }
+
+    public boolean sameNamesAs(String firstName, String lastName) {
+         return firstName.equals(getFirstName()) && lastName.equals(getLastName());
+    }
+
+    public boolean hasUserId(String userId, UserIdType userIdType) {
+        if(isEmpty(userId) || userIdType == UserIdType.Undefined)
+            return false;
+        if(userIdType == UserIdType.Facebook)
+            return userId.equals(getFacebookId());
+        return false;
     }
 }

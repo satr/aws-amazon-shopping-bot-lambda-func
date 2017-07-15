@@ -1,0 +1,21 @@
+{
+  "sessionAttributes":{
+    "FirstName": "John",
+    "LastName": "Doe",
+    "UserId": "SyntheticUserId"
+  },
+  "bot": {
+    "alias": "null",
+    "name": "ShoppingBot",
+    "version": "$LATEST"
+  },
+  "currentIntent": {
+    "confirmationStatus": "None",
+    "name": "MilkDepartment",
+    "slots": {
+      "Amount": "1",
+      "MilkProduct": "milk",
+      "MilkDepartmentUnit": "carton"
+    }
+  }
+}

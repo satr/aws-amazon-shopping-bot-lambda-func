@@ -4,20 +4,26 @@ package io.github.satr.aws.lambda.shoppingbot.request;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import static org.apache.http.util.TextUtils.isEmpty;
+
 public class LexRequest {
+
     private String botName;
-    private String confirmationStatus;
+    private ConfirmationStatus confirmationStatus;
     private String intentName;
     private String requestedProduct;
     private String requestedAmount;
     private String requestedUnit;
-    private String invocationSource;
-    private String outputDialogMode;
+    private InvocationSource invocationSource = InvocationSource.FulfillmentCodeHook;
+    private OutputDialogMode outputDialogMode = OutputDialogMode.Text;
     private String error;
     private String firstName;
     private String lastName;
     private String address;
     private Map<String, Object> sessionAttributes = new LinkedHashMap<>();
+    private String userId;
+    private String inputTranscript;
+    private UserIdType userIdType;
 
     public void setProduct(String requestedProduct) {
         this.requestedProduct = requestedProduct;
@@ -37,11 +43,11 @@ public class LexRequest {
 
     public String getRequestedUnit() { return requestedUnit; }
 
-    public void setInvocationSource(String invocationSource) {
+    public void setInvocationSource(InvocationSource invocationSource) {
         this.invocationSource = invocationSource;
     }
 
-    public void setOutputDialogMode(String outputDialogMode) {
+    public void setOutputDialogMode(OutputDialogMode outputDialogMode) {
         this.outputDialogMode = outputDialogMode;
     }
 
@@ -57,7 +63,7 @@ public class LexRequest {
         return botName;
     }
 
-    public String getConfirmationStatus() {
+    public ConfirmationStatus getConfirmationStatus() {
         return confirmationStatus;
     }
 
@@ -69,7 +75,7 @@ public class LexRequest {
         this.botName = botName;
     }
 
-    public void setConfirmationStatus(String confirmationStatus) {
+    public void setConfirmationStatus(ConfirmationStatus confirmationStatus) {
         this.confirmationStatus = confirmationStatus;
     }
 
@@ -134,6 +140,30 @@ public class LexRequest {
     }
 
     public String getUserId() {
-        return (String) getSessionAttribute(LexRequestAttribute.SessionAttribute.UserId);
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setInputTranscript(String inputTranscript) {
+        this.inputTranscript = inputTranscript;
+    }
+
+    public String getInputTranscript() {
+        return inputTranscript;
+    }
+
+    public void setUserIdType(UserIdType userIdType) {
+        this.userIdType = userIdType;
+    }
+
+    public UserIdType getUserIdType() {
+        return userIdType;
+    }
+
+    public boolean hasValidUserId() {
+        return !isEmpty(getUserId()) && getUserIdType() != UserIdType.Undefined;
     }
 }

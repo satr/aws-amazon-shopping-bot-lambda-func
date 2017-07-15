@@ -1,77 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a3bf89bc-f937-42e9-9932-c78a5fde736b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/common/OperationResult.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/common/OperationResultImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/common/OperationValueResult.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/common/OperationValueResultImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/Order.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/OrderInfo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/OrderItem.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/OrderItemInfo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/converters/OrderItemConverter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/converters/OrderItemInfoConverter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/intents/CompleteOrderIntent.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/strategies/CompleteOrderIntentProcessor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/strategies/UserSessionIntentProcessor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/OrderRepository.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/OrderRepositoryImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/services/OrderService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/services/OrderServiceImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/repositories/OrderRepositoryTestCases.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/repositories/realconnection/OrderRepositoryRealConnectionTestCases.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entity/Product.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/Product.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entity/ShoppingCart.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/ShoppingCart.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entity/ShoppingCartItem.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/ShoppingCartItem.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entity/UnitPrice.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/UnitPrice.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entity/User.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/User.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entity/converters/DbTypeConverter.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/converters/DbTypeConverter.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entity/converters/ShoppingCartItemConverter.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/converters/ShoppingCartItemConverter.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entity/converters/UnitPriceConverter.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/converters/UnitPriceConverter.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/intent/BakeryDepartmentIntent.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/intents/BakeryDepartmentIntent.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/intent/GreetingsIntent.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/intents/GreetingsIntent.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/intent/MilkDepartmentIntent.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/intents/MilkDepartmentIntent.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/intent/ReviewShoppingCartIntent.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/intents/ReviewShoppingCartIntent.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/intent/VegetableDepartmentIntent.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/intents/VegetableDepartmentIntent.java" />
+    <list default="true" id="a3bf89bc-f937-42e9-9932-c78a5fde736b" name="Default" comment="Implemented identification of a user by a facebook Id. Added Lex bot source code (json).">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../docs/images/shopping-bot-cover.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../docs/images/shopping-bot.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../lex-bot-sources/ShoppingBot.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/test/shoppingbot-lambda/testdata/lex/requests/BakeryDepartment.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/test/shoppingbot-lambda/testdata/lex/requests/GreetingsWithNames.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/test/shoppingbot-lambda/testdata/lex/requests/MilkDepartment.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/test/shoppingbot-lambda/testdata/lex/requests/VegetableDepartment.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/ConfirmationStatus.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/InvocationSource.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/OutputDialogMode.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/UserIdType.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/dictionaries/naveronics.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/ShoppingBotLambda.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/ShoppingBotLambda.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/ShoppingBotProcessor.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/ShoppingBotProcessor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/User.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/User.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/strategies/GreetingsIntentProcessor.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/strategies/GreetingsIntentProcessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/strategies/IntentProcessor.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/strategies/IntentProcessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/strategies/OrderProductIntentProcessor.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/strategies/OrderProductIntentProcessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/strategies/ReviewShoppingCartIntentProcessor.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/strategies/ReviewShoppingCartIntentProcessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/ProductRepository.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/ProductRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/ProductRepositoryImpl.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/ProductRepositoryImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/RepositoryFactory.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/RepositoryFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/RepositoryFactoryImpl.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/RepositoryFactoryImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/ShoppingCartRepository.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/ShoppingCartRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/ShoppingCartRepositoryImpl.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/ShoppingCartRepositoryImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/strategies/UserSessionIntentProcessor.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/strategies/UserSessionIntentProcessor.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/UserRepository.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/UserRepository.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/UserRepositoryImpl.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/UserRepositoryImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/LexRequest.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/LexRequest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/LexRequestAttribute.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/LexRequestAttribute.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/LexRequestFactory.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/LexRequestFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/strategies/intentloading/BakeryDepartmentIntentLoadingStrategy.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/strategies/intentloading/BakeryDepartmentIntentLoadingStrategy.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/strategies/intentloading/GreetingsIntentLoadingStrategy.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/strategies/intentloading/GreetingsIntentLoadingStrategy.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/strategies/intentloading/MilkDepartmentIntentLoadingStrategy.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/strategies/intentloading/MilkDepartmentIntentLoadingStrategy.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/strategies/intentloading/VegetableDepartmentIntentLoadingStrategy.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/strategies/intentloading/VegetableDepartmentIntentLoadingStrategy.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/services/ProductService.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/services/ProductService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/services/ProductServiceImpl.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/services/ProductServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/services/ShoppingCartService.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/services/ShoppingCartService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/services/ShoppingCartServiceImpl.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/services/ShoppingCartServiceImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/services/UserService.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/services/UserService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/services/UserServiceImpl.java" afterPath="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/services/UserServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/business/ShoppingBotLambdaTestCases.java" afterPath="$PROJECT_DIR$/tests/business/ShoppingBotLambdaTestCases.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/common/ObjectMother.java" afterPath="$PROJECT_DIR$/tests/common/ObjectMother.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/intentprocessors/GreetingsIntentProcessorTestCases.java" afterPath="$PROJECT_DIR$/tests/intentprocessors/GreetingsIntentProcessorTestCases.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/intentprocessors/OrderProductIntentProcessorTestCases.java" afterPath="$PROJECT_DIR$/tests/intentprocessors/OrderProductIntentProcessorTestCases.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/repositories/ProductRepositoryTestCases.java" afterPath="$PROJECT_DIR$/tests/repositories/ProductRepositoryTestCases.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/repositories/ShoppingCartRepositoryTestCases.java" afterPath="$PROJECT_DIR$/tests/repositories/ShoppingCartRepositoryTestCases.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/repositories/TestRepositoryHelper.java" afterPath="$PROJECT_DIR$/tests/repositories/TestRepositoryHelper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/repositories/UserRepositoryTestCases.java" afterPath="$PROJECT_DIR$/tests/repositories/UserRepositoryTestCases.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/repositories/realconnection/PopulateDataInRealDatabase.java" afterPath="$PROJECT_DIR$/tests/repositories/realconnection/PopulateDataInRealDatabase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/repositories/realconnection/ProductRepositoryRepositoryRealConnectionTestCases.java" afterPath="$PROJECT_DIR$/tests/repositories/realconnection/ProductRepositoryRepositoryRealConnectionTestCases.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/repositories/realconnection/UserRepositoryRealConnectionTestCases.java" afterPath="$PROJECT_DIR$/tests/repositories/realconnection/UserRepositoryRealConnectionTestCases.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/services/ShoppingCartServiceTestCases.java" afterPath="$PROJECT_DIR$/tests/services/ShoppingCartServiceTestCases.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -106,6 +62,10 @@
     <ignored path="external/dynamodb_local/third_party_licenses/sqlite4java_LICENSE.txt" />
     <ignored path="external/dynamodb_local/start.sh" />
     <ignored path="external/dynamodb_local/third_party_licenses/THIRD_PARTY_JAVASCRIPT_NOTICES.txt" />
+    <ignored mask="*.paint" />
+    <ignored path="../docs/images/mike-nearby-grocery-store-cover.jpg" />
+    <ignored path="../docs/images/mike-nearby-grocery-store.jpg" />
+    <ignored path=".idea/dictionaries/naveronics.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -131,73 +91,103 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ShoppingCartServiceTestCases.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/services/ShoppingCartServiceTestCases.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="388">
-              <caret line="61" column="70" lean-forward="false" selection-start-line="61" selection-start-column="70" selection-end-line="61" selection-end-column="70" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ShoppingCartServiceImpl.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/services/ShoppingCartServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="30" column="26" lean-forward="true" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PopulateDataInRealDatabase.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/repositories/realconnection/PopulateDataInRealDatabase.java">
+      <file leaf-file-name="ShoppingCartRepository.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/ShoppingCartRepository.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
-              <caret line="11" column="57" lean-forward="true" selection-start-line="11" selection-start-column="57" selection-end-line="11" selection-end-column="57" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ShoppingCartService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/services/ShoppingCartService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OrderRepositoryRealConnectionTestCases.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/repositories/realconnection/OrderRepositoryRealConnectionTestCases.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="31" />
+              <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="imports" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProductRepositoryRepositoryRealConnectionTestCases.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/repositories/realconnection/ProductRepositoryRepositoryRealConnectionTestCases.java">
+      <file leaf-file-name="ShoppingCartRepositoryImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/ShoppingCartRepositoryImpl.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
-              <caret line="19" column="31" lean-forward="false" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
+              <caret line="12" column="59" lean-forward="false" selection-start-line="12" selection-start-column="59" selection-end-line="12" selection-end-column="59" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserRepositoryRealConnectionTestCases.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/repositories/realconnection/UserRepositoryRealConnectionTestCases.java">
+      <file leaf-file-name="RepositoryImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/RepositoryImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="15" column="31" lean-forward="false" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
+            <state relative-caret-position="153">
+              <caret line="16" column="19" lean-forward="false" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RepositoryFactory.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/RepositoryFactory.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="17" lean-forward="false" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RepositoryFactoryImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/RepositoryFactoryImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="17" column="63" lean-forward="false" selection-start-line="17" selection-start-column="63" selection-end-line="17" selection-end-column="63" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ShoppingCart.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/ShoppingCart.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="12" column="39" lean-forward="false" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OrderInfo.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/OrderInfo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="20" column="9" lean-forward="false" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ShoppingBot.json" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../lex-bot-sources/ShoppingBot.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="1" column="2" lean-forward="false" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/User.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="317">
+              <caret line="87" column="8" lean-forward="false" selection-start-line="87" selection-start-column="8" selection-end-line="87" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GreetingsIntentProcessor.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/strategies/GreetingsIntentProcessor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="159">
+              <caret line="44" column="32" lean-forward="false" selection-start-line="44" selection-start-column="32" selection-end-line="44" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -213,12 +203,12 @@
         <option value="package_json" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>sum</find>
       <find>this.productName</find>
       <find>OrderItemInfo</find>
       <find>Product</find>
@@ -248,6 +238,7 @@
       <find>&quot;iec</find>
       <find>&quot;iece</find>
       <find>&quot;piece</find>
+      <find>UserId:</find>
     </findStrings>
     <replaceStrings>
       <replace>UserRepositoryImpl.</replace>
@@ -278,20 +269,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/validators/Validator.java" />
-        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/validators/UserInSessionValidator.java" />
-        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/common/OperationResultImpl.java" />
-        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/common/OperationValueResult.java" />
-        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/common/OperationValueResultImpl.java" />
-        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/strategies/IntentProcessor.java" />
-        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/strategies/NameMeLaterIntentProcessor.java" />
-        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entity/Product.java" />
-        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/common/OperationResult.java" />
-        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/intent/CompleteOrderIntent.java" />
-        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/CompleteOrderIntentProcessor.java" />
-        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entity/ShoppingCart.java" />
-        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entity/ShoppingCartItem.java" />
-        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/strategies/ReviewShoppingCartIntentProcessor.java" />
         <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entity/Order.java" />
         <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/ShoppingCart.java" />
         <option value="$PROJECT_DIR$/tests/repositories/ShoppingCartRepositoryTestCases.java" />
@@ -306,12 +283,9 @@
         <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/services/OrderService.java" />
         <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/ShoppingCartRepositoryImpl.java" />
         <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/OrderRepositoryImpl.java" />
-        <option value="$PROJECT_DIR$/tests/repositories/TestRepositoryHelper.java" />
         <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/services/OrderServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/strategies/UserSessionIntentProcessor.java" />
         <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/services/ShoppingCartService.java" />
         <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/OrderInfo.java" />
-        <option value="$PROJECT_DIR$/tests/common/ObjectMother.java" />
         <option value="$PROJECT_DIR$/tests/intentprocessors/OrderProductIntentProcessorTestCases.java" />
         <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/UnitPrice.java" />
         <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/OrderItemInfo.java" />
@@ -321,7 +295,6 @@
         <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/OrderItem.java" />
         <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/strategies/OrderProductIntentProcessor.java" />
         <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/Order.java" />
-        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/ShoppingBotLambda.java" />
         <option value="$PROJECT_DIR$/tests/repositories/OrderRepositoryTestCases.java" />
         <option value="$PROJECT_DIR$/tests/repositories/realconnection/OrderRepositoryRealConnectionTestCases.java" />
         <option value="$PROJECT_DIR$/tests/repositories/realconnection/ProductRepositoryRepositoryRealConnectionTestCases.java" />
@@ -329,6 +302,24 @@
         <option value="$PROJECT_DIR$/tests/repositories/realconnection/PopulateDataInRealDatabase.java" />
         <option value="$PROJECT_DIR$/tests/services/ShoppingCartServiceTestCases.java" />
         <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/services/ShoppingCartServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/InvocationSource.java" />
+        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/OutputDialogMode.java" />
+        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/LexRequestAttribute.java" />
+        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/ConfirmationStatus.java" />
+        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/ShoppingBotLambda.java" />
+        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/UserIdType.java" />
+        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/LexRequestFactory.java" />
+        <option value="$PROJECT_DIR$/tests/common/ObjectMother.java" />
+        <option value="$PROJECT_DIR$/tests/repositories/TestRepositoryHelper.java" />
+        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/UserRepository.java" />
+        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/UserRepositoryImpl.java" />
+        <option value="$PROJECT_DIR$/tests/repositories/UserRepositoryTestCases.java" />
+        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/services/UserService.java" />
+        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/services/UserServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/LexRequest.java" />
+        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/User.java" />
+        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/strategies/GreetingsIntentProcessor.java" />
+        <option value="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/strategies/UserSessionIntentProcessor.java" />
       </list>
     </option>
   </component>
@@ -392,10 +383,9 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1280" />
     <option name="y" value="23" />
-    <option name="width" value="1920" />
-    <option name="height" value="1002" />
+    <option name="width" value="1280" />
+    <option name="height" value="777" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -415,11 +405,19 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="source" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+          </PATH>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="source" />
@@ -477,28 +475,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="repositories" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="source" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="source" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tests" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="repositories" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="realconnection" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -614,6 +590,50 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="request" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="source" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="source" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shoppingbot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="repositories" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="source" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="source" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shoppingbot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="processing" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -666,84 +686,10 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="source" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="source" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="shoppingbot" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="source" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="source" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="source" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="source" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dexmaker-mockito-1.2.jar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="source" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="source" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dexmaker-mockito-1.2.jar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mockito" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -763,6 +709,13 @@
     <property name="last_directory_selection" value="$PROJECT_DIR$/tests/repositories" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="io.github.satr.aws.lambda.shoppingbot.request" />
+      <recent name="io.github.satr.aws.lambda.shoppingbot.services" />
+      <recent name="io.github.satr.aws.lambda.shoppingbot.repositories" />
+      <recent name="io.github.satr.aws.lambda.shoppingbot.entities" />
+      <recent name="io.github.satr.aws.lambda.shoppingbot.entity" />
+    </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="io.github.satr.aws.lambda.shoppingbot.entities" />
       <recent name="io.github.satr.aws.lambda.shoppingbot.processing.strategies" />
@@ -784,13 +737,6 @@
       <recent name="intentprocessors" />
       <recent name="services" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/tests/testdata/lex-requests/BakeryDepartment" />
-      <recent name="$PROJECT_DIR$/tests/testdata" />
-      <recent name="$PROJECT_DIR$/tests" />
-      <recent name="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot" />
-      <recent name="$PROJECT_DIR$/test" />
-    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="data" />
     </key>
@@ -801,12 +747,12 @@
       <recent name="common.ObjectMother" />
       <recent name="common.TestHelper" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="io.github.satr.aws.lambda.shoppingbot.services" />
-      <recent name="io.github.satr.aws.lambda.shoppingbot.repositories" />
-      <recent name="io.github.satr.aws.lambda.shoppingbot.entities" />
-      <recent name="io.github.satr.aws.lambda.shoppingbot.entity" />
-      <recent name="io.github.satr.aws.lambda.shoppingbot.processing" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tests/testdata/lex-requests/BakeryDepartment" />
+      <recent name="$PROJECT_DIR$/tests/testdata" />
+      <recent name="$PROJECT_DIR$/tests" />
+      <recent name="$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot" />
+      <recent name="$PROJECT_DIR$/test" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -821,33 +767,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ShoppingCartServiceTestCases">
-    <configuration default="false" name="PopulateDataInRealDatabase" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="repositories.realconnection.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="shoppingbot-lambda" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="repositories.realconnection" />
-      <option name="MAIN_CLASS_NAME" value="repositories.realconnection.PopulateDataInRealDatabase" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="JUnit.Tests">
     <configuration default="false" name="PopulateDataInRealDatabase.populateTablesWithCream" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -938,6 +858,32 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="services" />
       <option name="MAIN_CLASS_NAME" value="services.ShoppingCartServiceTestCases" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="UserRepositoryTestCases" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="repositories.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="shoppingbot-lambda" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="repositories" />
+      <option name="MAIN_CLASS_NAME" value="repositories.UserRepositoryTestCases" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" />
@@ -1378,19 +1324,19 @@
     <list size="7">
       <item index="0" class="java.lang.String" itemvalue="JUnit.Tests" />
       <item index="1" class="java.lang.String" itemvalue="JUnit.ShoppingBotLambdaTestCases.orderFulfilledBackeryRequest" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.PopulateDataInRealDatabase" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.PopulateDataInRealDatabase.populateTablesWithCream" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.ShoppingCartServiceTestCases.loadedShoppingCartHasUser" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.ShoppingCartServiceTestCases.nullShoppingCartForNotExistingUserId" />
-      <item index="6" class="java.lang.String" itemvalue="JUnit.ShoppingCartServiceTestCases" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.PopulateDataInRealDatabase.populateTablesWithCream" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.ShoppingCartServiceTestCases.loadedShoppingCartHasUser" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.ShoppingCartServiceTestCases.nullShoppingCartForNotExistingUserId" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.ShoppingCartServiceTestCases" />
+      <item index="6" class="java.lang.String" itemvalue="JUnit.UserRepositoryTestCases" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.ShoppingCartServiceTestCases" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.ShoppingCartServiceTestCases.loadedShoppingCartHasUser" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.ShoppingCartServiceTestCases.nullShoppingCartForNotExistingUserId" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.PopulateDataInRealDatabase.populateTablesWithCream" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.PopulateDataInRealDatabase" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.UserRepositoryTestCases" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.ShoppingCartServiceTestCases" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.ShoppingCartServiceTestCases.loadedShoppingCartHasUser" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.ShoppingCartServiceTestCases.nullShoppingCartForNotExistingUserId" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.PopulateDataInRealDatabase.populateTablesWithCream" />
       </list>
     </recent_temporary>
   </component>
@@ -1418,7 +1364,10 @@
       <workItem from="1499142602480" duration="536000" />
       <workItem from="1499186504856" duration="26679000" />
       <workItem from="1499543016415" duration="2194000" />
-      <workItem from="1499583214470" duration="20482000" />
+      <workItem from="1499583214470" duration="21135000" />
+      <workItem from="1499665019592" duration="189000" />
+      <workItem from="1499712080985" duration="14883000" />
+      <workItem from="1500112621257" duration="498000" />
     </task>
     <task id="LOCAL-00001" summary="Initial code">
       <created>1497481081458</created>
@@ -1567,21 +1516,19 @@
       <option name="project" value="LOCAL" />
       <updated>1499464490169</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Implemented support of orders with order-items, creating from shopping carts. &#10;UnitPrice gets unit in addition to unit-forms.">
+      <created>1499621478551</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1499621478551</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ShoppingCartServiceTestCases - 2017.07.09 at 19h 24m 17s.xml">
-      <configuration name="ShoppingCartServiceTestCases" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ShoppingCartServiceTestCases - 2017.07.09 at 19h 25m 23s.xml">
-      <configuration name="ShoppingCartServiceTestCases" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ShoppingCartServiceTestCases - 2017.07.09 at 19h 25m 38s.xml">
-      <configuration name="ShoppingCartServiceTestCases" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ShoppingCartServiceTestCases_loadedShoppingCartHasUser - 2017.07.09 at 19h 13m 04s.xml">
-      <configuration name="ShoppingCartServiceTestCases.loadedShoppingCartHasUser" configurationId="JUnit" />
+    <history-entry file="ShoppingBotLambdaTestCases_orderFulfilledBackeryRequest - 2017.07.11 at 20h 38m 34s.xml">
+      <configuration name="ShoppingBotLambdaTestCases.orderFulfilledBackeryRequest" configurationId="JUnit" />
     </history-entry>
     <history-entry file="ShoppingCartServiceTestCases_loadedShoppingCartHasUser - 2017.07.09 at 19h 14m 01s.xml">
       <configuration name="ShoppingCartServiceTestCases.loadedShoppingCartHasUser" configurationId="JUnit" />
@@ -1601,9 +1548,18 @@
     <history-entry file="Tests - 2017.07.09 at 19h 20m 26s.xml">
       <configuration name="Tests" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="Tests - 2017.07.11 at 20h 23m 58s.xml">
+      <configuration name="Tests" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Tests - 2017.07.11 at 22h 29m 11s.xml">
+      <configuration name="Tests" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UserRepositoryTestCases - 2017.07.11 at 21h 28m 39s.xml">
+      <configuration name="UserRepositoryTestCases" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="186304000" />
+    <option name="totallyTimeSpent" value="202527000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1615,32 +1571,31 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1280" y="23" width="1920" height="1002" extended-state="6" />
+    <frame x="0" y="23" width="1280" height="777" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Amazon EC2" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22189781" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26072606" sideWeight="0.24972972" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21783784" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23762377" sideWeight="0.75027025" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.88759124" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32893288" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36650485" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24972972" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23736264" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22307692" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.45054945" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32637364" sideWeight="0.75027025" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32893288" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27665246" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32527474" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23736264" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1648,6 +1603,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32893288" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32527474" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1704,7 +1660,9 @@
     <MESSAGE value="Added unit-tests for ordering products, added a class to unit-tests - to populate read database tables." />
     <MESSAGE value="Corrected the logic of the product ordering" />
     <MESSAGE value="Added support of the ReviewShoppingCart intent." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added support of the ReviewShoppingCart intent." />
+    <MESSAGE value="Implemented support of orders with order-items, creating from shopping carts. &#10;UnitPrice gets unit in addition to unit-forms." />
+    <MESSAGE value="Implemented identification of a user by a facebook Id. Added Lex bot source code (json)." />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented identification of a user by a facebook Id. Added Lex bot source code (json)." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1743,240 +1701,10 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/strategies/IntentProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/common/OperationResult.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/validators/Validator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="52" lean-forward="false" selection-start-line="7" selection-start-column="52" selection-end-line="7" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/common/OperationResultImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="18" column="32" lean-forward="false" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
-          <folding>
-            <element signature="e#469#470#0" expanded="false" />
-            <element signature="e#509#510#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/intents/ReviewShoppingCartIntent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="57" lean-forward="false" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/intents/CompleteOrderIntent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/java/util/List.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="543" column="6" lean-forward="false" selection-start-line="543" selection-start-column="6" selection-end-line="543" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/ShoppingCartRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/RepositoryImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="21" column="26" lean-forward="false" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/RepositoryFactoryImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="47" column="25" lean-forward="false" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/RepositoryFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="31" lean-forward="true" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/converters/ShoppingCartItemConverter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="54" lean-forward="false" selection-start-line="11" selection-start-column="54" selection-end-line="11" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/converters/OrderItemConverter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="51" lean-forward="true" selection-start-line="10" selection-start-column="51" selection-end-line="10" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#419#420#0" expanded="true" />
-            <element signature="e#480#481#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/converters/OrderItemInfoConverter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="42" column="56" lean-forward="false" selection-start-line="42" selection-start-column="56" selection-end-line="42" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/services/ProductService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="17" lean-forward="false" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/ShoppingBotProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="28" column="82" lean-forward="true" selection-start-line="28" selection-start-column="82" selection-end-line="28" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/ShoppingCart.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="12" column="39" lean-forward="false" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/ProductRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/OrderRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/services/OrderService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="15" lean-forward="false" selection-start-line="8" selection-start-column="15" selection-end-line="8" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/repositories/ShoppingCartRepositoryTestCases.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2125">
-          <caret line="137" column="44" lean-forward="false" selection-start-line="137" selection-start-column="44" selection-end-line="137" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/repositories/ProductRepositoryTestCases.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="662">
-          <caret line="80" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/repositories/TestRepositoryHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="30" column="40" lean-forward="false" selection-start-line="30" selection-start-column="40" selection-end-line="30" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/services/OrderServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="19" column="20" lean-forward="false" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
-          <folding>
-            <element signature="e#723#724#0" expanded="true" />
-            <element signature="e#783#784#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/OrderRepositoryImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="23" column="17" lean-forward="false" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
-          <folding>
-            <element signature="e#875#876#0" expanded="true" />
-            <element signature="e#933#934#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/ShoppingCartRepositoryImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/strategies/UserSessionIntentProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="35" lean-forward="false" selection-start-line="30" selection-start-column="35" selection-end-line="30" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1988,38 +1716,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/intentprocessors/OrderProductIntentProcessorTestCases.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-295">
-          <caret line="106" column="28" lean-forward="true" selection-start-line="106" selection-start-column="28" selection-end-line="106" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/UnitPrice.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="9" column="53" lean-forward="false" selection-start-line="9" selection-start-column="53" selection-end-line="9" selection-end-column="53" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/business/ShoppingBotLambdaTestCases.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="83" column="89" lean-forward="true" selection-start-line="83" selection-start-column="89" selection-end-line="83" selection-end-column="89" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/OrderInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="41" column="16" lean-forward="false" selection-start-line="41" selection-start-column="16" selection-end-line="41" selection-end-column="16" />
-          <folding>
-            <element signature="e#950#951#0" expanded="true" />
-            <element signature="e#977#978#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2036,7 +1737,7 @@
         <state relative-caret-position="391">
           <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2046,7 +1747,7 @@
         <state relative-caret-position="459">
           <caret line="39" column="5" lean-forward="true" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2055,15 +1756,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="6" lean-forward="false" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/strategies/OrderProductIntentProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="46" column="29" lean-forward="true" selection-start-line="46" selection-start-column="29" selection-end-line="46" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2072,24 +1764,8 @@
         <state relative-caret-position="410">
           <caret line="69" column="59" lean-forward="true" selection-start-line="69" selection-start-column="59" selection-end-line="69" selection-end-column="59" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/ShoppingBotLambda.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="27" column="102" lean-forward="false" selection-start-line="27" selection-start-column="102" selection-end-line="27" selection-end-column="102" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/common/ObjectMother.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="155" column="31" lean-forward="false" selection-start-line="155" selection-start-column="31" selection-end-line="155" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2107,7 +1783,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2124,7 +1799,7 @@
         <state relative-caret-position="334">
           <caret line="43" column="21" lean-forward="false" selection-start-line="43" selection-start-column="21" selection-end-line="43" selection-end-column="21" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2133,7 +1808,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="19" column="31" lean-forward="false" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2149,9 +1823,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2159,7 +1830,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="11" column="57" lean-forward="true" selection-start-line="11" selection-start-column="57" selection-end-line="11" selection-end-column="57" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2171,18 +1841,285 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/services/ShoppingCartServiceTestCases.java">
+    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/InvocationSource.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="61" column="70" lean-forward="false" selection-start-line="61" selection-start-column="70" selection-end-line="61" selection-end-column="70" />
+        <state relative-caret-position="85">
+          <caret line="5" column="18" lean-forward="false" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/OutputDialogMode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="9" lean-forward="false" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/ConfirmationStatus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="9" lean-forward="false" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/ShoppingBotProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="32" column="70" lean-forward="false" selection-start-line="32" selection-start-column="70" selection-end-line="32" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/strategies/OrderProductIntentProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="33" column="15" lean-forward="false" selection-start-line="33" selection-start-column="15" selection-end-line="33" selection-end-column="15" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/services/ShoppingCartServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="20" column="13" lean-forward="true" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/LexRequestAttribute.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="13" column="31" lean-forward="false" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/UserIdType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="12" lean-forward="false" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/ext/nashorn.jar!/jdk/nashorn/internal/runtime/regexp/joni/Matcher.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1974">
+          <caret line="9" column="22" lean-forward="false" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/ext/nashorn.jar!/jdk/nashorn/internal/runtime/regexp/joni/Regex.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="112" column="13" lean-forward="false" selection-start-line="112" selection-start-column="13" selection-end-line="112" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/LexRequestFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="42" column="8" lean-forward="false" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/common/ObjectMother.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="177" column="23" lean-forward="false" selection-start-line="177" selection-start-column="23" selection-end-line="177" selection-end-column="23" />
+          <folding>
+            <element signature="method#createUser#1;class#ObjectMother#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/business/ShoppingBotLambdaTestCases.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="59" column="40" lean-forward="false" selection-start-line="59" selection-start-column="40" selection-end-line="59" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/repositories/TestRepositoryHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="444">
+          <caret line="46" column="81" lean-forward="false" selection-start-line="46" selection-start-column="81" selection-end-line="46" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/UserRepositoryImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="40" column="57" lean-forward="true" selection-start-line="40" selection-start-column="57" selection-end-line="40" selection-end-column="57" />
+          <folding>
+            <element signature="e#1227#1228#0" expanded="false" />
+            <element signature="e#1283#1284#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/UserRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="10" column="48" lean-forward="false" selection-start-line="10" selection-start-column="48" selection-end-line="10" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/repositories/UserRepositoryTestCases.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="45" column="5" lean-forward="false" selection-start-line="45" selection-start-column="5" selection-end-line="45" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/services/ShoppingCartServiceTestCases.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="604">
+          <caret line="61" column="70" lean-forward="false" selection-start-line="61" selection-start-column="70" selection-end-line="61" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/intentprocessors/OrderProductIntentProcessorTestCases.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="182" column="68" lean-forward="false" selection-start-line="182" selection-start-column="68" selection-end-line="182" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/ShoppingBotLambda.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="49" column="51" lean-forward="false" selection-start-line="49" selection-start-column="51" selection-end-line="49" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/services/UserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="25" column="62" lean-forward="true" selection-start-line="25" selection-start-column="62" selection-end-line="25" selection-end-column="62" />
+          <folding>
+            <element signature="e#832#833#0" expanded="false" />
+            <element signature="e#901#902#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/services/UserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="25" lean-forward="true" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/request/LexRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="503">
+          <caret line="166" column="40" lean-forward="false" selection-start-line="166" selection-start-column="40" selection-end-line="166" selection-end-column="40" />
+          <folding>
+            <element signature="e#4615#4616#0" expanded="false" />
+            <element signature="e#4702#4703#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/strategies/UserSessionIntentProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
-          <caret line="30" column="26" lean-forward="true" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
+          <caret line="35" column="63" lean-forward="false" selection-start-line="35" selection-start-column="63" selection-end-line="35" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/ShoppingCartRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/ShoppingCartRepositoryImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="12" column="59" lean-forward="false" selection-start-line="12" selection-start-column="59" selection-end-line="12" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/RepositoryImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="16" column="19" lean-forward="false" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/RepositoryFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="17" lean-forward="false" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/repositories/RepositoryFactoryImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="17" column="63" lean-forward="false" selection-start-line="17" selection-start-column="63" selection-end-line="17" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/ShoppingCart.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="12" column="39" lean-forward="false" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/OrderInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="20" column="9" lean-forward="false" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/processing/strategies/GreetingsIntentProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="44" column="32" lean-forward="false" selection-start-line="44" selection-start-column="32" selection-end-line="44" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/io/github/satr/aws/lambda/shoppingbot/entities/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="87" column="8" lean-forward="false" selection-start-line="87" selection-start-column="8" selection-end-line="87" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../lex-bot-sources/ShoppingBot.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="2" lean-forward="false" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
           <folding />
         </state>
       </provider>

@@ -3,10 +3,11 @@ package io.github.satr.aws.lambda.shoppingbot;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.satr.aws.lambda.shoppingbot.log.CompositeLogger;
+import io.github.satr.aws.lambda.shoppingbot.processing.ShoppingBotProcessor;
 import io.github.satr.aws.lambda.shoppingbot.repositories.RepositoryFactory;
 import io.github.satr.aws.lambda.shoppingbot.repositories.RepositoryFactoryImpl;
-import io.github.satr.aws.lambda.shoppingbot.processing.ShoppingBotProcessor;
 import io.github.satr.aws.lambda.shoppingbot.request.LexRequest;
 import io.github.satr.aws.lambda.shoppingbot.request.LexRequestFactory;
 import io.github.satr.aws.lambda.shoppingbot.response.LexResponse;
@@ -47,6 +48,9 @@ public class ShoppingBotLambda implements RequestHandler<Map<String, Object>, Le
         LexRequest lexRequest = null;
         try {
             lexRequest = LexRequestFactory.createFromMap(input);
+            String json = new ObjectMapper().writeValueAsString(input);
+            logger.log(String.format("Input: %s", json));
+            logger.log(String.format("Input UserId: %s", lexRequest.getUserId()));
             LexResponse lexRespond = shoppingBotProcessor.Process(lexRequest);
             logStatus(lexRespond);
             return lexRespond;

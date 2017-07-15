@@ -36,6 +36,12 @@ public class UserRepositoryImpl extends RepositoryImpl implements UserRepository
     }
 
     @Override
+    public User getUserByFacebookId(String facebookId) {
+        List<User> users = scan(User.class, "facebook_id", facebookId);
+        return (users.size() == 0) ? null : users.get(0);
+    }
+
+    @Override
     public List<User> getUserByName(String firstName, String lastName) {
         String attrValueFirstName = ":v_first_name";
         String attrValueLastName = ":v_last_name";

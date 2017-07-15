@@ -31,14 +31,21 @@ public class TestRepositoryHelper {
         dynamoDbClient.deleteTable(OrderRepositoryImpl.TableName);
     }
 
-    public static User addUser(DynamoDBMapper dbMapper, String firstName, String lastName, String address) {
+    public static User addUser(DynamoDBMapper dbMapper, String firstName, String lastName, String address, String facebookId) {
         User user = new User();
         user.setUserId(UUID.randomUUID().toString());
         user.setFirstName(firstName);
         user.setLastName(lastName);
-        user.setAddress(address);
+        if(address != null)
+            user.setAddress(address);
+        if(facebookId != null)
+            user.setFacebookId(facebookId);
         dbMapper.save(user);
         return user;
+    }
+
+    public static User addUser(DynamoDBMapper dbMapper, String firstName, String lastName, String address) {
+        return addUser(dbMapper, firstName, lastName, address, null);
     }
 
     public static void createTableUser(AmazonDynamoDB dynamodb) {

@@ -20,6 +20,7 @@ public class UserRepositoryTestCases {
     private final String testingLastName1 = "testingLastName1";
     private UserRepositoryImpl userRepository;
     private List<User> testUsers = new ArrayList<>();
+    private User facebookUser;
 
     @BeforeClass
     public static void fixtureSetUp() throws Exception {
@@ -39,7 +40,9 @@ public class UserRepositoryTestCases {
         TestRepositoryHelper.createTableUser(dynamoDbClient);
         testUsers.add(TestRepositoryHelper.addUser(dbMapper, testingFirstName1, testingLastName1, "address1"));
         testUsers.add(TestRepositoryHelper.addUser(dbMapper, testingFirstName1, testingLastName1, "address2"));
-        testUsers.add(TestRepositoryHelper.addUser(dbMapper, "firstName2", "lastName2", "address3"));
+        facebookUser = TestRepositoryHelper.addUser(dbMapper, "firstName2", "lastName2",
+                                                    "address3", ObjectMother.createRandomString());
+        testUsers.add(facebookUser);
     }
 
     @After
@@ -60,6 +63,13 @@ public class UserRepositoryTestCases {
         User dbUser = userRepository.getUserById(testUser.getUserId());
         assertNotNull(dbUser);
         assertEquals(testUser.toString(), dbUser.toString());
+    }
+
+    @Test
+    public void getUserByFacebookId() throws Exception {
+        User dbUser = userRepository.getUserByFacebookId(facebookUser.getFacebookId());
+        assertNotNull(dbUser);
+        assertEquals(facebookUser.toString(), dbUser.toString());
     }
 
     @Test

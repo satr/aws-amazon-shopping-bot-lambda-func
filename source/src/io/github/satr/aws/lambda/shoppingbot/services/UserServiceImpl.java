@@ -22,6 +22,11 @@ public class UserServiceImpl extends Service implements UserService {
     }
 
     @Override
+    public User getUserByFacebookId(String facebookId) {
+        return userRepository.getUserByFacebookId(facebookId);
+    }
+
+    @Override
     public User getUserByName(String firstName, String lastName) {
         List<User> users = userRepository.getUserByName(firstName, lastName);
         if(users.size() == 0)
