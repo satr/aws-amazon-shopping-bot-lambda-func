@@ -230,4 +230,10 @@ public class ObjectMother {
         order.setUser(createUser());
         return order;
     }
+
+    public static User createUserWithFacebookId(String facebookUserId) {
+        User user = createUser();
+        user.setFacebookId(facebookUserId);
+        return user;
+    }
 }

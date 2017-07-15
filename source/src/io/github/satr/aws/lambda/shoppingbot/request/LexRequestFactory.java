@@ -10,11 +10,14 @@ import io.github.satr.aws.lambda.shoppingbot.request.strategies.intentloading.*;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.apache.http.util.TextUtils.isEmpty;
+
 public class LexRequestFactory {
 
 
     private final static Map<String, IntentLoaderStrategy> intentLoaderStrategies = new HashMap<>();
     private final static IntentLoaderStrategy unsupportedIntentLoaderStrategy = new UnsupportedIntentLoaderStrategy();
+    private final static String FACEBOOK_ID_PATTERN = "^\\d{16}$";
 
     static {
         intentLoaderStrategies.put(GreetingsIntent.Name, new GreetingsIntentLoadingStrategy());
@@ -49,12 +52,14 @@ public class LexRequestFactory {
     private static void loadUserId(Map<String, Object> input, LexRequest request) {
         String userId = (String) input.get(LexRequestAttribute.UserId);
         request.setUserId(userId);
-        if(userId == null)
+        if(isEmpty(userId))
             request.setUserIdType(UserIdType.Undefined);
-        else if(userId.matches("ˆ\\d{16}$"))
-            request.setUserIdType(UserIdType.Facebook);
-        else
-            request.setUserIdType(UserIdType.Undefined);
+        else {
+            if(userId.matches(FACEBOOK_ID_PATTERN))
+                request.setUserIdType(UserIdType.Facebook);
+            else
+                request.setUserIdType(UserIdType.Undefined);
+        }
     }
 
     private static OutputDialogMode getOutputDialogMode(Map<String, Object> input) {

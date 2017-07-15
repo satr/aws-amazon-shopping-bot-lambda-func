@@ -1,0 +1,22 @@
+{
+  "messageVersion": "1.0",
+  "invocationSource": "FulfillmentCodeHook",
+  "userId": "1234567890123456",
+  "sessionAttributes": null,
+  "bot": {
+    "name": "ShoppingBot",
+    "alias": null,
+    "version": "$LATEST"
+  },
+  "outputDialogMode": "Text",
+  "currentIntent": {
+    "name": "VegetableDepartment",
+    "slots": {
+      "VegetableProduct": "apple",
+      "VegetableDepartmentUnit": null,
+      "Amount": "1"
+    },
+    "confirmationStatus": "None"
+  },
+  "inputTranscript": "I need 1 apple"
+}

@@ -13,7 +13,8 @@ import io.github.satr.aws.lambda.shoppingbot.services.UserService;
 import static org.apache.http.util.TextUtils.isEmpty;
 
 public abstract class UserSessionIntentProcessor extends IntentProcessor {
-    protected UserService userService;
+    protected final UserService userService;
+    private static final String ERROR_MESSAGE = "I'm sorry, could you please tell your full name?";//Probably not good error message
 
     public UserSessionIntentProcessor(UserService userService, Logger logger) {
         super(logger);
@@ -21,25 +22,24 @@ public abstract class UserSessionIntentProcessor extends IntentProcessor {
     }
 
     protected OperationValueResult<User> getUser(LexRequest lexRequest) {
-        String errorMessage = "I'm sorry, could you please tell your full name?";//Probably not good error message
         OperationValueResultImpl<User> operationResult = new OperationValueResultImpl<>();
         String sessionUserId = (String) lexRequest.getSessionAttribute(LexRequestAttribute.SessionAttribute.UserId);
         boolean userIdIsEmpty = isEmpty(lexRequest.getUserId());
         boolean sessionUserIdIsEmpty = isEmpty(sessionUserId);
         if(sessionUserIdIsEmpty && userIdIsEmpty) {
-            operationResult.addError(errorMessage);
+            operationResult.addError(ERROR_MESSAGE);
             return operationResult;
         }
         User user = null;
         if(!sessionUserIdIsEmpty)
             user = userService.getUserById(sessionUserId);
-        if(user == null && lexRequest.hasValidUserId()) {//TODO
+        if(user == null && lexRequest.hasValidUserId()) {
             if (lexRequest.getUserIdType() == UserIdType.Facebook)
-                user = userService.getUserById(sessionUserId);
+                user = userService.getUserByFacebookId(lexRequest.getUserId());
         }
 
         if(user == null) {
-            operationResult.addError(errorMessage);
+            operationResult.addError(ERROR_MESSAGE);
             return operationResult;
         }
 
