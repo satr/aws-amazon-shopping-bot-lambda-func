@@ -6,7 +6,9 @@ Download and unpack DynamoDBLocal to an externals folder (it is used only for un
 Setup IAM credentials to be able to access the DynamoDB from a local computer:
 http://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/setup-credentials.html
 Creadentials are stored in the folder (Linux, Mac):
+```
 ~/.aws/credentials
 [default]
 aws_access_key_id = …
 aws_secret_access_key = …
+```
